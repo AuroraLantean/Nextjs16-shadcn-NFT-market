@@ -9,6 +9,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    //"forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -43,6 +44,7 @@
     "**/*.mts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "aarchives"
   ]
 }
