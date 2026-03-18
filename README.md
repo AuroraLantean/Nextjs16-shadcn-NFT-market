@@ -1,7 +1,9 @@
 # NextJs16 NFT Market
 
 ## TODO
-
+	"tailwind": {
+		"config": "tailwind.config.js",
+  }
 - Fix Button arguments: isLoading, pX, pY
 - Wagmi: <https://wagmi.sh/>
 - Migrate from Web3Modal v5 to Reown AppKit
@@ -38,6 +40,10 @@ Then install this repository packages:
 ```bash
 pnpm install
 ```
+
+Install TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
+
+Install Shadcn-UI: <https://ui.shadcn.com/docs/installation>
 
 [Notice] use v1.0.4 for Radix UI @radix-ui/react-dialog@1.0.4 and @radix-ui/react-alert-dialog@1.0.4 for the DialogPortalProp error
 
