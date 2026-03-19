@@ -3,6 +3,7 @@
 justfile
 aarchives
 zz*
+todo.txt
 test-ledger
 
 # dependencies

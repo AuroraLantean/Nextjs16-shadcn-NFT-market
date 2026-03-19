@@ -13,7 +13,7 @@
   "iconLibrary": "lucide",
   "rtl": false,
   "aliases": {
-    "components": "@/styles/components",
+    "components": "@/components",
     "utils": "@/styles/lib/utils",
     "ui": "@/styles/components/ui",
     "lib": "@/styles/lib",

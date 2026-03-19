@@ -14,6 +14,10 @@
 
 @rainbow-me/rainbowkit
 https://rainbowkit.com/docs/introduction
+https://rainbowkit.com/docs/migration-guide
+
+Wagmi
+https://wagmi.sh/react/api/hooks/useDisconnect
 
 @react-email/components
 @react-email/tailwind
@@ -32,10 +36,9 @@ Unpin or uninstall Xverse crypto wallet extension in the Chrome Browser, or you 
 TypeError: Cannot redefine property: StacksProvider... chrome-extension://idnnbdplmphpflfnlkomgpfbpcgelopg/inpage.js (27:40749)
 ```
 
-## Install a NPM Package Manager and Install this repository packages
+## Installation
 
-See [PNPM installation](https://pnpm.io/installation)
-Then install this repository packages:
+[PNPM installation](https://pnpm.io/installation)
 
 ```bash
 pnpm install
@@ -43,7 +46,7 @@ pnpm install
 
 Install TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
 
-Install Shadcn-UI: <https://ui.shadcn.com/docs/installation>
+Install Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
 
 [Notice] use v1.0.4 for Radix UI @radix-ui/react-dialog@1.0.4 and @radix-ui/react-alert-dialog@1.0.4 for the DialogPortalProp error
 
