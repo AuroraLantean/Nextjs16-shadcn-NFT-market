@@ -13,7 +13,7 @@ import {
 //https://ui.shadcn.com/docs/dark-mode/next
 export function ModeToggle() {
   const { setTheme } = useTheme()
-
+  //<Button variant="outline" size="icon" onClick={()=> setTheme(theme === "dark" ? "light": "dark")} />
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

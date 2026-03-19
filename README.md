@@ -38,15 +38,15 @@ TypeError: Cannot redefine property: StacksProvider... chrome-extension://idnnbd
 
 ## Installation
 
-[PNPM installation](https://pnpm.io/installation)
-
 ```bash
 pnpm install
 ```
 
-Install TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
+TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
 
-Install Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
+Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
+
+Lucide Icons: <https://lucide.dev/>
 
 [Notice] use v1.0.4 for Radix UI @radix-ui/react-dialog@1.0.4 and @radix-ui/react-alert-dialog@1.0.4 for the DialogPortalProp error
 

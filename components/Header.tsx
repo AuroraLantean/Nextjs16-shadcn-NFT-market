@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { cn } from "@/styles/lib/utils";
+import { ModeToggle } from "./dark-mode";
 
 const Header = () => {
   const pathname = usePathname();
@@ -11,7 +12,12 @@ const Header = () => {
     <header className="">
       <div className="main-container inner">
         <Link href="/">
-          <Image src="bitcoin.svg" alt="CoinPlus logo" width={72} height={40} />
+          <Image
+            src="/bitcoin.svg"
+            alt="CoinPlus logo"
+            width={72}
+            height={40}
+          />
         </Link>
 
         <nav>
@@ -35,6 +41,7 @@ const Header = () => {
           >
             All Coins
           </Link>
+          <ModeToggle />
         </nav>
       </div>
     </header>
