@@ -18,7 +18,7 @@ const Card = ({
   children,
   variant = "default",
   size = "medium",
-  padding = "normal",
+  padding = "small",
   className = "",
   isHover = true,
   //disabled = false,
@@ -31,7 +31,7 @@ const Card = ({
     default: "bg-green-400 border border-gray-200",
     primary: "bg-yellow-100 border border-blue-200",
     success: "bg-green-50 border border-green-200",
-    dark: "bg-blue-800 border border-gray-700 text-white",
+    dark: "bg-blue-800 border border-gray-700",
   };
 
   const hoverStyles = isHover ? "hover:shadow-xl hover:-translate-y-1" : "";

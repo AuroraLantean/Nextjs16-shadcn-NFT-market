@@ -9,13 +9,12 @@ type Props = {
   aspectRatio?: "portrait" | "square";
   className?: string;
 };
-//w-full h-full"
 const CardImage = ({
   src,
   alt = "CardImage",
-  width,
-  height,
-  aspectRatio = "portrait",
+  width = 512,
+  height = 512,
+  aspectRatio = "square",
   className = "",
 }: Props) => {
   return (
@@ -26,6 +25,7 @@ const CardImage = ({
           alt={alt}
           width={width}
           height={height}
+          loading="eager"
           className={cn(
             "h-auto w-auto object-cover transition-all hover:scale-105",
             aspectRatio === "portrait" ? "aspect-3/4" : "aspect-square",

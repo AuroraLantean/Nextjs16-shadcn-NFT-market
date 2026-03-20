@@ -28,7 +28,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen w-full flex-col items-center bg-zinc-50 dark:bg-black px-6 pb-10 sm:px-10 overflow-hidden">
+          <main className="min-h-screen w-full max-w-7xl flex-col items-center bg-zinc-50 dark:bg-black px-6 pb-10 sm:px-10 overflow-hidden">
             <NavBar />
             {children}
           </main>

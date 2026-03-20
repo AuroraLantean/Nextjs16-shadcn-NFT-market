@@ -1,6 +1,7 @@
 import { ArrowUpDown, Coins, LogIn, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "@/styles/lib/utils";
 import { Button } from "@/ui/button";
 import ChainsDropdown from "./ChainsDropdown";
 import { ModeToggle } from "./dark-mode";
@@ -20,8 +21,10 @@ const NavBar = () => {
               <Image
                 src="/bitcoin.svg"
                 alt="CoinPlus logo"
-                width={72}
+                width={40}
                 height={40}
+                loading="eager"
+                //className={cn("aspect-square")}
               />
             </Link>
 
