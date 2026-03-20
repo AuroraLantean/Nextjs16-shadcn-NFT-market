@@ -2,14 +2,15 @@
 
 ## Build Steps and objectives
 
-- Setup and Responsive NavBar
-- Form with validation
-- Card + carousel
-- EVM wallet button
+- Setup NextJs, ShadcnUI, Theme, DarkButton
+- Responsive NavBar
+- Form with validation, Shadcn Dialog + field + switch
+- Card + Shadcn carousel
+- EVM wallet connect button
 - Web3 connection to Solidity ABI
 - EVM Read functions
-- EVM Write functions
-- Solana wallet button
+- EVM Write functions, Spinner + Sonner
+- Solana wallet connect button
 - Web3 connection to Solana IDL
 - Solana Read functions
 - Solana Write functions
@@ -20,9 +21,6 @@
 
 ## TODO
 
-	"tailwind": {
-		"config": "tailwind.config.js",
-  }
 - Fix Button arguments: isLoading, pX, pY
 - Wagmi: <https://wagmi.sh/>
 - Migrate from Web3Modal v5 to Reown AppKit
@@ -34,6 +32,7 @@
 @rainbow-me/rainbowkit
 https://rainbowkit.com/docs/introduction
 https://rainbowkit.com/docs/migration-guide
+@web3modal/wagmi
 
 Wagmi
 https://wagmi.sh/react/api/hooks/useDisconnect
@@ -41,11 +40,9 @@ https://wagmi.sh/react/api/hooks/useDisconnect
 @react-email/components
 @react-email/tailwind
 @tanstack/react-table
-@web3modal/wagmi
-resend
-viem
-wagmi
-ws, zod
+
+eslint-plugin-tailwindcss
+https://github.com/francoismassart/eslint-plugin-tailwindcss
 
 ## Warning
 
