@@ -1,4 +1,4 @@
-import { Menu as MenuIcon } from "lucide-react";
+import { Globe } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/ui/button";
 import {
@@ -14,7 +14,7 @@ const ChainsDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
-          <MenuIcon className="w-4 h-4" />
+          <Globe className="w-4 h-4" />
           <span className="hidden md:inline">Chains</span>
         </Button>
       </DropdownMenuTrigger>

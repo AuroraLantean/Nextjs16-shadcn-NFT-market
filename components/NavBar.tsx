@@ -1,4 +1,4 @@
-import { ArrowUpZA, Search, Sprout, Wallet } from "lucide-react";
+import { ArrowUpDown, Coins, LogIn, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/ui/button";
@@ -58,19 +58,8 @@ const NavBar = () => {
                 asChild
               >
                 <Link href="/swap">
-                  <Sprout className="w-4 h-4" />
+                  <ArrowUpDown className="w-4 h-4" />
                   <span className="hidden md:inline">Swap</span>
-                </Link>
-              </Button>
-
-              <Button
-                variant="ghost"
-                className="flex items-center gap-2"
-                asChild
-              >
-                <Link href="/allcoins">
-                  <ArrowUpZA className="w-4 h-4" />
-                  <span className="hidden md:inline">Coins</span>
                 </Link>
               </Button>
 
@@ -81,9 +70,20 @@ const NavBar = () => {
                 className="flex items-center gap-2"
                 asChild
               >
+                <Link href="/allcoins">
+                  <Coins className="w-4 h-4" />
+                  <span className="hidden md:inline">Coins</span>
+                </Link>
+              </Button>
+
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                asChild
+              >
                 <Link href="/">
-                  <Wallet className="w-4 h-4" />
-                  <span className="hidden md:inline">Wallet</span>
+                  <LogIn className="w-4 h-4" />
+                  <span className="hidden md:inline">Connect</span>
                 </Link>
               </Button>
             </div>
