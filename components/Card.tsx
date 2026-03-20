@@ -1,21 +1,29 @@
 import type React from "react";
+import { cn } from "@/styles/lib/utils";
 
-///variant: primary, secondary
-///hover: boolean
-///padding: small, medium, large
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+/*variant: primary, secondary
+padding: small, medium, large
+hover: boolean
+*/
+//extends React.HTMLAttributes<HTMLDivElement>
+type Props = {
   children: React.ReactNode;
-  variant: "default" | "primary" | "success" | "dark";
-  padding: "none" | "small" | "normal" | "large";
+  variant?: "default" | "primary" | "success" | "dark";
+  size?: "small" | "medium" | "large";
+  padding?: "none" | "small" | "normal" | "large";
   className?: string;
   isHover?: boolean;
-}
+};
 const Card = ({
   children,
-  variant = "default", //: keyof typeof variants
+  variant = "default",
+  size = "medium",
   padding = "normal",
   className = "",
   isHover = true,
+  //disabled = false,
+  //onClick,
+  ...props
 }: Props) => {
   const baseStyles = "rounded-lg shadow-md transition-all duration-300";
 
@@ -27,7 +35,11 @@ const Card = ({
   };
 
   const hoverStyles = isHover ? "hover:shadow-xl hover:-translate-y-1" : "";
-
+  const sizes = {
+    small: "py-1.5 text-sm",
+    medium: "py-2 text-base",
+    large: "py-3 text-lg",
+  };
   const paddingStyles = {
     none: "p-0",
     small: "p-4",
@@ -37,7 +49,10 @@ const Card = ({
 
   return (
     <div
-      className={`${baseStyles} ${variants[variant]} ${hoverStyles} ${paddingStyles[padding]} ${className}`}
+      className={cn(
+        `${baseStyles} ${variants[variant]} ${sizes[size]} ${hoverStyles} ${paddingStyles[padding]} ${className}`,
+      )}
+      {...props}
     >
       {children}
     </div>

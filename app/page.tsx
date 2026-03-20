@@ -1,11 +1,13 @@
 import Card from "@/components/Card";
+import CardImage from "@/components/CardImage";
 
 export default function Home() {
   return (
     <div>
-      <Card variant="default" padding="none" className="xyz">
-        <h2>H2 tags</h2>
-        <p>p tags</p>
+      <Card variant="default" size="small">
+        <CardImage></CardImage>
+        <h1>NFT Name</h1>
+        <p>NFT description. Price: $999</p>
       </Card>
     </div>
   );
