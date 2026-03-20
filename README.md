@@ -1,6 +1,25 @@
 # NextJs16 NFT Market
 
+## Build Steps and objectives
+
+- Setup and Responsive NavBar
+- Form with validation
+- Card + carousel
+- EVM wallet button
+- Web3 connection to Solidity ABI
+- EVM Read functions
+- EVM Write functions
+- Solana wallet button
+- Web3 connection to Solana IDL
+- Solana Read functions
+- Solana Write functions
+- Postgres DB connector
+- Streaming real-time live price feeds and trade data from CoinGecko API REST endpoints and crypto WebSocket API
+- Fetching historical price data(coins, markets, OHLC, trending) using CoinGecko REST API endpoints
+- TradeView chart to display historical prices
+
 ## TODO
+
 	"tailwind": {
 		"config": "tailwind.config.js",
   }
@@ -47,6 +66,8 @@ TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
 Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
 
 Lucide Icons: <https://lucide.dev/>
+
+## Error
 
 [Notice] use v1.0.4 for Radix UI @radix-ui/react-dialog@1.0.4 and @radix-ui/react-alert-dialog@1.0.4 for the DialogPortalProp error
 

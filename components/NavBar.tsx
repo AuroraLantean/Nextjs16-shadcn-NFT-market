@@ -1,15 +1,10 @@
-import {
-  ArrowUpZA,
-  HomeIcon,
-  Menu,
-  Search,
-  Sprout,
-  Wallet,
-} from "lucide-react";
+import { ArrowUpZA, Search, Sprout, Wallet } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/ui/button";
+import ChainsDropdown from "./ChainsDropdown";
 import { ModeToggle } from "./dark-mode";
+import { MenuDropdown } from "./MenuDropdown";
 
 const NavBar = () => {
   //bg-background/95 for opacity
@@ -32,49 +27,66 @@ const NavBar = () => {
 
             <Link
               href="/"
-              className="hidden md:inline text-xl font-bold text-primary font-mono tracking-wider"
+              className="text-xl font-bold text-primary font-mono tracking-wider"
             >
               CoinPlus
             </Link>
           </div>
 
-          {/*Navbar components */}
-          <div className="hidden sm:flex items-center space-x-4">
-            <Button variant="ghost" className="flex items-center gap-2" asChild>
-              <Link href="/search">
-                <Search className="w-4 h-4" />
-                <span className="hidden md:inline">Search</span>
-              </Link>
-            </Button>
+          <div className="flex items-center space-x-4">
+            {/*Navbar mobile menu */}
+            <div className="flex sm:hidden items-center space-x-4">
+              <MenuDropdown />
+            </div>
 
-            <Button variant="ghost" className="flex items-center gap-2" asChild>
-              <Link href="/swap">
-                <Sprout className="w-4 h-4" />
-                <span className="hidden md:inline">Swap</span>
-              </Link>
-            </Button>
+            {/*Navbar components */}
+            <div className="hidden sm:flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                asChild
+              >
+                <Link href="/search">
+                  <Search className="w-4 h-4" />
+                  <span className="hidden md:inline">Search</span>
+                </Link>
+              </Button>
 
-            <Button variant="ghost" className="flex items-center gap-2" asChild>
-              <Link href="/allcoins">
-                <ArrowUpZA className="w-4 h-4" />
-                <span className="hidden md:inline">Coins</span>
-              </Link>
-            </Button>
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                asChild
+              >
+                <Link href="/swap">
+                  <Sprout className="w-4 h-4" />
+                  <span className="hidden md:inline">Swap</span>
+                </Link>
+              </Button>
 
-            <Button variant="ghost" className="flex items-center gap-2" asChild>
-              <Link href="/">
-                <Menu className="w-4 h-4" />
-                <span className="hidden md:inline">Menu</span>
-              </Link>
-            </Button>
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                asChild
+              >
+                <Link href="/allcoins">
+                  <ArrowUpZA className="w-4 h-4" />
+                  <span className="hidden md:inline">Coins</span>
+                </Link>
+              </Button>
 
-            <Button variant="ghost" className="flex items-center gap-2" asChild>
-              <Link href="/">
-                <Wallet className="w-4 h-4" />
-                <span className="hidden md:inline">Wallet</span>
-              </Link>
-            </Button>
+              <ChainsDropdown />
 
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2"
+                asChild
+              >
+                <Link href="/">
+                  <Wallet className="w-4 h-4" />
+                  <span className="hidden md:inline">Wallet</span>
+                </Link>
+              </Button>
+            </div>
             <ModeToggle />
           </div>
         </div>
