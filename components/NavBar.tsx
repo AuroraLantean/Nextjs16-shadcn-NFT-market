@@ -76,6 +76,8 @@ const NavBar = () => {
                 </Link>
               </Button>
 
+              <ChainsDropdown />
+
               <Button
                 variant="ghost"
                 className="flex items-center gap-2"

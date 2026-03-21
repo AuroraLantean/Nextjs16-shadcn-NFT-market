@@ -14,10 +14,13 @@ const ChainsDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost">
-          <Globe className="w-4 h-4" />
-          <span className="hidden md:inline">Chains</span>
+          <div className="flex items-center gap-2">
+            <Globe className="w-4 h-4" />
+            <span className="hidden md:inline">Chains</span>
+          </div>
         </Button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuItem>
