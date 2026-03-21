@@ -1,5 +1,5 @@
 import type React from "react";
-import { cn } from "@/styles/lib/utils";
+import { cn } from "@/lib/utils";
 
 /*variant: primary, secondary
 padding: small, medium, large

@@ -6,10 +6,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/ui/carousel";
-import { dragons } from "../constants/site_data";
-import { buyNow } from "../lib/utils";
+import { dragons } from "../mockdata/data";
 import NftCard from "./NftCard";
 
+export const buyNow = async () => {
+  "use server";
+  console.log("buy_now");
+};
 const CarouselNft = () => {
   //Carousel: set Carousel width = w-full
   // max-w-48 sm:max-w-lg md:max-w-lg

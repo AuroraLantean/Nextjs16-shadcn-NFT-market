@@ -1,7 +1,7 @@
 "use client";
 import Card from "@/components/Card";
 import CardImage from "@/components/CardImage";
-import { cn } from "@/styles/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/ui/button";
 
 type Props = {

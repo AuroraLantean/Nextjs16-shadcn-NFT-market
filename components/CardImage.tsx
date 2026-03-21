@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { cn } from "@/styles/lib/utils";
+import { cn } from "@/lib/utils";
 
 type Props = {
   src?: string;

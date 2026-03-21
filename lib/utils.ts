@@ -1,7 +1,15 @@
-export const buyNow = async () => {
-  "use server";
-  console.log("buy_now");
-};
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const APP_WIDTH_MIN = 350;
+export const chainTypeDefault = "evm";
+export const localChainDefault = "Foundry".toLowerCase();
+export const nftIdMin = 0;
+export const nftIdMax = 9;
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export const parseFloatSafe = (input: string) => {
   const out = Number.parseFloat(input);

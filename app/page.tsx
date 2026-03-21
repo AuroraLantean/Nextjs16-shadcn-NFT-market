@@ -1,3 +1,4 @@
+"use client";
 import CarouselNft from "@/components/CarouselNft";
 
 export default function Home() {
@@ -7,3 +8,8 @@ export default function Home() {
     </div>
   );
 }
+/*    <Button disabled>
+      <Spinner aria-hidden="true" />
+      Please wait
+    </Button>
+ */

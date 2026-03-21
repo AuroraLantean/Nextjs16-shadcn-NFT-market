@@ -21,6 +21,9 @@
 
 ## TODO
 
+ReUi
+<https://reui.io/patterns/input>
+
 - Fix Button arguments: isLoading, pX, pY
 - Wagmi: <https://wagmi.sh/>
 - Migrate from Web3Modal v5 to Reown AppKit
@@ -43,6 +46,15 @@ https://wagmi.sh/react/api/hooks/useDisconnect
 
 eslint-plugin-tailwindcss
 https://github.com/francoismassart/eslint-plugin-tailwindcss
+
+## Problems with NextJs
+
+Next.js Was a Mistake...
+<https://www.youtube.com/watch?v=p05VMzq3iqg>
+
+Google: "github nextjs slow dev server"
+Problems with turbopack in dev development being way too slow, taking 25 seconds for page to fully compile #85744 <https://github.com/vercel/next.js/discussions/85744>
+
 
 ## Warning
 

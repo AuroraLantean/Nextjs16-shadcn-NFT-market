@@ -1,7 +1,6 @@
 import { ArrowUpDown, Coins, LogIn, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/styles/lib/utils";
 import { Button } from "@/ui/button";
 import ChainsDropdown from "./ChainsDropdown";
 import { ModeToggle } from "./dark-mode";

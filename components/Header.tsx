@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { cn } from "@/styles/lib/utils";
+import { cn } from "@/lib/utils";
+
 import { ModeToggle } from "./dark-mode";
 
 const Header = () => {
