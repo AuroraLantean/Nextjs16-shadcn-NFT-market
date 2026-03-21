@@ -34,7 +34,7 @@
         "./styles/*"
       ],
       "@/ui/*": [
-        "./styles/components/ui/*"
+        "./components/ui/*"
       ],
       "@/lib/*": [
         "./lib/*"

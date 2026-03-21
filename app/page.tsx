@@ -47,8 +47,12 @@ export default function Home() {
     } else {
       toast.error("Failed to create project.");
     }
-  }
-  //  "next": "16.1.7",
+  } //625
+  //  next 16.2.1 conflicts with               <ChainsDropdown />
+
+  //[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+  //<Link href="/allcoins">
+
   return (
     <div className="">
       <CarouselNft />
