@@ -35,6 +35,9 @@
       ],
       "@/ui/*": [
         "./styles/components/ui/*"
+      ],
+      "@/lib/*": [
+        "./lib/*"
       ]
     }
   },

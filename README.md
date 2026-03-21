@@ -54,9 +54,11 @@ TypeError: Cannot redefine property: StacksProvider... chrome-extension://idnnbd
 
 ## Installation
 
-```bash
-pnpm install
-```
+Development Environment
+
+- PNPM: 10.32.1
+- Bun: 1.3.11
+- Google Chrome 146.0.7680.153(64-bit)
 
 TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
 
