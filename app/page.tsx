@@ -7,6 +7,7 @@ import type z from "zod";
 import CarouselNft from "@/components/CarouselNft";
 import { saveForm1 } from "@/lib/actions/db_actions";
 import { form1Schema } from "@/lib/schemas";
+import { FieldGroup, FieldLabel } from "@/ui/field";
 
 export default function Home() {
   const form1 = useForm({
@@ -47,13 +48,18 @@ export default function Home() {
       toast.error("Failed to create project.");
     }
   }
-
+  //  "next": "16.1.7",
   return (
     <div className="">
-      <div className="container px-4 mx-auto my-6">
-        <form onSubmit={form1.handleSubmit(onSubmit)}>Form1</form>
-      </div>
       <CarouselNft />
+      <div className="container px-4 mx-auto my-6">
+        <form onSubmit={form1.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <FieldLabel>Name</FieldLabel>
+          </FieldGroup>
+          Form1
+        </form>
+      </div>
     </div>
   );
 }
