@@ -1,10 +1,15 @@
 "use server";
 
 import type z from "zod";
-import { projectSchema } from "../schemas";
+import { form1Schema } from "../schemas";
+import { ll } from "../utils";
 
-export async function createProject(unsafeData: z.infer<typeof projectSchema>) {
-  const data = projectSchema.safeParse(unsafeData);
+export const buyNow = async () => {
+  ll("buy_now");
+};
+
+export async function saveForm1(unsafeData: z.infer<typeof form1Schema>) {
+  const data = form1Schema.safeParse(unsafeData);
 
   if (!data.success) return { success: false };
 

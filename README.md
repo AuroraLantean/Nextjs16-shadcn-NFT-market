@@ -77,6 +77,7 @@ TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
 Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
 
 Lucide Icons: <https://lucide.dev/>
+React Hook Form: <https://react-hook-form.com/get-started>
 
 ## Error
 

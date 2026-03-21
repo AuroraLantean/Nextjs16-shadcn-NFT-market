@@ -1,3 +1,4 @@
+import { buyNow } from "@/lib/actions/db_actions";
 import { Card, CardContent } from "@/ui/card";
 import {
   Carousel,
@@ -9,10 +10,6 @@ import {
 import { dragons } from "../mockdata/data";
 import NftCard from "./NftCard";
 
-export const buyNow = async () => {
-  "use server";
-  console.log("buy_now");
-};
 const CarouselNft = () => {
   //Carousel: set Carousel width = w-full
   // max-w-48 sm:max-w-lg md:max-w-lg

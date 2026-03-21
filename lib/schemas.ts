@@ -3,7 +3,7 @@ import * as z from "zod";
 //https://zod.dev/basics
 export const PROJECT_STATUSES = ["draft", "active", "finished"] as const;
 
-export const projectSchema = z.object({
+export const form1Schema = z.object({
   name: z.string().min(1),
   //amount: z.number(),
   status: z.enum(PROJECT_STATUSES),
