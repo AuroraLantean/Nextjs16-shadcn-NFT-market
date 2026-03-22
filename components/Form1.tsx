@@ -13,6 +13,7 @@ import { saveForm1 } from "@/lib/actions/db_actions";
 import { form1Schema, PROJECT_STATUSES } from "@/lib/schemas";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
+import { Checkbox } from "@/ui/checkbox";
 import {
   Field,
   FieldContent,
@@ -20,6 +21,8 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldLegend,
+  FieldSet,
 } from "@/ui/field";
 import { Input } from "@/ui/input";
 import {
@@ -41,11 +44,11 @@ export default function Form1() {
       name: "",
       description: "",
       status: "draft" as const,
-      // notifications: {
-      //   email: false,
-      //   sms: false,
-      //   push: false,
-      // },
+      notifications: {
+        email: false,
+        sms: false,
+        push: false,
+      },
       // users: [{ email: "" }],
     },
   });
@@ -104,7 +107,7 @@ export default function Form1() {
             )}
           />
 
-          {/*1242  add Controller with different name and FieldLable */}
+          {/*add Controller with different name and FieldLable */}
           <Controller
             name="status"
             control={form1.control}
@@ -157,6 +160,106 @@ export default function Form1() {
             )}
           />
 
+          {/*1754 */}
+          <FieldSet>
+            <FieldContent>
+              <FieldLegend>Notifications</FieldLegend>
+              <FieldDescription>
+                Select how you would like to receive notifications.
+              </FieldDescription>
+            </FieldContent>
+            <FieldGroup data-slot="checkbox-group">
+              <Controller
+                name="notifications.email"
+                control={form1.control}
+                render={({
+                  field: { value, onChange, ...field },
+                  fieldState,
+                }) => (
+                  <Field
+                    orientation="horizontal"
+                    data-invalid={fieldState.invalid}
+                  >
+                    <Checkbox
+                      {...field}
+                      id={field.name}
+                      onCheckedChange={onChange}
+                      checked={value}
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldContent>
+                      <FieldLabel htmlFor={field.name} className="font-normal">
+                        Email
+                      </FieldLabel>
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
+                    </FieldContent>
+                  </Field>
+                )}
+              />
+              <Controller
+                name="notifications.sms"
+                control={form1.control}
+                render={({
+                  field: { value, onChange, ...field },
+                  fieldState,
+                }) => (
+                  <Field
+                    orientation="horizontal"
+                    data-invalid={fieldState.invalid}
+                  >
+                    <Checkbox
+                      {...field}
+                      id={field.name}
+                      onCheckedChange={onChange}
+                      checked={value}
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldContent>
+                      <FieldLabel htmlFor={field.name} className="font-normal">
+                        SMS
+                      </FieldLabel>
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
+                    </FieldContent>
+                  </Field>
+                )}
+              />
+              <Controller
+                name="notifications.push"
+                control={form1.control}
+                render={({
+                  field: { value, onChange, ...field },
+                  fieldState,
+                }) => (
+                  <Field
+                    orientation="horizontal"
+                    data-invalid={fieldState.invalid}
+                  >
+                    <Checkbox
+                      {...field}
+                      id={field.name}
+                      onCheckedChange={onChange}
+                      checked={value}
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldContent>
+                      <FieldLabel htmlFor={field.name} className="font-normal">
+                        App Notification
+                      </FieldLabel>
+                      {fieldState.invalid && (
+                        <FieldError errors={[fieldState.error]} />
+                      )}
+                    </FieldContent>
+                  </Field>
+                )}
+              />
+            </FieldGroup>
+          </FieldSet>
+
+          {/*2300 */}
           <Button type="submit" form="form1">
             Submit
           </Button>
