@@ -1,14 +1,23 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import {
+  Controller,
+  type FieldErrors,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
 import { saveForm1 } from "@/lib/actions/db_actions";
 import { form1Schema } from "@/lib/schemas";
+import { ll } from "@/lib/utils";
+import { Button } from "@/ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/ui/field";
 import { Input } from "@/ui/input";
 
+//See Shadcn-field-component-main repo
+//https://ui.shadcn.com/docs/forms/react-hook-form
 export default function Form1() {
   const form1 = useForm({
     // biome-ignore lint/suspicious/noExplicitAny: <https://github.com/react-hook-form/resolvers/issues/842>
@@ -35,34 +44,53 @@ export default function Form1() {
     name: "users",
   });
 
-  async function onSubmit(data: z.infer<typeof form1Schema>) {
+  const onSubmit = async (data: z.infer<typeof form1Schema>) => {
+    ll("onSubmit");
     const res = await saveForm1(data);
-
+    ll("res:", res);
     if (res.success) {
       form1.reset();
       toast.success("Project created successfully!", {
         description: JSON.stringify(data, null, 2),
         className: "whitespace-pre-wrap font-mono",
+        position: "top-right",
       });
     } else {
-      toast.error("Failed to create project.");
+      toast.error("Failed to create project.", {
+        position: "top-right",
+      });
     }
-  } //625
+  }; //1120
+  const validationFailed = (e: FieldErrors) => {
+    ll("validationFailed:", e);
+  };
   return (
     <div className="container px-4 mx-auto my-6">
-      <form onSubmit={form1.handleSubmit(onSubmit)}>
+      <form
+        id="form1"
+        onSubmit={form1.handleSubmit(onSubmit, validationFailed)}
+      >
         <FieldGroup>
           <Controller
             name="name"
             control={form1.control}
             render={({ field, fieldState }) => (
-              <Field>
-                <FieldLabel>My Form</FieldLabel>
-                <Input />
-                <FieldError errors={[{ message: "error" }]} />
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                <Input
+                  {...field}
+                  id={field.name}
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
               </Field>
             )}
-          ></Controller>
+          />
+          <Button type="submit" form="form1">
+            Submit
+          </Button>
         </FieldGroup>
       </form>
     </div>

@@ -9,9 +9,10 @@ export const buyNow = async () => {
 };
 
 export async function saveForm1(unsafeData: z.infer<typeof form1Schema>) {
-  const data = form1Schema.safeParse(unsafeData);
-
-  if (!data.success) return { success: false };
+  ll("saveForm1");
+  const parsedData = form1Schema.safeParse(unsafeData);
+  ll("parsedData:", parsedData);
+  if (!parsedData.success) return { success: false };
 
   // Save to DB
 
