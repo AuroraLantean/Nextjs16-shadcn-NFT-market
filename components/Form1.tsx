@@ -10,7 +10,7 @@ import {
 import { toast } from "sonner";
 import type z from "zod";
 import { saveForm1 } from "@/lib/actions/db_actions";
-import { form1Schema } from "@/lib/schemas";
+import { form1Schema, PROJECT_STATUSES } from "@/lib/schemas";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 import {
@@ -22,6 +22,13 @@ import {
   FieldLabel,
 } from "@/ui/field";
 import { Input } from "@/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/ui/select";
 import { Textarea } from "@/ui/textarea";
 
 //See Shadcn-field-component-main repo
@@ -33,7 +40,7 @@ export default function Form1() {
     defaultValues: {
       name: "",
       description: "",
-      // status: "draft" as const,
+      status: "draft" as const,
       // notifications: {
       //   email: false,
       //   sms: false,
@@ -98,6 +105,35 @@ export default function Form1() {
           />
 
           {/*1242  add Controller with different name and FieldLable */}
+          <Controller
+            name="status"
+            control={form1.control}
+            render={({ field: { onChange, ...field }, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={field.name}>Status</FieldLabel>
+                <Select {...field} onValueChange={onChange}>
+                  <SelectTrigger
+                    aria-invalid={fieldState.invalid}
+                    onBlur={field.onBlur}
+                    id={field.name}
+                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PROJECT_STATUSES.map((status) => (
+                      <SelectItem key={status} value={status}>
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+
           <Controller
             name="description"
             control={form1.control}
