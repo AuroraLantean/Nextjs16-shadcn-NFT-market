@@ -81,20 +81,7 @@ React Hook Form: <https://react-hook-form.com/get-started>
 
 ## Error
 
-[Notice] Use NextJs 16.1.7. NextJs 16.2.x will cause the following error:
-
-```bash
-[browser] Uncaught Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
-  <Link href="/allcoins">
-```
-
-[Notice] use v1.0.4 for Radix UI @radix-ui/react-dialog@1.0.4 and @radix-ui/react-alert-dialog@1.0.4 for the DialogPortalProp error
-
 [Notice] use @react-email/tailwind@^0.0.8 instead of @react-email/tailwind@0.0.9 for the ReactServerComponentsError
-
-```bash
-pnpm add @radix-ui/react-dialog@1.0.4 @radix-ui/react-alert-dialog@1.0.4 @react-email/tailwind@^0.0.8
-```
 
 ## Deploy Solidity Smart Contracts on a Local Ethereum Network
 

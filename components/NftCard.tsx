@@ -1,5 +1,5 @@
 "use client";
-import Card from "@/components/Card";
+import Card from "@/components/Card1";
 import CardImage from "@/components/CardImage";
 import { cn } from "@/lib/utils";
 import { Button } from "@/ui/button";
