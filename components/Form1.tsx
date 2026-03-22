@@ -13,8 +13,16 @@ import { saveForm1 } from "@/lib/actions/db_actions";
 import { form1Schema } from "@/lib/schemas";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/ui/field";
 import { Input } from "@/ui/input";
+import { Textarea } from "@/ui/textarea";
 
 //See Shadcn-field-component-main repo
 //https://ui.shadcn.com/docs/forms/react-hook-form
@@ -24,8 +32,8 @@ export default function Form1() {
     resolver: zodResolver(form1Schema as any),
     defaultValues: {
       name: "",
+      description: "",
       // status: "draft" as const,
-      // description: "",
       // notifications: {
       //   email: false,
       //   sms: false,
@@ -88,6 +96,31 @@ export default function Form1() {
               </Field>
             )}
           />
+
+          {/*1242  add Controller with different name and FieldLable */}
+          <Controller
+            name="description"
+            control={form1.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldContent>
+                  <FieldLabel htmlFor={field.name}>Description</FieldLabel>
+                  <FieldDescription>
+                    Be as detailed as possible
+                  </FieldDescription>
+                </FieldContent>
+                <Textarea
+                  {...field}
+                  id={field.name}
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+
           <Button type="submit" form="form1">
             Submit
           </Button>

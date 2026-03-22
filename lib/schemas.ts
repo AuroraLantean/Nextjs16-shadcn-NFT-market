@@ -5,9 +5,9 @@ export const PROJECT_STATUSES = ["draft", "active", "finished"] as const;
 
 export const form1Schema = z.object({
   name: z.string().min(1),
+  description: z.string().transform((v) => v || undefined), //so not to store "" in db!
   //amount: z.number(),
   /*status: z.enum(PROJECT_STATUSES),
-  description: z.string().transform((v) => v || undefined),
   notifications: z.object({
     email: z.boolean(),
     sms: z.boolean(),
