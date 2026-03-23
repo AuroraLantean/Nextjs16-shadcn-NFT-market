@@ -26,7 +26,6 @@ import {
   FieldSeparator,
   FieldSet,
 } from "@/ui/field";
-import { Input } from "@/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
@@ -41,6 +40,7 @@ import {
   SelectValue,
 } from "@/ui/select";
 import { Textarea } from "@/ui/textarea";
+import FormController from "./FormController";
 
 //See Shadcn-field-component-main repo
 //https://ui.shadcn.com/docs/forms/react-hook-form
@@ -97,23 +97,7 @@ export default function Form1() {
         onSubmit={form1.handleSubmit(onSubmit, validationFailed)}
       >
         <FieldGroup>
-          <Controller
-            name="name"
-            control={form1.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                <Input
-                  {...field}
-                  id={field.name}
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
+          <FormController control={form1.control} name="name" label="Name" />
 
           {/*add Controller with different name and FieldLable */}
           <Controller
