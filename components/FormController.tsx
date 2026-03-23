@@ -44,6 +44,8 @@ type FormBaseProps<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
   TTransformedValues = TFieldValues,
 > = FormControlProps<TFieldValues, TName, TTransformedValues> & {
+  horizontal?: boolean;
+  controlFirst?: boolean;
   children: (
     field: Parameters<
       ControllerProps<TFieldValues, TName, TTransformedValues>["render"]
@@ -52,8 +54,6 @@ type FormBaseProps<
       id: string;
     },
   ) => ReactNode;
-  //horizontal?: boolean
-  //controlFirst?: boolean
 };
 export const FormBase = <
   TFieldValues extends FieldValues = FieldValues,
@@ -65,28 +65,56 @@ export const FormBase = <
   label,
   name,
   description,
+  horizontal,
+  controlFirst,
 }: FormBaseProps<TFieldValues, TName, TTransformedValues>) => {
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState }) => (
-        <Field data-invalid={fieldState.invalid}>
-          <FieldContent>
+      render={({ field, fieldState }) => {
+        const labelElement = (
+          <>
             <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
             {description && <FieldDescription>{description}</FieldDescription>}
-          </FieldContent>
-          {children({
-            ...field,
-            id: field.name,
-            "aria-invalid": fieldState.invalid,
-          })}
-          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-        </Field>
-      )}
+          </>
+        );
+        const control = children({
+          ...field,
+          id: field.name,
+          "aria-invalid": fieldState.invalid,
+        });
+        const errorElement = fieldState.invalid && (
+          <FieldError errors={[fieldState.error]} />
+        );
+        //controlFirst is for checkbox layout
+        return (
+          <Field
+            data-invalid={fieldState.invalid}
+            orientation={horizontal ? "horizontal" : undefined}
+          >
+            {controlFirst ? (
+              <>
+                {control}
+                <FieldContent>
+                  {labelElement}
+                  {errorElement}
+                </FieldContent>
+              </>
+            ) : (
+              <>
+                <FieldContent>{labelElement}</FieldContent>
+                {control}
+                {errorElement}
+              </>
+            )}
+            {}
+          </Field>
+        );
+      }}
     />
   );
-};
+}; //Checkbox is changing from uncontrolled to controlled.
 
 //adding generics from above should give hint on name argument... but not working
 /*const FormController = <
@@ -132,9 +160,7 @@ export const FormControllerSelect: FormControlFunc<{
   );
 };
 
-export const FormCheckbox: FormControlFunc<{
-  children: ReactNode;
-}> = (props) => {
+export const FormControllerCheckbox: FormControlFunc = (props) => {
   return (
     <FormBase {...props} horizontal controlFirst>
       {({ onChange, value, ...field }) => (
@@ -143,3 +169,23 @@ export const FormCheckbox: FormControlFunc<{
     </FormBase>
   );
 };
+/**Checkbox is changing from uncontrolled to controlled. Components  
+              <FormControllerCheckbox
+                control={form1.control}
+                label="Email"
+                name="notification.email"
+              />
+
+              <FormControllerCheckbox
+                control={form1.control}
+                label="SMS"
+                name="notification.sms"
+              />
+
+              <FormControllerCheckbox
+                control={form1.control}
+                label="Push"
+                name="notification.push"
+              />
+ */
+//Tanstack Form: 48:30

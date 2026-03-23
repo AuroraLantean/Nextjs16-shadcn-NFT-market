@@ -128,6 +128,7 @@ export default function Form1() {
                 Select how you would like to receive notifications.
               </FieldDescription>
             </FieldContent>
+
             <FieldGroup data-slot="checkbox-group">
               <Controller
                 name="notifications.email"
