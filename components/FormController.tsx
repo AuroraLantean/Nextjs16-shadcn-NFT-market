@@ -8,8 +8,15 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form";
-import { Field, FieldError, FieldLabel } from "@/ui/field";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "@/ui/field";
 import { Input } from "@/ui/input";
+import { Textarea } from "./ui/textarea";
 
 ///usage: <FormController control={form1.control} name="name" label="label" />
 type FormControlProps<
@@ -19,8 +26,16 @@ type FormControlProps<
 > = {
   name: TName; //TName will infer only valid name for our app
   label: ReactNode;
+  description?: ReactNode;
   control: ControllerProps<TFieldValues, TName, TTransformedValues>["control"]; //write ControllerProps here and import it from react-hook-form. copy the generic types from ControllerProps popover hint, paste them into this FormControlProps<...>, and paste the leading generics here ControllerProps<...>
 };
+type FormControlFunc = <
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+>(
+  props: FormControlProps<TFieldValues, TName, TTransformedValues>,
+) => ReactNode;
 
 type FormBaseProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -47,6 +62,7 @@ export const FormBase = <
   control,
   label,
   name,
+  description,
 }: FormBaseProps<TFieldValues, TName, TTransformedValues>) => {
   return (
     <Controller
@@ -54,7 +70,10 @@ export const FormBase = <
       control={control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+          <FieldContent>
+            <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+            {description && <FieldDescription>{description}</FieldDescription>}
+          </FieldContent>
           {children({
             ...field,
             id: field.name,
@@ -68,7 +87,7 @@ export const FormBase = <
 };
 
 //adding generics from above should give hint on name argument... but not working
-const FormController = <
+/*const FormController = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
   TTransformedValues = TFieldValues,
@@ -78,4 +97,10 @@ const FormController = <
   return <FormBase {...props}>{(field) => <Input {...field} />}</FormBase>;
 };
 
-export default FormController;
+export default FormController;*/
+export const FormControllerInput: FormControlFunc = (props) => {
+  return <FormBase {...props}>{(field) => <Input {...field} />}</FormBase>;
+};
+export const FormControllerTextArea: FormControlFunc = (props) => {
+  return <FormBase {...props}>{(field) => <Textarea {...field} />}</FormBase>;
+};

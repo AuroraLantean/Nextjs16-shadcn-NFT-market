@@ -39,8 +39,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/ui/select";
-import { Textarea } from "@/ui/textarea";
-import FormController from "./FormController";
+import { FormControllerInput, FormControllerTextArea } from "./FormController";
 
 //See Shadcn-field-component-main repo
 //https://ui.shadcn.com/docs/forms/react-hook-form
@@ -97,7 +96,11 @@ export default function Form1() {
         onSubmit={form1.handleSubmit(onSubmit, validationFailed)}
       >
         <FieldGroup>
-          <FormController control={form1.control} name="name" label="Name" />
+          <FormControllerInput
+            control={form1.control}
+            name="name"
+            label="Name"
+          />
 
           {/*add Controller with different name and FieldLable */}
           <Controller
@@ -129,27 +132,11 @@ export default function Form1() {
             )}
           />
 
-          <Controller
+          <FormControllerTextArea
             name="description"
             control={form1.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldContent>
-                  <FieldLabel htmlFor={field.name}>Description</FieldLabel>
-                  <FieldDescription>
-                    Be as detailed as possible
-                  </FieldDescription>
-                </FieldContent>
-                <Textarea
-                  {...field}
-                  id={field.name}
-                  aria-invalid={fieldState.invalid}
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
+            label="Description"
+            description="Be as detailed as possible"
           />
 
           {/*1754 */}
