@@ -1,11 +1,11 @@
 import CarouselNft from "@/components/CarouselNft";
-import Form1 from "@/components/Form1";
+import ReactHookForm1 from "@/components/ReactHookForm1";
 
 export default function Home() {
   return (
     <div className="">
       <CarouselNft />
-      <Form1 />
+      <ReactHookForm1 />
     </div>
   );
 }

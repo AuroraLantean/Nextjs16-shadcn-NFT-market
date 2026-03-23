@@ -37,11 +37,11 @@ import {
   FormControllerInput,
   FormControllerSelect,
   FormControllerTextArea,
-} from "./FormController";
+} from "./ReactHookFormController";
 
 //See Shadcn-field-component-main repo
 //https://ui.shadcn.com/docs/forms/react-hook-form
-export default function Form1() {
+export default function ReactHookForm1() {
   const form1 = useForm({
     // biome-ignore lint/suspicious/noExplicitAny: <https://github.com/react-hook-form/resolvers/issues/842>
     resolver: zodResolver(form1Schema as any),
@@ -54,7 +54,7 @@ export default function Form1() {
         sms: false,
         push: false,
       },
-      // users: [{ email: "" }],
+      users: [{ email: "" }],
     },
   });
 

@@ -169,7 +169,7 @@ export const FormControllerCheckbox: FormControlFunc = (props) => {
     </FormBase>
   );
 };
-/**Checkbox is changing from uncontrolled to controlled. Components  
+/**Checkbox is changing from uncontrolled to controlled. Components  ... Web Dev Simplified: "Shadcn Form Components"
               <FormControllerCheckbox
                 control={form1.control}
                 label="Email"
