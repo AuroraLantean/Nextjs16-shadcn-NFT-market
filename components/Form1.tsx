@@ -32,14 +32,12 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/ui/input-group";
+import { SelectItem } from "@/ui/select";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ui/select";
-import { FormControllerInput, FormControllerTextArea } from "./FormController";
+  FormControllerInput,
+  FormControllerSelect,
+  FormControllerTextArea,
+} from "./FormController";
 
 //See Shadcn-field-component-main repo
 //https://ui.shadcn.com/docs/forms/react-hook-form
@@ -103,34 +101,17 @@ export default function Form1() {
           />
 
           {/*add Controller with different name and FieldLable */}
-          <Controller
-            name="status"
+          <FormControllerSelect
             control={form1.control}
-            render={({ field: { onChange, ...field }, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>Status</FieldLabel>
-                <Select {...field} onValueChange={onChange}>
-                  <SelectTrigger
-                    aria-invalid={fieldState.invalid}
-                    onBlur={field.onBlur}
-                    id={field.name}
-                  >
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {PROJECT_STATUSES.map((status) => (
-                      <SelectItem key={status} value={status}>
-                        {status}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
+            name="status"
+            label="Status"
+          >
+            {PROJECT_STATUSES.map((status) => (
+              <SelectItem key={status} value={status}>
+                {status}
+              </SelectItem>
+            ))}
+          </FormControllerSelect>
 
           <FormControllerTextArea
             name="description"

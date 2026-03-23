@@ -1,6 +1,4 @@
-import { fields } from "@hookform/resolvers/ajv/src/__tests__/__fixtures__/data.js";
 import type { ReactNode } from "react";
-//import { FormBase, FormControlProps } from "./FormBase"
 //import { useFieldContext } from "./hooks"
 import {
   Controller,
@@ -8,6 +6,7 @@ import {
   type FieldPath,
   type FieldValues,
 } from "react-hook-form";
+import { Checkbox } from "@/ui/checkbox";
 import {
   Field,
   FieldContent,
@@ -16,7 +15,8 @@ import {
   FieldLabel,
 } from "@/ui/field";
 import { Input } from "@/ui/input";
-import { Textarea } from "./ui/textarea";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "@/ui/select";
+import { Textarea } from "@/ui/textarea";
 
 ///usage: <FormController control={form1.control} name="name" label="label" />
 type FormControlProps<
@@ -29,12 +29,14 @@ type FormControlProps<
   description?: ReactNode;
   control: ControllerProps<TFieldValues, TName, TTransformedValues>["control"]; //write ControllerProps here and import it from react-hook-form. copy the generic types from ControllerProps popover hint, paste them into this FormControlProps<...>, and paste the leading generics here ControllerProps<...>
 };
-type FormControlFunc = <
+type FormControlFunc<
+  ExtraProps extends Record<string, unknown> = Record<never, never>,
+> = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
   TTransformedValues = TFieldValues,
 >(
-  props: FormControlProps<TFieldValues, TName, TTransformedValues>,
+  props: FormControlProps<TFieldValues, TName, TTransformedValues> & ExtraProps,
 ) => ReactNode;
 
 type FormBaseProps<
@@ -103,4 +105,41 @@ export const FormControllerInput: FormControlFunc = (props) => {
 };
 export const FormControllerTextArea: FormControlFunc = (props) => {
   return <FormBase {...props}>{(field) => <Textarea {...field} />}</FormBase>;
+};
+
+//4236 for FormSelect
+export const FormControllerSelect: FormControlFunc<{
+  children: ReactNode;
+}> = ({ children, ...props }) => {
+  //const field = useFieldContext<string>();
+  //const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
+  return (
+    <FormBase {...props}>
+      {({ onChange, onBlur, ...field }) => (
+        <Select {...field} onValueChange={onChange}>
+          <SelectTrigger
+            aria-invalid={field["aria-invalid"]}
+            id={field.name}
+            onBlur={onBlur}
+          >
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>{children}</SelectContent>
+        </Select>
+      )}
+    </FormBase>
+  );
+};
+
+export const FormCheckbox: FormControlFunc<{
+  children: ReactNode;
+}> = (props) => {
+  return (
+    <FormBase {...props} horizontal controlFirst>
+      {({ onChange, value, ...field }) => (
+        <Checkbox {...field} checked={value} onCheckedChange={onChange} />
+      )}
+    </FormBase>
+  );
 };
