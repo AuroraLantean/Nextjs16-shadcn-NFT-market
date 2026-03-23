@@ -208,10 +208,10 @@ Change the lockfileVersion in pnpm-lock.yaml to `lockfileVersion: '8.5.1'`
 
 Use Vercel's NodeJs version(from deployment error message) in your package.json engine section. Remove `"pnpm": ">=8.14.0"` in your package.json engine section to avoid `ERR_PNPM_UNSUPPORTED_ENGINE  Unsupported environment (bad pnpm and/or Node.js version)`:
 
-```
+```json
   "engines": {
-    "node": "18.x",
-    "bun": ">=1.0.22"
+    "node": "24.x",
+    "bun": ">=1.3.11"
   }
 ```
 

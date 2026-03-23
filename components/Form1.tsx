@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { XIcon } from "lucide-react";
 import {
   Controller,
   type FieldErrors,
@@ -22,9 +23,16 @@ import {
   FieldGroup,
   FieldLabel,
   FieldLegend,
+  FieldSeparator,
   FieldSet,
 } from "@/ui/field";
 import { Input } from "@/ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/ui/input-group";
 import {
   Select,
   SelectContent,
@@ -259,7 +267,77 @@ export default function Form1() {
             </FieldGroup>
           </FieldSet>
 
-          {/*2300 */}
+          {/*2300 dynamic array of objects 
+          FieldLegend variant="label" ... for size
+          */}
+          <FieldSeparator />
+          <FieldSet>
+            <div className="flex justify-between gap-2 items-center">
+              <FieldContent>
+                <FieldLegend variant="label" className="mb-0">
+                  User Email Addresses
+                </FieldLegend>
+                <FieldDescription>
+                  Add up to 5 users to this project (including yourself).
+                </FieldDescription>
+                {form1.formState.errors.users?.root && (
+                  <FieldError errors={[form1.formState.errors.users.root]} />
+                )}
+              </FieldContent>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => addUser({ email: "" })}
+              >
+                Add User
+              </Button>
+            </div>
+            <FieldGroup>
+              {users.map((user, index) => (
+                <Controller
+                  key={user.id}
+                  name={`users.${index}.email`}
+                  control={form1.control}
+                  render={({ field, fieldState }) => (
+                    <Field
+                      orientation="horizontal"
+                      data-invalid={fieldState.invalid}
+                    >
+                      <FieldContent>
+                        <InputGroup>
+                          <InputGroupInput
+                            {...field}
+                            id={`${field.name}-${index}`}
+                            aria-invalid={fieldState.invalid}
+                            aria-label={`User ${index + 1} email`}
+                            type="email"
+                          />
+                          {users.length > 1 && (
+                            <InputGroupAddon align="inline-end">
+                              <InputGroupButton
+                                type="button"
+                                variant="ghost"
+                                size="icon-xs"
+                                onClick={() => removeUser(index)}
+                                aria-label={`Remove User ${index + 1}`}
+                              >
+                                <XIcon />
+                              </InputGroupButton>
+                            </InputGroupAddon>
+                          )}
+                        </InputGroup>
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </FieldContent>
+                    </Field>
+                  )}
+                />
+              ))}
+            </FieldGroup>
+          </FieldSet>
+
           <Button type="submit" form="form1">
             Submit
           </Button>
