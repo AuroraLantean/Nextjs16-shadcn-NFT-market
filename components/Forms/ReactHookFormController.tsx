@@ -55,7 +55,7 @@ type FormBaseProps<
     },
   ) => ReactNode;
 };
-export const FormBase = <
+export const ReactHookFormBase = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
   TTransformedValues = TFieldValues,
@@ -124,15 +124,23 @@ export const FormBase = <
 >(
   props: FormControlProps<TFieldValues, TName, TTransformedValues>,
 ) => {
-  return <FormBase {...props}>{(field) => <Input {...field} />}</FormBase>;
+  return <ReactHookFormBase {...props}>{(field) => <Input {...field} />}</ReactHookFormBase>;
 };
 
 export default FormController;*/
 export const FormControllerInput: FormControlFunc = (props) => {
-  return <FormBase {...props}>{(field) => <Input {...field} />}</FormBase>;
+  return (
+    <ReactHookFormBase {...props}>
+      {(field) => <Input {...field} />}
+    </ReactHookFormBase>
+  );
 };
 export const FormControllerTextArea: FormControlFunc = (props) => {
-  return <FormBase {...props}>{(field) => <Textarea {...field} />}</FormBase>;
+  return (
+    <ReactHookFormBase {...props}>
+      {(field) => <Textarea {...field} />}
+    </ReactHookFormBase>
+  );
 };
 
 //4236 for FormSelect
@@ -143,7 +151,7 @@ export const FormControllerSelect: FormControlFunc<{
   //const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
   return (
-    <FormBase {...props}>
+    <ReactHookFormBase {...props}>
       {({ onChange, onBlur, ...field }) => (
         <Select {...field} onValueChange={onChange}>
           <SelectTrigger
@@ -156,17 +164,17 @@ export const FormControllerSelect: FormControlFunc<{
           <SelectContent>{children}</SelectContent>
         </Select>
       )}
-    </FormBase>
+    </ReactHookFormBase>
   );
 };
 
 export const FormControllerCheckbox: FormControlFunc = (props) => {
   return (
-    <FormBase {...props} horizontal controlFirst>
+    <ReactHookFormBase {...props} horizontal controlFirst>
       {({ onChange, value, ...field }) => (
         <Checkbox {...field} checked={value} onCheckedChange={onChange} />
       )}
-    </FormBase>
+    </ReactHookFormBase>
   );
 };
 /**Checkbox is changing from uncontrolled to controlled. Components  ... Web Dev Simplified: "Shadcn Form Components"

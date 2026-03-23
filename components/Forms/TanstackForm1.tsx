@@ -1,39 +1,26 @@
 "use client";
 
 //https://tanstack.com/form/latest/docs/overview
-import { useForm } from "@tanstack/react-form";
-import { XIcon } from "lucide-react";
 import { toast } from "sonner";
 import type z from "zod";
 import { saveForm1 } from "@/lib/actions/db_actions";
 import { form1Schema, PROJECT_STATUSES } from "@/lib/schemas";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
-import { Checkbox } from "@/ui/checkbox";
 import {
-  Field,
   FieldContent,
   FieldDescription,
-  FieldError,
   FieldGroup,
-  FieldLabel,
   FieldLegend,
   FieldSeparator,
   FieldSet,
 } from "@/ui/field";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from "@/ui/input-group";
-import { SelectItem } from "@/ui/select";
-import { Input } from "./ui/input";
+import { useAppForm } from "./TanstackFormController";
 
 type FormData = z.infer<typeof form1Schema>;
 
 const TanstackForm1 = () => {
-  const form1 = useForm({
+  const form1 = useAppForm({
     defaultValues: {
       name: "",
       description: "",
@@ -77,42 +64,19 @@ const TanstackForm1 = () => {
         }}
       >
         <FieldGroup>
-          <form1.Field name="name">
-            {(field) => {
-              const isInvalid =
-                field.state.meta.isTouched && !field.state.meta.isValid;
-              return (
-                <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                  <Input
-                    id={field.name}
-                    name={field.name}
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                    aria-invalid={isInvalid}
-                  />
-                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
-                </Field>
-              );
-            }}
-          </form1.Field>
+          <form1.AppField name="name">
+            {(field) => <field.TextField label="Name" />}
+          </form1.AppField>
 
-          {/*5154 */}
-          <FieldSet>
-            <FieldContent>
-              <FieldLegend>Notifications</FieldLegend>
-              <FieldDescription>
-                Select how you would like to receive notifications.
-              </FieldDescription>
-            </FieldContent>
+          <form1.AppField name="description">
+            {(field) => (
+              <field.Textarea
+                label="Description"
+                description="Be as specific as possible"
+              />
+            )}
+          </form1.AppField>
 
-            <FieldGroup data-slot="checkbox-group"></FieldGroup>
-          </FieldSet>
-
-          {/*2300 dynamic array of objects 
-          FieldLegend variant="label" ... for size
-          */}
           <FieldSeparator />
 
           <Button type="submit" form="form1">
