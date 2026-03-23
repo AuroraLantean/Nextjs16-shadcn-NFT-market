@@ -15,6 +15,7 @@ import {
   FieldSeparator,
   FieldSet,
 } from "@/ui/field";
+import { SelectItem } from "../ui/select";
 import { useAppForm } from "./TanstackFormController";
 
 type FormData = z.infer<typeof form1Schema>;
@@ -68,6 +69,18 @@ const TanstackForm1 = () => {
             {(field) => <field.TextField label="Name" />}
           </form1.AppField>
 
+          <form1.AppField name="status">
+            {(field) => (
+              <field.Select label="Status">
+                {PROJECT_STATUSES.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status}
+                  </SelectItem>
+                ))}
+              </field.Select>
+            )}
+          </form1.AppField>
+
           <form1.AppField name="description">
             {(field) => (
               <field.Textarea
@@ -77,8 +90,30 @@ const TanstackForm1 = () => {
             )}
           </form1.AppField>
 
-          <FieldSeparator />
+          <FieldSet>
+            <FieldContent>
+              <FieldLegend>Notifications</FieldLegend>
+              <FieldDescription>
+                Select how you would like to receive notifications.
+              </FieldDescription>
+            </FieldContent>
 
+            <FieldGroup data-slot="checkbox-group">
+              <form1.AppField name="notifications.email">
+                {(field) => <field.Checkbox label="Email" />}
+              </form1.AppField>
+
+              <form1.AppField name="notifications.sms">
+                {(field) => <field.Checkbox label="SMS" />}
+              </form1.AppField>
+
+              <form1.AppField name="notifications.push">
+                {(field) => <field.Checkbox label="Push" />}
+              </form1.AppField>
+            </FieldGroup>
+          </FieldSet>
+
+          <FieldSeparator />
           <Button type="submit" form="form1">
             Submit
           </Button>
