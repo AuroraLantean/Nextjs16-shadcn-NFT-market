@@ -3,31 +3,36 @@ import Card from "@/components/Card1";
 import CardImage from "@/components/CardImage";
 import { cn } from "@/lib/utils";
 import { Button } from "@/ui/button";
+import { DialogNft } from "./Forms/DialogNft";
 
 type Props = {
+  nftId: number;
   name: string;
   imgUrl: string;
   detail: string;
   price: number;
-  buyNow: () => void;
   className?: string;
   //children: React.ReactNode;
 };
 const NftCard = ({
+  nftId,
   name,
   imgUrl,
   detail,
   price,
-  buyNow,
   className,
   ...props
 }: Props) => {
   return (
     //leading-none: set the line height of an element equal to its font size:
     //text-muted-foreground
-    <div className={cn(className)} {...props}>
-      <Card variant="default" size="large">
-        {name && <h3 className="text-2xl font-extrabold mb-1">{name}</h3>}
+    <div className="" {...props}>
+      <Card className={cn(className)} variant="default" size="large">
+        {name && (
+          <h3 className="text-2xl font-extrabold mb-1">
+            {name} id: {nftId}
+          </h3>
+        )}
         {imgUrl && <CardImage src={imgUrl} />}
         {detail && <div className="mb-1">{detail}</div>}
 
@@ -36,12 +41,7 @@ const NftCard = ({
             Price: ${price}
           </span>
 
-          <Button
-            onClick={buyNow}
-            className="ml-4 text-xl  bg-blue-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
-          >
-            Buy Now
-          </Button>
+          <DialogNft nftId={nftId} price={price} />
         </div>
       </Card>
     </div>

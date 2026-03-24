@@ -28,10 +28,10 @@ const Card = ({
   const baseStyles = "rounded-lg shadow-md transition-all duration-300";
 
   const variants = {
-    default: "bg-green-400 border border-gray-200",
-    primary: "bg-yellow-100 border border-blue-200",
-    success: "bg-green-50 border border-green-200",
-    dark: "bg-blue-800 border border-gray-700",
+    default: "border border-gray-200",
+    primary: "border border-blue-200",
+    success: "border border-green-200",
+    dark: "border border-gray-700",
   };
 
   const hoverStyles = isHover ? "hover:shadow-xl hover:-translate-y-1" : "";

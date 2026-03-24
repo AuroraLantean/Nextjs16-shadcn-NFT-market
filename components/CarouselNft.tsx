@@ -1,4 +1,3 @@
-import { buyNow } from "@/lib/actions/db_actions";
 import { Card, CardContent } from "@/ui/card";
 import {
   Carousel,
@@ -25,18 +24,15 @@ const CarouselNft = () => {
       <CarouselContent>
         {dragons.map((dragon) => (
           <CarouselItem
-            key={dragon.id}
+            key={dragon.nftId}
             className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
           >
             <div className="">
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-2">
                   <NftCard
-                    name={dragon.name}
-                    imgUrl={dragon.imgUrl}
-                    detail={dragon.detail}
-                    price={dragon.price}
-                    buyNow={buyNow}
+                    className="bg-yellow-400 dark:bg-green-400"
+                    {...dragon}
                   />
                 </CardContent>
               </Card>

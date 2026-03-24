@@ -1,7 +1,7 @@
 import { parseIntSafe } from "@/lib/utils";
 
 export type DragonT = {
-  id: number;
+  nftId: number;
   name: string;
   artist: string;
   category: string;
@@ -10,7 +10,7 @@ export type DragonT = {
   price: number;
 };
 export const dragon1: DragonT = {
-  id: 10,
+  nftId: 10,
   name: "Woogoo",
   artist: "longsun",
   category: "mysterious",
@@ -19,10 +19,10 @@ export const dragon1: DragonT = {
   price: 300,
 };
 
-//export type nftT = Pick<DragonT, "id"> & Partial<DragonT>
-export type nftT = Partial<DragonT> & { id: number };
+//export type nftT = Pick<DragonT, "nftId"> & Partial<DragonT>
+export type nftT = Partial<DragonT> & { nftId: number };
 export const extractNftIds = (nfts: nftT[]) => {
-  const nftIdArray = nfts.map((item) => parseIntSafe(`${item.id}`));
+  const nftIdArray = nfts.map((item) => parseIntSafe(`${item.nftId}`));
   return nftIdArray;
 };
 
@@ -44,7 +44,7 @@ export const sepoliaDp6contracts: contractT[] = [
 export const soldout = "/kisspng-sold512x375.png";
 export const dragons: DragonT[] = [
   {
-    id: 0,
+    nftId: 0,
     name: "Rendezvous",
     artist: "Ethan Byte",
     category: "dragon",
@@ -53,7 +53,7 @@ export const dragons: DragonT[] = [
     price: 300,
   },
   {
-    id: 1,
+    nftId: 1,
     name: "Awakening",
     artist: "Nina Netcode",
     category: "dragon",
@@ -62,7 +62,7 @@ export const dragons: DragonT[] = [
     price: 430,
   },
   {
-    id: 2,
+    nftId: 2,
     name: "Dreadful",
     artist: "Lena Logic",
     category: "dragon",
@@ -71,7 +71,7 @@ export const dragons: DragonT[] = [
     price: 560,
   },
   {
-    id: 3,
+    nftId: 3,
     name: "Predator",
     artist: "Beth Binary",
     category: "dragon",
@@ -80,7 +80,7 @@ export const dragons: DragonT[] = [
     price: 780,
   },
   {
-    id: 4,
+    nftId: 4,
     name: "Mystical",
     artist: "Lena Logic",
     category: "dragon",
@@ -89,7 +89,7 @@ export const dragons: DragonT[] = [
     price: 920,
   },
   {
-    id: 5,
+    nftId: 5,
     name: "Water Hunter",
     artist: "Lena Logic",
     category: "dragon",
@@ -98,7 +98,7 @@ export const dragons: DragonT[] = [
     price: 1120,
   },
   {
-    id: 6,
+    nftId: 6,
     name: "Air Terror",
     artist: "Lena Logic",
     category: "dragon",
@@ -107,7 +107,7 @@ export const dragons: DragonT[] = [
     price: 1370,
   },
   {
-    id: 7,
+    nftId: 7,
     name: "Fire Beast",
     artist: "Luna punk",
     category: "dragon",
