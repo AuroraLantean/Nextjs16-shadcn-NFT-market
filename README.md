@@ -79,6 +79,9 @@ Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
 Lucide Icons: <https://lucide.dev/>
 React Hook Form: <https://react-hook-form.com/get-started>
 
+Tanstack Form is better than React Hook Form:
+<https://tanstack.com/form/latest/docs/comparison>
+
 ## Error
 
 [Notice] use @react-email/tailwind@^0.0.8 instead of @react-email/tailwind@0.0.9 for the ReactServerComponentsError
