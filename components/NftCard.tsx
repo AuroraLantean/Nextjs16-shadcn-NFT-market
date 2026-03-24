@@ -2,7 +2,6 @@
 import Card from "@/components/Card1";
 import CardImage from "@/components/CardImage";
 import { cn } from "@/lib/utils";
-import { Button } from "@/ui/button";
 import { DialogNft } from "./Forms/DialogNft";
 
 type Props = {
@@ -30,7 +29,7 @@ const NftCard = ({
       <Card className={cn(className)} variant="default" size="large">
         {name && (
           <h3 className="text-2xl font-extrabold mb-1">
-            {name} id: {nftId}
+            {name} {nftId}
           </h3>
         )}
         {imgUrl && <CardImage src={imgUrl} />}

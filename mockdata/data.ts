@@ -59,7 +59,7 @@ export const dragons: DragonT[] = [
     category: "dragon",
     detail: "will attack you at night in your bed",
     imgUrl: "/dragons/8e25da39-6895-4ad4-88b2-34a31ac1bfa4.png",
-    price: 430,
+    price: 320,
   },
   {
     nftId: 2,
@@ -68,7 +68,7 @@ export const dragons: DragonT[] = [
     category: "dragon",
     detail: "can tear anything apart into pieces",
     imgUrl: "/dragons/41a691af-f4c3-4242-a223-5b0796b603ec.png",
-    price: 560,
+    price: 373,
   },
   {
     nftId: 3,
@@ -77,7 +77,7 @@ export const dragons: DragonT[] = [
     category: "dragon",
     detail: "will hunt anything down day or night",
     imgUrl: "/dragons/65f6e1c0-f76d-4a1e-869e-dfa6011eaeea.png",
-    price: 780,
+    price: 324,
   },
   {
     nftId: 4,
@@ -86,16 +86,16 @@ export const dragons: DragonT[] = [
     category: "dragon",
     detail: "can summon mystical powers",
     imgUrl: "/dragons/8599b949-2f76-4ec5-91b6-1a9a6fae3867.png",
-    price: 920,
+    price: 398,
   },
   {
     nftId: 5,
-    name: "Water Hunter",
+    name: "Sea Hunter",
     artist: "Lena Logic",
     category: "dragon",
     detail: "can dive into the abyss in sea",
     imgUrl: "/dragons/a4a4b0a8-f0a8-4bb7-9b72-c43153390d47.png",
-    price: 1120,
+    price: 313,
   },
   {
     nftId: 6,
@@ -104,7 +104,7 @@ export const dragons: DragonT[] = [
     category: "dragon",
     detail: "can fly into the sky and beyond",
     imgUrl: "/dragons/b45006c8-2a7a-4950-89f8-bded7fc4dcad.png",
-    price: 1370,
+    price: 426,
   },
   {
     nftId: 7,
@@ -113,6 +113,6 @@ export const dragons: DragonT[] = [
     category: "dragon",
     detail: "will rain fire balls on you if you feel cold",
     imgUrl: "/dragons/dragonBreathFire521x512.png",
-    price: 1490,
+    price: 479,
   },
 ];

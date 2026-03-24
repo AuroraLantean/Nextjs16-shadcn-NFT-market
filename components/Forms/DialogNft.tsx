@@ -1,6 +1,8 @@
 "use client";
+import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { chainIndexAtom, chainsAtom } from "@/lib/jotaiStates";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 import {
@@ -11,9 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/ui/dialog";
-import { Field, FieldGroup } from "@/ui/field";
-import { Input } from "@/ui/input";
-import { Label } from "@/ui/label";
+import { FieldLabel } from "@/ui/field";
 
 type Props = {
   nftId: number;
@@ -21,6 +21,11 @@ type Props = {
 };
 export const DialogNft = ({ nftId, price }: Props) => {
   const _compoName = "DialogNft";
+  const [chainIndex, setChainIndexAtom] = useAtom(chainIndexAtom);
+  const [chainConfig, setChainConfig] = useAtom(chainsAtom);
+  const { blockchain, acceptedTokSymbol, contractAddr } =
+    chainConfig[chainIndex];
+
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false); //setOpen is a function for Dialog to export its open/close state
 
@@ -67,14 +72,20 @@ export const DialogNft = ({ nftId, price }: Props) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Buy NFT #{nftId}</DialogTitle>
+          <DialogTitle className="font-extrabold">Buy NFT</DialogTitle>
           <DialogDescription>
             Choose input token and blockchain. Confirm NFT ID and enter the
             required price. Click 'Buy' when you're ready.
           </DialogDescription>
         </DialogHeader>
-        YOUR FORM HERE Price ${price} USDT
-        <div className="mt-0"></div>
+        <div className="mt-0 flex-col">
+          <FieldLabel>NFT ID: {nftId}</FieldLabel>
+          <FieldLabel>
+            Price: {price} {acceptedTokSymbol}
+          </FieldLabel>
+          <FieldLabel>Contract Address: {contractAddr}</FieldLabel>
+          <FieldLabel>Blockchain: {blockchain.toUpperCase()}</FieldLabel>
+        </div>
         <Button
           type="submit"
           onClick={() => ll("click on DialogSubmitBtn")}
