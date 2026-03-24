@@ -1,12 +1,17 @@
 import CarouselNft from "@/components/CarouselNft";
-import { Dialog1 } from "@/components/Forms/Dialog1";
+import { DialogNft } from "@/components/Forms/DialogNft";
 import TanstackForm1 from "@/components/Forms/TanstackForm1";
 
 export default function Home() {
+  const dialogProps = {
+    nftId: 1,
+    priceNative: 1n,
+    priceToken: 30n,
+  };
   return (
     <div className="">
       <CarouselNft />
-      <Dialog1 />
+      <DialogNft {...dialogProps} />
       <TanstackForm1 />
     </div>
   );
