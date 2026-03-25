@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
   },
   serverExternalPackages: [
     "pino",
-    "@rainbow-me/rainbowkit",
-    "viem",
-    "wagmi",
     "pino-pretty",
     "thread-stream",
     "@walletconnect/universal-provider",
@@ -17,5 +14,5 @@ const nextConfig: NextConfig = {
     "mongoose",
   ],
 };
-
+//"@rainbow-me/rainbowkit", "viem", "wagmi",
 export default nextConfig;

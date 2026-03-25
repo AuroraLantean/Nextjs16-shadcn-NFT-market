@@ -1,5 +1,5 @@
 "use client";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { chainIndexAtom, chainsAtom } from "@/lib/jotaiStates";
@@ -21,8 +21,8 @@ type Props = {
 };
 export const DialogNft = ({ nftId, price }: Props) => {
   const _compoName = "DialogNft";
-  const [chainIndex, setChainIndexAtom] = useAtom(chainIndexAtom);
-  const [chainConfig, setChainConfig] = useAtom(chainsAtom);
+  const chainIndex = useAtomValue(chainIndexAtom);
+  const chainConfig = useAtomValue(chainsAtom);
   if (!chainConfig[chainIndex]) throw new Error("chainIndex invalid");
   const { blockchain, acceptedTokSymbol, contractAddr } =
     chainConfig[chainIndex];

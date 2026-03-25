@@ -32,14 +32,6 @@ ReUi
 - Next.js Top 7 Security Best Practices (Checklist)
 <https://www.youtube.com/watch?v=yDjXW-0Gi6k>
 
-@rainbow-me/rainbowkit
-https://rainbowkit.com/docs/introduction
-https://rainbowkit.com/docs/migration-guide
-@web3modal/wagmi
-
-Wagmi
-https://wagmi.sh/react/api/hooks/useDisconnect
-
 @react-email/components
 @react-email/tailwind
 @tanstack/react-table
@@ -82,8 +74,53 @@ React Hook Form: <https://react-hook-form.com/get-started>
 Tanstack Form is better than React Hook Form:
 <https://tanstack.com/form/latest/docs/comparison>
 
-## Error
+Jotai: <https://jotai.org/>
 
+- Dead simple API. Very granular
+- No context or reducer boilerplate
+- Derived atoms, composable(computed state)
+- Async atoms(built-in fetch support)
+- Fully React driven. No external magic
+
+Ethereum Testnetwork and faucet: Sepolia
+<https://cloud.google.com/application/web3/faucet/ethereum/sepolia>
+<https://ethereum.org/developers/docs/networks/>
+
+Add Sepolia to your wallet:
+ChainID= 11155111
+RPC= https://ethereum-sepolia-rpc.publicnode.com,
+https://rpc.sepolia.org, https://sepolia.drpc.org
+Explorer = https://sepolia.etherscan.io
+
+Check account balance on Sepolia: https://sepolia.etherscan.io/
+
+RainbowKit: has error with NextJs... localStorage.getItem is not a function #2639 <https://github.com/rainbow-me/rainbowkit/issues/2639>
+NodeJs 24.14.0 can run with some error in the terminal; NodeJs 25.8.2 cannot run it.
+
+Why Wagmi: <https://github.com/wevm/wagmi/blob/main/site/react/comparisons.md>
+
+Wagmi requires Viem and TanstackQuery.
+Viem is a TypeScript interface for Ethereum that performs blockchain operations.
+
+TanStack Query is an async state manager that handles requests, caching, and more.
+
+Wagmi to work with above connectors
+<https://wagmi.sh/cli/getting-started>
+Wagmi + MetaMaskSDK: <https://docs.metamask.io/sdk/connect/javascript-wagmi>
+
+MetaMask Connect to replace previous MetaMask SDK
+<https://github.com/MetaMask/connect-monorepo>
+
+Safe Wallet: <https://safe.global/>
+Injected Wallet: <https://web3onboard.thirdweb.com/docs/wallets/injected>
+
+RainbowKit, based on Wagmi and Viem
+<https://rainbowkit.com/docs/introduction>
+<https://rainbowkit.com/docs/migration-guide>
+<https://wagmi.sh/react/api/hooks/useDisconnect>
+
+
+## Error
 [Notice] use @react-email/tailwind@^0.0.8 instead of @react-email/tailwind@0.0.9 for the ReactServerComponentsError
 
 ## Deploy Solidity Smart Contracts on a Local Ethereum Network

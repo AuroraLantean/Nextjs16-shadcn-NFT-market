@@ -1,9 +1,15 @@
 import { atom } from "jotai";
 import { chainIndexInitial } from "./utils";
 //https://jotai.org/
+//https://github.com/pmndrs/jotai
 export const chainIndexAtom = atom(chainIndexInitial);
 
-export const chainsAtom = atom([
+export type Chain = {
+  blockchain: string;
+  contractAddr: string;
+  acceptedTokSymbol: string;
+};
+export const chainsAtom = atom<Chain[]>([
   {
     blockchain: "sepolia",
     contractAddr: "0x123Abcdef456Abcdef",
