@@ -23,6 +23,7 @@ export const DialogNft = ({ nftId, price }: Props) => {
   const _compoName = "DialogNft";
   const [chainIndex, setChainIndexAtom] = useAtom(chainIndexAtom);
   const [chainConfig, setChainConfig] = useAtom(chainsAtom);
+  if (!chainConfig[chainIndex]) throw new Error("chainIndex invalid");
   const { blockchain, acceptedTokSymbol, contractAddr } =
     chainConfig[chainIndex];
 

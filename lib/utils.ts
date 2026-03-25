@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+//------------== Initial Conditions
+export const chainIndexInitial = 0;
 export const APP_WIDTH_MIN = 350;
 export const chainTypeDefault = "evm";
 export const localChainDefault = "Foundry".toLowerCase();
@@ -8,6 +10,7 @@ export const nftIdMin = 0;
 export const nftIdMax = 9;
 export const ll = console.log;
 
+//------------== Functions
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -15,7 +18,7 @@ export function cn(...inputs: ClassValue[]) {
 export const parseFloatSafe = (input: string) => {
   const out = Number.parseFloat(input);
   if (Number.isNaN(out)) {
-    console.error("parseFloatSafe failed");
+    ll("parseFloatSafe failed");
     return -1.1;
   }
   return out;
@@ -23,7 +26,7 @@ export const parseFloatSafe = (input: string) => {
 export const parseIntSafe = (input: string) => {
   const out = Number.parseInt(input, 10);
   if (Number.isNaN(out)) {
-    console.error("parseIntSafe failed");
+    ll("parseIntSafe failed");
     return -1;
   }
   return out;

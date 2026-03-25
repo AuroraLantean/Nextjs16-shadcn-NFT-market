@@ -1,3 +1,4 @@
+"use client";
 import CarouselNft from "@/components/CarouselNft";
 import TanstackForm1 from "@/components/Forms/TanstackForm1";
 

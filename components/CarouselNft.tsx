@@ -1,4 +1,3 @@
-import { tokenSymbol } from "@/lib/utils";
 import { Card, CardContent } from "@/ui/card";
 import {
   Carousel,

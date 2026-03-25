@@ -233,8 +233,8 @@ export default function ReactHookForm1() {
                 <FieldDescription>
                   Add up to 5 users to this project (including yourself).
                 </FieldDescription>
-                {form1.formState.errors.users?.root && (
-                  <FieldError errors={[form1.formState.errors.users.root]} />
+                {form1.formState.errors["users"]?.root && (
+                  <FieldError errors={[form1.formState.errors["users"].root]} />
                 )}
               </FieldContent>
               <Button

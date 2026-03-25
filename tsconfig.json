@@ -8,8 +8,21 @@
       "es2020",
     ],
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
+    //"noUnusedLocals": false,//true in production
+    "noUnusedParameters": true,
+    "allowUnusedLabels": false,
+    "noUncheckedSideEffectImports": true, //to avoid invalid importing
+    "noFallthroughCasesInSwitch": true,
+    "allowUnreachableCode": false,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "erasableSyntaxOnly": false, //true in production
+    "noImplicitOverride": true,
+    "noErrorTruncation": false,
+    "exactOptionalPropertyTypes": false, //true in production
     //"forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,

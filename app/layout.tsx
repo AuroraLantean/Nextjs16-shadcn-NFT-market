@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Provider } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,7 +24,7 @@ export default function RootLayout({
       className={`${inter.className} h-full antialiased`}
     >
       <body className={`min-h-full flex flex-col`}>
-        <ThemeProvider
+        <Provider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -35,7 +35,7 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster />
-        </ThemeProvider>
+        </Provider>
       </body>
     </html>
   );
