@@ -31,6 +31,9 @@ const rainbowkitConfig = getDefaultConfig({
 });
 const queryClient = new QueryClient();
 
+/*  const wagmiInitialState = cookieToInitialState(getConfig(),
+    (await headers()).get('cookie'),
+)*/
 export function Provider({
   children,
   ...props

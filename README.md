@@ -114,6 +114,9 @@ MetaMask Connect to replace previous MetaMask SDK
 Safe Wallet: <https://safe.global/>
 Injected Wallet: <https://web3onboard.thirdweb.com/docs/wallets/injected>
 
+ConnectKit & WalletConnect(Reown)
+<https://family.co/docs/connectkit>
+
 RainbowKit, based on Wagmi and Viem
 <https://rainbowkit.com/docs/introduction>
 <https://rainbowkit.com/docs/migration-guide>
