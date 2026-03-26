@@ -1,5 +1,6 @@
 "use client";
 import { useAtom, useAtomValue } from "jotai";
+import { LogIn } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { chainIndexAtom, chainsAtom } from "@/lib/jotaiStates";
@@ -55,28 +56,20 @@ export const DialogWallet = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
+          variant="ghost"
           onClick={() => ll("click on DialogBtn")}
-          className="ml-4 text-xl  bg-blue-600 text-white rounded-lg hover:bg-orange-700 transition-colors font-medium"
+          className="flex items-center gap-2"
         >
-          Connect
+          <LogIn className="w-4 h-4" />
+          <span className="hidden md:inline">Connect</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-86.25">
         <DialogHeader>
           <DialogTitle className="font-extrabold">Connect a Wallet</DialogTitle>
           <DialogDescription>Choose a wallet</DialogDescription>
         </DialogHeader>
-        <div className="mt-0 flex-col">
-          <WalletMenu />
-        </div>
-        <Button
-          type="submit"
-          onClick={() => ll("click on DialogSubmitBtn")}
-          disabled={isLoading}
-          className="primary-color"
-        >
-          Buy Now
-        </Button>
+        <WalletMenu />
       </DialogContent>
     </Dialog>
   );

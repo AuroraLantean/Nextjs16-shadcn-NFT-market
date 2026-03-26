@@ -14,6 +14,7 @@ export const metamaskSrc = "/wallets/metamask.png";
 export const walletconnectSrc = "/wallets/walletconnect.png";
 export const coinbaseSrc = "/wallets/coinbase.png";
 export const phantomSrc = "/wallets/phantom.png";
+export const safewalletSrc = "/wallets/safewallet.png";
 export const trustwalletSrc = "/wallets/trustwallet.png";
 //------------== Functions
 export function cn(...inputs: ClassValue[]) {

@@ -10,9 +10,6 @@ import {
   MoreHorizontalIcon,
   Search,
 } from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
-import { Button } from "@/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -101,11 +98,6 @@ export function MenuDropdown() {
             <Coins />
             Coins
             <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <LogIn />
-            Connect Wallet
-            <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

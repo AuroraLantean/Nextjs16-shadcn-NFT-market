@@ -1,5 +1,6 @@
 import { useConnect, useConnection, useConnectors, useDisconnect } from "wagmi";
 import { metaMask } from "wagmi/connectors";
+import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 
 //import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -12,9 +13,14 @@ const WalletButton = () => {
   return (
     <div>
       {connection.status === "connected" && (
-        <Button type="button" onClick={() => disconnect.mutate()}>
-          Disconnect
-        </Button>
+        <div>
+          addresses: {JSON.stringify(connection.addresses)}
+          <br />
+          chainId: {connection.chainId}
+          <Button type="button" onClick={() => disconnect.mutate()}>
+            Disconnect
+          </Button>
+        </div>
       )}
       {connection.status === "disconnected" &&
         connectors.map((connector) => (

@@ -1,10 +1,11 @@
 import { rainbowConnector } from "@rainbow-me/rainbow-button";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
+import { trustWallet } from "@rainbow-me/rainbowkit/wallets";
 import { createConfig, http } from "wagmi";
 import { base, mainnet, sepolia } from "wagmi/chains";
 import {
-  injected,
-  type MetaMaskParameters,
+  coinbaseWallet,
+  // injected,  type MetaMaskParameters,
   metaMask,
   safe,
   walletConnect,
@@ -17,10 +18,15 @@ const reownProjId =
   process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "YOUR_PROJECT_ID";
 console.log("Reown Project Id:", reownProjId);
 
-//baseWallet, phantomWallet
+//baseWallet, phantomWallet, injected(),
 export const wagmiConfig = createConfig({
   chains: [mainnet, sepolia, base],
-  connectors: [injected(), walletConnect({ reownProjId }), metaMask(), safe()],
+  connectors: [
+    walletConnect({ reownProjId }),
+    metaMask(),
+    coinbaseWallet(),
+    safe(),
+  ],
   transports: {
     // RPC URL for each chain
     [mainnet.id]: http(),

@@ -1,6 +1,8 @@
-import { ArrowUpDown, Coins, LogIn, Search } from "lucide-react";
+"use client";
+import { ArrowUpDown, Coins, LogOut, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useConnection, useDisconnect } from "wagmi";
 import { Button } from "@/ui/button";
 import ChainsDropdown from "./ChainsDropdown";
 import { ModeToggle } from "./dark-mode";
@@ -8,6 +10,9 @@ import { DialogWallet } from "./Forms/DialogWallet";
 import { MenuDropdown } from "./MenuDropdown";
 
 const NavBar = () => {
+  const connection = useConnection();
+  const disconnect = useDisconnect();
+
   //bg-background/95 for opacity
   //supports-backdrop-filter:bg-background for background image
   // z-50 to stay ontop of everything
@@ -78,9 +83,15 @@ const NavBar = () => {
               </Button>
 
               <ChainsDropdown />
-
-              <DialogWallet />
             </div>
+            {connection.status === "disconnected" && <DialogWallet />}
+            {connection.status === "connected" && (
+              <Button variant="ghost" onClick={() => disconnect.mutate()}>
+                <LogOut className="w-4 h-4" />
+                <span className="hidden md:inline">Disconnect</span>
+              </Button>
+            )}
+
             <ModeToggle />
           </div>
         </div>
