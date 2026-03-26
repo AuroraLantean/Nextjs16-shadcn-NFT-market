@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/ui/button";
 import ChainsDropdown from "./ChainsDropdown";
 import { ModeToggle } from "./dark-mode";
+import { DialogWallet } from "./Forms/DialogWallet";
 import { MenuDropdown } from "./MenuDropdown";
 
 const NavBar = () => {
@@ -78,16 +79,7 @@ const NavBar = () => {
 
               <ChainsDropdown />
 
-              <Button
-                variant="ghost"
-                className="flex items-center gap-2"
-                asChild
-              >
-                <Link href="/">
-                  <LogIn className="w-4 h-4" />
-                  <span className="hidden md:inline">Connect</span>
-                </Link>
-              </Button>
+              <DialogWallet />
             </div>
             <ModeToggle />
           </div>

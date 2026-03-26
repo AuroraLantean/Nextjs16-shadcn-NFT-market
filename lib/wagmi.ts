@@ -1,10 +1,6 @@
-import {
-  cookieStorage,
-  createConfig,
-  createStorage,
-  http,
-  useBlockNumber,
-} from "wagmi";
+import { rainbowConnector } from "@rainbow-me/rainbow-button";
+import { getDefaultConfig } from "@rainbow-me/rainbowkit";
+import { createConfig, http } from "wagmi";
 import { base, mainnet, sepolia } from "wagmi/chains";
 import {
   injected,
@@ -17,9 +13,11 @@ import {
 //https://github.com/wevm/wagmi/blob/main/site/react/getting-started.md
 //https://wagmi.sh/vue/guides/connect-wallet
 
-const reownProjId = process.env["NEXT_PUBLIC_REOWN_PROJECTID"];
+const reownProjId =
+  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "YOUR_PROJECT_ID";
 console.log("Reown Project Id:", reownProjId);
 
+//baseWallet, phantomWallet
 export const wagmiConfig = createConfig({
   chains: [mainnet, sepolia, base],
   connectors: [injected(), walletConnect({ reownProjId }), metaMask(), safe()],
@@ -34,6 +32,15 @@ export const wagmiConfig = createConfig({
   //   storage: cookieStorage,
   // }),
   ssr: true,
+});
+export const rainbowkitConfig = getDefaultConfig({
+  appName: "NextJs Dapp",
+  projectId: reownProjId,
+  chains: [mainnet, sepolia, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+  // connectors: [
+  //   rainbowConnector({ projectId: reownProjId, appName: "Your App" }),
+  // ],
 });
 
 const connector = metaMask({

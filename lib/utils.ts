@@ -10,6 +10,11 @@ export const nftIdMin = 0;
 export const nftIdMax = 9;
 export const ll = console.log;
 
+export const metamaskSrc = "/wallets/metamask.png";
+export const walletconnectSrc = "/wallets/walletconnect.png";
+export const coinbaseSrc = "/wallets/coinbase.png";
+export const phantomSrc = "/wallets/phantom.png";
+export const trustwalletSrc = "/wallets/trustwallet.png";
 //------------== Functions
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

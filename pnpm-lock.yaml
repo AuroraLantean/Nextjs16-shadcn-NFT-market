@@ -14,6 +14,9 @@ importers:
       '@metamask/connect-evm':
         specifier: ~0.9.0
         version: 0.9.0(@babel/runtime@7.29.2)
+      '@rainbow-me/rainbow-button':
+        specifier: ^0.2.27
+        version: 0.2.27(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))(wagmi@3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6)))
       '@rainbow-me/rainbowkit':
         specifier: ^2.2.10
         version: 2.2.10(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))(wagmi@3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6)))
@@ -75,7 +78,7 @@ importers:
         specifier: ~2.47.6
         version: 2.47.6(typescript@6.0.2)(zod@4.3.6)
       wagmi:
-        specifier: ^3.6.0
+        specifier: 3.6.0
         version: 3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))
       zod:
         specifier: ^4.3.6
@@ -103,7 +106,7 @@ importers:
         specifier: ^4.2.1
         version: 4.2.1
       typescript:
-        specifier: ^6.0.2
+        specifier: 6.0.2
         version: 6.0.2
 
 packages:
@@ -1507,6 +1510,15 @@ packages:
 
   '@radix-ui/rect@1.1.1':
     resolution: {integrity: sha512-HPwpGIzkl28mWyZqG52jiqDJ12waP11Pa1lGoiyUkIEuMLBP0oeK/C89esbXrxsky5we7dfd8U58nm0SgAWpVw==}
+
+  '@rainbow-me/rainbow-button@0.2.27':
+    resolution: {integrity: sha512-nS1I1iTgSr+yBTyUX9d0hiP9ZwMWq3zt6GU1r/6pjmgLo+uipg0NNr88WDywUaPPJEeCHOMIeVZ/zj9ag1J4Hg==}
+    engines: {node: '>=12.4'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+      viem: 2.x
+      wagmi: ^2.9.0
 
   '@rainbow-me/rainbowkit@2.2.10':
     resolution: {integrity: sha512-8+E4die1A2ovN9t3lWxWnwqTGEdFqThXDQRj+E4eDKuUKyymYD+66Gzm6S9yfg8E95c6hmGlavGUfYPtl1EagA==}
@@ -5004,6 +5016,19 @@ snapshots:
       '@types/react-dom': 19.2.3(@types/react@19.2.14)
 
   '@radix-ui/rect@1.1.1': {}
+
+  '@rainbow-me/rainbow-button@0.2.27(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))(wagmi@3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6)))':
+    dependencies:
+      '@rainbow-me/rainbowkit': 2.2.10(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))(wagmi@3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6)))
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      viem: 2.47.6(typescript@6.0.2)(zod@4.3.6)
+      wagmi: 3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))
+    transitivePeerDependencies:
+      - '@tanstack/react-query'
+      - '@types/react'
+      - babel-plugin-macros
+      - typescript
 
   '@rainbow-me/rainbowkit@2.2.10(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6))(wagmi@3.6.0(@metamask/connect-evm@0.9.0(@babel/runtime@7.29.2))(@tanstack/query-core@5.95.2)(@tanstack/react-query@5.95.2(react@19.2.4))(@types/react@19.2.14)(immer@9.0.21)(ox@0.14.7(typescript@6.0.2)(zod@4.3.6))(react@19.2.4)(typescript@6.0.2)(viem@2.47.6(typescript@6.0.2)(zod@4.3.6)))':
     dependencies:

@@ -97,18 +97,29 @@ Check account balance on Sepolia: https://sepolia.etherscan.io/
 RainbowKit: has error with NextJs... localStorage.getItem is not a function #2639 <https://github.com/rainbow-me/rainbowkit/issues/2639>
 NodeJs 24.14.0 can run with some error in the terminal; NodeJs 25.8.2 cannot run it.
 
-Why Wagmi: <https://github.com/wevm/wagmi/blob/main/site/react/comparisons.md>
+Why Wagmi
+
+- ready for connecting to multiple wallets
+- Wagmi works with MetaMask Connect to replace previous [MetaMask SDK](https://github.com/MetaMask/connect-monorepo) <https://wagmi.sh/react/api/connectors/metaMask>
+
+<https://github.com/wevm/wagmi/blob/main/site/react/comparisons.md>
 
 Wagmi requires Viem and TanstackQuery.
 Viem is a TypeScript interface for Ethereum that performs blockchain operations.
 
 TanStack Query is an async state manager that handles requests, caching, and more.
 
-Wagmi to work with above connectors
+Wagmi installation
+
+- See the latest working example: <https://wagmi.sh/react/getting-started#automatic-installation>
+- Lock your Wagmi and TypeScript versions: <https://wagmi.sh/react/typescript>
+
+
+Wagmi to work with connectors below
 <https://wagmi.sh/cli/getting-started>
 Wagmi + MetaMaskSDK: <https://docs.metamask.io/sdk/connect/javascript-wagmi>
 
-MetaMask Connect to replace previous MetaMask SDK
+Wagmi works with MetaMask Connect to replace previous MetaMask SDK
 <https://github.com/MetaMask/connect-monorepo>
 
 Safe Wallet: <https://safe.global/>
@@ -117,6 +128,7 @@ Injected Wallet: <https://web3onboard.thirdweb.com/docs/wallets/injected>
 ConnectKit & WalletConnect(Reown)
 <https://family.co/docs/connectkit>
 
+Wallet Icons: RainbowKit repo: package/rainbowkit/assets/wallets/registry.json
 RainbowKit, based on Wagmi and Viem
 <https://rainbowkit.com/docs/introduction>
 <https://rainbowkit.com/docs/migration-guide>

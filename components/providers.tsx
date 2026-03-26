@@ -4,12 +4,16 @@ import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type * as React from "react";
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
-import { arbitrum, base, mainnet, optimism, polygon } from "wagmi/chains";
-import { wagmiConfig } from "@/lib/wagmi";
+import { rainbowkitConfig, wagmiConfig } from "@/lib/wagmi";
+import "@rainbow-me/rainbow-button/styles.css";
+import {
+  RainbowButtonProvider,
+  rainbowConnector,
+} from "@rainbow-me/rainbow-button";
 
+//import { createConfig, WagmiConfig } from 'wagmi';
 /*export function ThemeProvider({
   children,
   ...props
@@ -23,17 +27,13 @@ export const JotaiProviders = ({ children }: Props) => {
   return <Provider>{children}</Provider>;
 };*/
 
-const rainbowkitConfig = getDefaultConfig({
-  appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
-  chains: [mainnet, polygon, optimism, arbitrum, base],
-  ssr: true, // If your dApp uses server side rendering (SSR)
-});
 const queryClient = new QueryClient();
 
 /*  const wagmiInitialState = cookieToInitialState(getConfig(),
     (await headers()).get('cookie'),
 )*/
+const config = wagmiConfig;
+//const config = rainbowkitConfig;
 export function Provider({
   children,
   ...props
@@ -41,7 +41,7 @@ export function Provider({
   return (
     <NextThemesProvider {...props}>
       <JotaiProvider>
-        <WagmiProvider config={wagmiConfig}>
+        <WagmiProvider config={config}>
           <QueryClientProvider client={queryClient}>
             {children}
           </QueryClientProvider>
