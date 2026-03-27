@@ -8,17 +8,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { rainbowkitConfig, wagmiConfig } from "@/lib/wagmi";
 import "@rainbow-me/rainbow-button/styles.css";
-import {
-  AddressType,
-  darkTheme,
-  PhantomProvider,
-  useDisconnect,
-  useModal,
-  usePhantom,
-} from "@phantom/react-sdk";
-import { walletMenuOpenAtom } from "@/lib/jotaiStates";
+import { AddressType, darkTheme, PhantomProvider } from "@phantom/react-sdk";
 import { phantomAppId } from "@/lib/utils";
-import { Button } from "./ui/button";
 
 /*import {
   RainbowButtonProvider,
@@ -65,45 +56,7 @@ export function Provider({
 /**       
             <RainbowKitProvider>{children}</RainbowKitProvider>
  */
-export function PhantomButton() {
-  //setPrevOpen: (open: boolean) => void
-  const { open, close, isOpened } = useModal();
-  const { isConnected, user } = usePhantom();
-  const { disconnect, isDisconnecting } = useDisconnect();
-  const [_walletMenuOpen, setWalletMenuOpen] = useAtom(walletMenuOpenAtom);
-  //          <p>Connected</p>
-  //          {JSON.stringify(user?.addresses)}
-  return (
-    <div>
-      {isConnected ? (
-        <Button
-          type="button"
-          size="lg"
-          className="ml-2 h-12"
-          onClick={() => {
-            setWalletMenuOpen(false);
-            disconnect();
-          }}
-          disabled={isDisconnecting}
-        >
-          <span className="font-bold w-60">Disconnect Phantom</span>
-        </Button>
-      ) : (
-        <Button
-          type="button"
-          size="lg"
-          className="ml-2 h-12"
-          onClick={() => {
-            setWalletMenuOpen(false);
-            open();
-          }}
-        >
-          <span className="font-bold w-60">Phantom</span>
-        </Button>
-      )}
-    </div>
-  );
-}
+
 type Props = {
   children: React.ReactNode;
 };

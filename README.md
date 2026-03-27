@@ -37,7 +37,7 @@ ReUi
 @tanstack/react-table
 
 eslint-plugin-tailwindcss
-https://github.com/francoismassart/eslint-plugin-tailwindcss
+<https://github.com/francoismassart/eslint-plugin-tailwindcss>
 
 ## Problems with NextJs
 
@@ -46,7 +46,6 @@ Next.js Was a Mistake...
 
 Google: "github nextjs slow dev server"
 Problems with turbopack in dev development being way too slow, taking 25 seconds for page to fully compile #85744 <https://github.com/vercel/next.js/discussions/85744>
-
 
 ## Warning
 
@@ -88,11 +87,11 @@ Ethereum Testnetwork and faucet: Sepolia
 
 Add Sepolia to your wallet:
 ChainID= 11155111
-RPC= https://ethereum-sepolia-rpc.publicnode.com,
-https://rpc.sepolia.org, https://sepolia.drpc.org
-Explorer = https://sepolia.etherscan.io
+RPC= <https://ethereum-sepolia-rpc.publicnode.com>,
+<https://rpc.sepolia.org>, <https://sepolia.drpc.org>
+Explorer = <https://sepolia.etherscan.io>
 
-Check account balance on Sepolia: https://sepolia.etherscan.io/
+Check account balance on Sepolia: <https://sepolia.etherscan.io/>
 
 RainbowKit: has error with NextJs... localStorage.getItem is not a function #2639 <https://github.com/rainbow-me/rainbowkit/issues/2639>
 NodeJs 24.14.0 can run with some error in the terminal; NodeJs 25.8.2 cannot run it.
@@ -135,12 +134,13 @@ RainbowKit, based on Wagmi and Viem
 
 Phantom Wallet
 <https://docs.phantom.com/sdks/react-sdk#pnpm>
-- Get Phantom App ID: <https://phantom.com/portal/login>. And setup Allowed Origins to "http://localhost:3000" and your deployment URL.
+
+- Get Phantom App ID: <https://phantom.com/portal/login>
+- And setup Allowed Origins to "<http://localhost:3000>" and your deployment URL.
 - Install @phantom/react-sdk @solana/kit viem
 
-
-
 ## Error
+
 [Notice] use @react-email/tailwind@^0.0.8 instead of @react-email/tailwind@0.0.9 for the ReactServerComponentsError
 
 ## Deploy Solidity Smart Contracts on a Local Ethereum Network
@@ -148,7 +148,7 @@ Phantom Wallet
 [Install Foundry](https://book.getfoundry.sh/getting-started/installation)
 Then start a local Ethereum network via Anvil: `anvil`
 
-Download the Solidity Codebase at [here](https://github.com/AuroraLantean/foundry-d2)
+[Download the Solidity Codebase](https://github.com/AuroraLantean/foundry-d2)
 Run tests on ERC721 Sales smart contract: `bun run erc721sales`
 
 Deploy the ERC20, ERC721, and the ERC721 Sales smart contracts onto the Anvil Local Ethereum network:
@@ -196,7 +196,7 @@ NEXT_PUBLIC_ETHEREUM_NFTSALES=
 ## Run this NextJs application
 
 I use Bun to run this app in development because of its speed, but you should be able to use PNPM or NPM or Yarn to run it as well.
-Install Bun: [here](https://bun.sh/docs/installation)
+[Install Bun](https://bun.sh/docs/installation)
 
 Run this app with development configuratioon:
 
@@ -224,14 +224,14 @@ If you want to use another account, go to your browser wallet to choose the acco
 
 Confirm your initial ETH balance and the token balance on the home page. This token is the token address set inside the ERC721 Sales smart contract during its deployment, or you can reset the token address after deployment.
 
-#### If you do not have the tokens that is accepted by the NFT Sales contract:
+### If you do not have the tokens that is accepted by the NFT Sales contract
 
 In the dropdown: choose the USDT or TokenX on Ethereum/Other Chain
 In the Radio buttons: choose `Mint Tokens To Guest`
 Click on the `Submit to Blockchain` button then your Browser wallet should pop up for you to click proceed.
 After the transaction has been submitted and finalized, you should see your Browser Wallet's notice on your screen. Then click on the left `Go` button to refresh your balances. You should see your token balance has increased by 100.
 
-#### If the Sales contract has sold out all NFT:
+#### If the Sales contract has sold out all NFT
 
 In the dropdown: choose the `DragonNFT on Ethereum/Other Chain`
 In the Radio buttons: choose `Mint NFTs to Sales Contract`, enter a NFT ID in the form first field. This NFT ID should not have beem minted before. Just try a few numbers until you made it through. The NFT contract will mint 3 new NFTs starting from your chosen NFT ID.
@@ -284,13 +284,13 @@ This turns out to be an issue from the Sepolia.org APIs, because I have no contr
 
 Cant resolve 'bufferutil' and 'utf-8-validate'
 => pnpm add ws bufferutil utf-8-validate
-https://github.com/ethers-io/ethers.js/issues/4428
+<https://github.com/ethers-io/ethers.js/issues/4428>
 
 React-Email
-https://github.com/resendlabs/react-email/issues/977
+<https://github.com/resendlabs/react-email/issues/977>
 
 Popover
-https://github.com/shadcn-ui/ui/issues/1511#issuecomment-1810682366
+<https://github.com/shadcn-ui/ui/issues/1511#issuecomment-1810682366>
 
 ## Development Requirement
 

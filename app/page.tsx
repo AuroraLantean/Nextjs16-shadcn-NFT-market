@@ -2,13 +2,14 @@
 
 import CarouselNft from "@/components/CarouselNft";
 import TanstackForm1 from "@/components/Forms/TanstackForm1";
-import WalletButton from "@/components/WalletButton";
+import { PhantomButtonFat, WagmiButton } from "@/components/WalletButtons";
 
 export default function Home() {
   return (
     <div className="">
       <div className="border-2">
-        <WalletButton />
+        <WagmiButton />
+        <PhantomButtonFat />
       </div>
 
       <CarouselNft />

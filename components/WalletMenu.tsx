@@ -16,7 +16,7 @@ import {
 } from "@/lib/utils";
 import { metamaskConn, walletConnectConn } from "@/lib/wagmi";
 import { Button } from "@/ui/button";
-import { PhantomButton } from "./providers";
+import { PhantomButtonFat } from "./WalletButtons";
 
 const buttonWidth = 48;
 const makeConnectorDiv = (
@@ -125,7 +125,7 @@ const makeConnectorDiv = (
             height={buttonWidth}
             loading="eager"
           />
-          <PhantomButton />
+          <PhantomButtonFat />
         </div>
       );
     }
