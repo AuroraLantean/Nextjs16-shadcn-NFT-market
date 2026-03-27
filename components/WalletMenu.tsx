@@ -1,22 +1,22 @@
 import Image from "next/image";
 import {
   type Config,
-  Connector,
-  CreateConnectorFn,
   type UseConnectReturnType,
   useConnect,
   useConnectors,
 } from "wagmi";
-import { metaMask } from "wagmi/connectors";
+import { metaMask, walletConnect } from "wagmi/connectors";
 import {
   coinbaseSrc,
   ll,
   metamaskSrc,
   phantomSrc,
+  reownProjId,
   safewalletSrc,
   trustwalletSrc,
   walletconnectSrc,
 } from "@/lib/utils";
+import { walletConnectConn } from "@/lib/wagmi";
 import { Button } from "./ui/button";
 
 const width = 48;
@@ -25,23 +25,9 @@ const makeConnectorDiv = (
   connect: UseConnectReturnType<Config, unknown>,
 ) => {
   switch (connectorName) {
-    case "WalletConnect": {
-      return (
-        <div className="flex items-center">
-          <Image
-            src={walletconnectSrc}
-            alt="WalletConnect"
-            width={width}
-            height={width}
-            loading="eager"
-          />
-          <span className="font-bold ml-2">WalletConnect</span>
-        </div>
-      );
-    }
     case "MetaMask": {
       return (
-        <div className="flex items-center mt-1">
+        <div className="flex items-center">
           <Image
             src={metamaskSrc}
             alt="metamask"
@@ -53,9 +39,34 @@ const makeConnectorDiv = (
             onClick={() => connect.mutate({ connector: metaMask() })}
             type="button"
             size="lg"
-            className="ml-2"
+            className="ml-2 h-12"
           >
             <span className="font-bold w-60">MetaMask</span>
+          </Button>
+        </div>
+      );
+    }
+    case "WalletConnect": {
+      return (
+        <div className="flex items-center mt-1">
+          <Image
+            src={walletconnectSrc}
+            alt="WalletConnect"
+            width={width}
+            height={width}
+            loading="eager"
+          />
+          <Button
+            onClick={() =>
+              connect.mutate({
+                connector: walletConnectConn,
+              })
+            }
+            type="button"
+            size="lg"
+            className="ml-2 h-12"
+          >
+            <span className="font-bold w-60">WalletConnect</span>
           </Button>
         </div>
       );
@@ -70,7 +81,14 @@ const makeConnectorDiv = (
             height={width}
             loading="eager"
           />
-          <span className="font-bold ml-2">Coinbase</span>
+          <Button
+            onClick={() => console.log("to connect to Coinbase wallet")}
+            type="button"
+            size="lg"
+            className="ml-2 h-12"
+          >
+            <span className="font-bold w-60">Coinbase</span>
+          </Button>
         </div>
       );
     }
@@ -84,7 +102,14 @@ const makeConnectorDiv = (
             height={width}
             loading="eager"
           />
-          <span className="font-bold ml-2">Safe wallet</span>
+          <Button
+            onClick={() => console.log("to connect to Safe wallet")}
+            type="button"
+            size="lg"
+            className="ml-2 h-12"
+          >
+            <span className="font-bold w-60">Safe wallet</span>
+          </Button>
         </div>
       );
     }
@@ -98,7 +123,14 @@ const makeConnectorDiv = (
             height={width}
             loading="eager"
           />
-          <span className="font-bold ml-2">Phantom</span>
+          <Button
+            onClick={() => console.log("to connect to Phantom wallet")}
+            type="button"
+            size="lg"
+            className="ml-2 h-12"
+          >
+            <span className="font-bold w-60">Phantom</span>
+          </Button>
         </div>
       );
     }
@@ -112,7 +144,14 @@ const makeConnectorDiv = (
             height={width}
             loading="eager"
           />
-          <span className="font-bold ml-2">Trust wallet</span>
+          <Button
+            onClick={() => console.log("to connect to Trust wallet")}
+            type="button"
+            size="lg"
+            className="ml-2 h-12"
+          >
+            <span className="font-bold w-60">Trust wallet</span>
+          </Button>
         </div>
       );
     }

@@ -1,9 +1,7 @@
 "use client";
-import { useAtom, useAtomValue } from "jotai";
 import { LogIn } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
-import { chainIndexAtom, chainsAtom } from "@/lib/jotaiStates";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 import {

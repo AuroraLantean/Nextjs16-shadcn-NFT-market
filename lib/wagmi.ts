@@ -10,23 +10,18 @@ import {
   safe,
   walletConnect,
 } from "wagmi/connectors";
+import { reownProjId } from "./utils";
 
 //https://github.com/wevm/wagmi/blob/main/site/react/getting-started.md
 //https://wagmi.sh/vue/guides/connect-wallet
 
-const reownProjId =
-  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "YOUR_PROJECT_ID";
 console.log("Reown Project Id:", reownProjId);
+export const walletConnectConn = walletConnect({ projectId: reownProjId });
 
 //baseWallet, phantomWallet, injected(),
 export const wagmiConfig = createConfig({
   chains: [mainnet, sepolia, base],
-  connectors: [
-    walletConnect({ reownProjId }),
-    metaMask(),
-    coinbaseWallet(),
-    safe(),
-  ],
+  connectors: [metaMask(), walletConnectConn, coinbaseWallet(), safe()], //connectors order matters
   transports: {
     // RPC URL for each chain
     [mainnet.id]: http(),
@@ -47,12 +42,4 @@ export const rainbowkitConfig = getDefaultConfig({
   // connectors: [
   //   rainbowConnector({ projectId: reownProjId, appName: "Your App" }),
   // ],
-});
-
-const connector = metaMask({
-  dapp: {
-    name: "Dapp + Wagmi",
-    url: "https://example.com",
-    iconUrl: "https://example.com/favicon.ico",
-  },
 });

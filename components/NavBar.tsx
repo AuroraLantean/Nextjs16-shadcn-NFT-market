@@ -24,18 +24,18 @@ const NavBar = () => {
             {/*Logo */}
             <Link href="/">
               <Image
-                src="/bitcoin.svg"
+                src="/bitcoin-gold-60.png"
                 alt="CoinPlus logo"
                 width={40}
                 height={40}
                 loading="eager"
-                //className={cn("aspect-square")}
+                //className="aspect-square"
               />
             </Link>
 
             <Link
               href="/"
-              className="text-xl font-bold text-primary font-mono tracking-wider"
+              className="hidden md:inline text-xl font-bold text-primary font-mono tracking-wider"
             >
               CoinPlus
             </Link>

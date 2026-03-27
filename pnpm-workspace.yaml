@@ -2,5 +2,8 @@ ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
 onlyBuiltDependencies:
+  - '@reown/appkit'
+  - bufferutil
   - msw
   - protobufjs
+  - utf-8-validate

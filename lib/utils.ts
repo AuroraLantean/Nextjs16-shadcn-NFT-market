@@ -16,6 +16,9 @@ export const coinbaseSrc = "/wallets/coinbase.png";
 export const phantomSrc = "/wallets/phantom.png";
 export const safewalletSrc = "/wallets/safewallet.png";
 export const trustwalletSrc = "/wallets/trustwallet.png";
+export const reownProjId =
+  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "YOUR_PROJECT_ID";
+
 //------------== Functions
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
