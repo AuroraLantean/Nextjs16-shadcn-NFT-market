@@ -18,7 +18,7 @@ import { metamaskConn, walletConnectConn } from "@/lib/wagmi";
 import { Button } from "@/ui/button";
 import { PhantomButton } from "./providers";
 
-const width = 48;
+const buttonWidth = 48;
 const makeConnectorDiv = (
   connectorName: string,
   connect: UseConnectReturnType<Config, unknown>,
@@ -33,8 +33,8 @@ const makeConnectorDiv = (
           <Image
             src={metamaskSrc}
             alt="metamask"
-            width={width}
-            height={width}
+            width={buttonWidth}
+            height={buttonWidth}
             loading="eager"
           />
           <Button
@@ -54,8 +54,8 @@ const makeConnectorDiv = (
           <Image
             src={walletconnectSrc}
             alt="WalletConnect"
-            width={width}
-            height={width}
+            width={buttonWidth}
+            height={buttonWidth}
             loading="eager"
           />
           <Button
@@ -79,8 +79,8 @@ const makeConnectorDiv = (
           <Image
             src={coinbaseSrc}
             alt="Coinbase"
-            width={width}
-            height={width}
+            width={buttonWidth}
+            height={buttonWidth}
             loading="eager"
           />
           <Button
@@ -100,8 +100,8 @@ const makeConnectorDiv = (
           <Image
             src={safewalletSrc}
             alt="safe wallet"
-            width={width}
-            height={width}
+            width={buttonWidth}
+            height={buttonWidth}
             loading="eager"
           />
           <Button
@@ -121,8 +121,8 @@ const makeConnectorDiv = (
           <Image
             src={phantomSrc}
             alt="Phantom"
-            width={width}
-            height={width}
+            width={buttonWidth}
+            height={buttonWidth}
             loading="eager"
           />
           <PhantomButton />
@@ -135,8 +135,8 @@ const makeConnectorDiv = (
           <Image
             src={trustwalletSrc}
             alt="trust wallet"
-            width={width}
-            height={width}
+            width={buttonWidth}
+            height={buttonWidth}
             loading="eager"
           />
           <Button

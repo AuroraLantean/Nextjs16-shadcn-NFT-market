@@ -2,7 +2,7 @@
 
 justfile
 aarchives
-zz*
+removed*
 todo.txt
 test-ledger
 

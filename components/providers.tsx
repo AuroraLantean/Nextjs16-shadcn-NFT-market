@@ -1,6 +1,6 @@
 "use client";
 
-import { Provider as JotaiProvider } from "jotai";
+import { Provider as JotaiProvider, useAtom } from "jotai";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type * as React from "react";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -16,6 +16,7 @@ import {
   useModal,
   usePhantom,
 } from "@phantom/react-sdk";
+import { walletMenuOpenAtom } from "@/lib/jotaiStates";
 import { phantomAppId } from "@/lib/utils";
 import { Button } from "./ui/button";
 
@@ -69,9 +70,9 @@ export function PhantomButton() {
   const { open, close, isOpened } = useModal();
   const { isConnected, user } = usePhantom();
   const { disconnect, isDisconnecting } = useDisconnect();
+  const [_walletMenuOpen, setWalletMenuOpen] = useAtom(walletMenuOpenAtom);
   //          <p>Connected</p>
   //          {JSON.stringify(user?.addresses)}
-
   return (
     <div>
       {isConnected ? (
@@ -79,13 +80,24 @@ export function PhantomButton() {
           type="button"
           size="lg"
           className="ml-2 h-12"
-          onClick={disconnect}
+          onClick={() => {
+            setWalletMenuOpen(false);
+            disconnect();
+          }}
           disabled={isDisconnecting}
         >
           <span className="font-bold w-60">Disconnect Phantom</span>
         </Button>
       ) : (
-        <Button type="button" size="lg" className="ml-2 h-12" onClick={open}>
+        <Button
+          type="button"
+          size="lg"
+          className="ml-2 h-12"
+          onClick={() => {
+            setWalletMenuOpen(false);
+            open();
+          }}
+        >
           <span className="font-bold w-60">Phantom</span>
         </Button>
       )}

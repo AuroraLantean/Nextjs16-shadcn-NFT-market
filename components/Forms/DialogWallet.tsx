@@ -1,7 +1,9 @@
 "use client";
+import { useAtom } from "jotai";
 import { LogIn } from "lucide-react";
-import { type SetStateAction, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
+import { walletMenuOpenAtom } from "@/lib/jotaiStates";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 import {
@@ -14,13 +16,15 @@ import {
 } from "@/ui/dialog";
 import WalletMenu from "../WalletMenu";
 
+//export const setDialogWallet = (fn: (open: boolean)=> void) => fn();
 export const DialogWallet = () => {
   const _compoName = "DialogWallet";
   const [isLoading, setIsLoading] = useState(false);
-  const [open, setOpen] = useState(false); //setOpen is a function for Dialog to export its open/close state
-  const walletMenuProps = {
-    setOpen: setOpen, //Dispatch<SetStateAction<boolean>>,
-  };
+  const [open, setOpen] = useAtom(walletMenuOpenAtom); //setOpen is a function for Dialog to export its open/close state
+  // const connectors = useConnectors();
+  // const connect = useConnect();
+  // const connNames = connectors.map((connector) => connector.name);
+
   const onSubmit = async () => {
     ll("onSubmit");
     setIsLoading(true);
@@ -74,3 +78,4 @@ export const DialogWallet = () => {
     </Dialog>
   );
 };
+// {connNames.includes("Xyz") ? ( ) : null}

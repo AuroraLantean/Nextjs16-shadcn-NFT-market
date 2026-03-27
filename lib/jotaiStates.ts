@@ -2,6 +2,8 @@ import { atom } from "jotai";
 import { chainIndexInitial } from "./utils";
 //https://jotai.org/
 //https://github.com/pmndrs/jotai
+export const walletMenuOpenAtom = atom<boolean>(false);
+
 export const chainIndexAtom = atom(chainIndexInitial);
 
 export type Chain = {
