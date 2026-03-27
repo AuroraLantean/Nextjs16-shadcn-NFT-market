@@ -17,7 +17,9 @@ export const phantomSrc = "/wallets/phantom.png";
 export const safewalletSrc = "/wallets/safewallet.png";
 export const trustwalletSrc = "/wallets/trustwallet.png";
 export const reownProjId =
-  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "YOUR_PROJECT_ID";
+  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "REOWN_PROJECT_ID";
+export const phantomAppId =
+  process.env["NEXT_PUBLIC_PHANTOM_APP_ID"] ?? "PHANTOM_APP_ID";
 
 //------------== Functions
 export function cn(...inputs: ClassValue[]) {

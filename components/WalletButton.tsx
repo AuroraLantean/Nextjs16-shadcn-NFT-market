@@ -1,6 +1,5 @@
 import { useConnect, useConnection, useConnectors, useDisconnect } from "wagmi";
 import { metaMask } from "wagmi/connectors";
-import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 
 //import { ConnectButton } from "@rainbow-me/rainbowkit";

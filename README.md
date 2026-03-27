@@ -114,7 +114,6 @@ Wagmi installation
 - See the latest working example: <https://wagmi.sh/react/getting-started#automatic-installation>
 - Lock your Wagmi and TypeScript versions: <https://wagmi.sh/react/typescript>
 
-
 Wagmi to work with connectors below
 <https://wagmi.sh/cli/getting-started>
 Wagmi + MetaMaskSDK: <https://docs.metamask.io/sdk/connect/javascript-wagmi>
@@ -133,6 +132,12 @@ RainbowKit, based on Wagmi and Viem
 <https://rainbowkit.com/docs/introduction>
 <https://rainbowkit.com/docs/migration-guide>
 <https://wagmi.sh/react/api/hooks/useDisconnect>
+
+Phantom Wallet
+<https://docs.phantom.com/sdks/react-sdk#pnpm>
+- Get Phantom App ID: <https://phantom.com/portal/login>. And setup Allowed Origins to "http://localhost:3000" and your deployment URL.
+- Install @phantom/react-sdk @solana/kit viem
+
 
 
 ## Error

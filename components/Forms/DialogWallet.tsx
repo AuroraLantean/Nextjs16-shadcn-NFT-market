@@ -1,6 +1,6 @@
 "use client";
 import { LogIn } from "lucide-react";
-import { useState } from "react";
+import { type SetStateAction, useState } from "react";
 import { toast } from "sonner";
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
@@ -18,7 +18,9 @@ export const DialogWallet = () => {
   const _compoName = "DialogWallet";
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false); //setOpen is a function for Dialog to export its open/close state
-
+  const walletMenuProps = {
+    setOpen: setOpen, //Dispatch<SetStateAction<boolean>>,
+  };
   const onSubmit = async () => {
     ll("onSubmit");
     setIsLoading(true);

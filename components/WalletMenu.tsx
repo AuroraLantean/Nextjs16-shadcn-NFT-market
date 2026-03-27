@@ -5,24 +5,26 @@ import {
   useConnect,
   useConnectors,
 } from "wagmi";
-import { metaMask, walletConnect } from "wagmi/connectors";
 import {
   coinbaseSrc,
   ll,
   metamaskSrc,
   phantomSrc,
-  reownProjId,
   safewalletSrc,
   trustwalletSrc,
   walletconnectSrc,
 } from "@/lib/utils";
-import { walletConnectConn } from "@/lib/wagmi";
-import { Button } from "./ui/button";
+import { metamaskConn, walletConnectConn } from "@/lib/wagmi";
+import { Button } from "@/ui/button";
+import { PhantomButton } from "./providers";
 
 const width = 48;
 const makeConnectorDiv = (
   connectorName: string,
   connect: UseConnectReturnType<Config, unknown>,
+  //setPrevOpen: (open: boolean) => void,
+  //phantomOpen: () => void,
+  //phantomDisconnect: () => Promise<void>,
 ) => {
   switch (connectorName) {
     case "MetaMask": {
@@ -36,7 +38,7 @@ const makeConnectorDiv = (
             loading="eager"
           />
           <Button
-            onClick={() => connect.mutate({ connector: metaMask() })}
+            onClick={() => connect.mutate({ connector: metamaskConn })}
             type="button"
             size="lg"
             className="ml-2 h-12"
@@ -123,14 +125,7 @@ const makeConnectorDiv = (
             height={width}
             loading="eager"
           />
-          <Button
-            onClick={() => console.log("to connect to Phantom wallet")}
-            type="button"
-            size="lg"
-            className="ml-2 h-12"
-          >
-            <span className="font-bold w-60">Phantom</span>
-          </Button>
+          <PhantomButton />
         </div>
       );
     }
@@ -161,6 +156,7 @@ const makeConnectorDiv = (
   }
 };
 const WalletMenu = () => {
+  //setOpen: (open: boolean) => void
   //connection.status === "disconnected"
   const connectors = useConnectors();
   ll("connectors:", connectors);
