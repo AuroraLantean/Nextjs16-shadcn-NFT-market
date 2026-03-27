@@ -1,6 +1,7 @@
 import {
-  useDisconnect as useDisconnectPhantom,
   usePhantom,
+  useAccounts as usePhantomAccounts,
+  useDisconnect as usePhantomDisconnect,
   useModal as usePhantomModal,
 } from "@phantom/react-sdk";
 import { useAtom } from "jotai";
@@ -15,16 +16,19 @@ export const WagmiButton = () => {
   const connectors = useConnectors();
   const disconnect = useDisconnect();
   const connection = useConnection();
+  const phantomAddresses = usePhantomAccounts();
   return (
     <div>
       {connection.status === "connected" && (
         <div>
-          addresses: {JSON.stringify(connection.addresses)}
+          Wagmi addresses: {JSON.stringify(connection.addresses)}
           <br />
-          chainId: {connection.chainId}
-          <Button type="button" onClick={() => disconnect.mutate()}>
-            Disconnect
-          </Button>
+          <div className="flex items-center">
+            <span className="mr-3">chainId: {connection.chainId}</span>
+            <Button type="button" onClick={() => disconnect.mutate()}>
+              Disconnect
+            </Button>
+          </div>
         </div>
       )}
       {connection.status === "disconnected" && (
@@ -53,7 +57,10 @@ export const WagmiButton = () => {
         </div>
       )}
       <div>connect status: {connect.status}</div>
-      <div>error message: {connect.error?.message}</div>
+      <div>
+        error message: {connect.error?.message}{" "}
+        <div>PhantomAccounts: {JSON.stringify(phantomAddresses)}</div>
+      </div>
     </div>
   );
 };
@@ -65,7 +72,7 @@ export function PhantomButton({ isFat = true }: PhantomButtonProps) {
   //setPrevOpen: (open: boolean) => void
   const { open, close, isOpened } = usePhantomModal();
   const { isConnected, user } = usePhantom();
-  const { disconnect, isDisconnecting } = useDisconnectPhantom();
+  const { disconnect, isDisconnecting } = usePhantomDisconnect();
   const [_walletMenuOpen, setWalletMenuOpen] = useAtom(walletMenuOpenAtom);
   //          <p>Connected</p>
   //          {JSON.stringify(user?.addresses)}

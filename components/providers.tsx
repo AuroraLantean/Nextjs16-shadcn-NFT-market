@@ -64,7 +64,7 @@ export const PhantomProvider1 = ({ children }: Props) => {
   return (
     <PhantomProvider
       config={{
-        providers: ["google", "apple", "injected"], // Enabled auth methods
+        providers: ["injected", "google", "apple"], // Enabled auth methods
         appId: phantomAppId,
         addressTypes: [
           AddressType.ethereum,

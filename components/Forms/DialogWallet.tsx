@@ -21,9 +21,6 @@ export const DialogWallet = () => {
   const _compoName = "DialogWallet";
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useAtom(walletMenuOpenAtom); //setOpen is a function for Dialog to export its open/close state
-  // const connectors = useConnectors();
-  // const connect = useConnect();
-  // const connNames = connectors.map((connector) => connector.name);
 
   const onSubmit = async () => {
     ll("onSubmit");
@@ -78,4 +75,3 @@ export const DialogWallet = () => {
     </Dialog>
   );
 };
-// {connNames.includes("Xyz") ? ( ) : null}

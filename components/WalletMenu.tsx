@@ -22,9 +22,6 @@ const buttonWidth = 48;
 const makeConnectorDiv = (
   connectorName: string,
   connect: UseConnectReturnType<Config, unknown>,
-  //setPrevOpen: (open: boolean) => void,
-  //phantomOpen: () => void,
-  //phantomDisconnect: () => Promise<void>,
 ) => {
   switch (connectorName) {
     case "MetaMask": {
@@ -156,8 +153,6 @@ const makeConnectorDiv = (
   }
 };
 const WalletMenu = () => {
-  //setOpen: (open: boolean) => void
-  //connection.status === "disconnected"
   const connectors = useConnectors();
   ll("connectors:", connectors);
   const connect = useConnect();
