@@ -27,23 +27,41 @@ export const WagmiButton = () => {
           </Button>
         </div>
       )}
-      {connection.status === "disconnected" &&
-        connectors.map((connector) => (
-          <Button
-            key={connector.uid}
-            onClick={() => connect.mutate({ connector: metamaskConn })}
-            type="button"
-          >
-            {connector.name}
-          </Button>
-        ))}
+      {connection.status === "disconnected" && (
+        <div className="flex items-center">
+          {connectors.map((connector) => {
+            if (connector.name === "Phantom") {
+              return (
+                <div key={connector.id}>
+                  <PhantomButton isFat={false} />
+                </div>
+              );
+            } else {
+              return (
+                <div key={connector.id}>
+                  <Button
+                    key={connector.uid}
+                    onClick={() => connect.mutate({ connector: metamaskConn })}
+                    type="button"
+                  >
+                    {connector.name}
+                  </Button>
+                </div>
+              );
+            }
+          })}
+        </div>
+      )}
       <div>connect status: {connect.status}</div>
       <div>error message: {connect.error?.message}</div>
     </div>
   );
 };
 
-export function PhantomButtonFat() {
+type PhantomButtonProps = {
+  isFat?: boolean;
+};
+export function PhantomButton({ isFat = true }: PhantomButtonProps) {
   //setPrevOpen: (open: boolean) => void
   const { open, close, isOpened } = usePhantomModal();
   const { isConnected, user } = usePhantom();
@@ -51,32 +69,38 @@ export function PhantomButtonFat() {
   const [_walletMenuOpen, setWalletMenuOpen] = useAtom(walletMenuOpenAtom);
   //          <p>Connected</p>
   //          {JSON.stringify(user?.addresses)}
+  let buttonClassname = "ml-2 h-12";
+  let spanClassname = "font-bold w-60";
+  if (!isFat) {
+    buttonClassname = "";
+    spanClassname = "";
+  }
   return (
     <div>
       {isConnected ? (
         <Button
           type="button"
           size="lg"
-          className="ml-2 h-12"
+          className={buttonClassname}
           onClick={() => {
             setWalletMenuOpen(false);
             disconnect();
           }}
           disabled={isDisconnecting}
         >
-          <span className="font-bold w-60">Disconnect Phantom</span>
+          <span className={spanClassname}>Disconnect Phantom</span>
         </Button>
       ) : (
         <Button
           type="button"
           size="lg"
-          className="ml-2 h-12"
+          className={buttonClassname}
           onClick={() => {
             setWalletMenuOpen(false);
             open();
           }}
         >
-          <span className="font-bold w-60">Phantom</span>
+          <span className={spanClassname}>Phantom</span>
         </Button>
       )}
     </div>
