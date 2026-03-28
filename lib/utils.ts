@@ -82,3 +82,34 @@ export const parseIntSafe = (input: string) => {
   }
   return out;
 };
+export const formatNumbers = (num: number) => {
+  if (num >= 1000000000) {
+    const billions = parseFloat((num / 1000000000).toFixed(2));
+    return `${billions}B`;
+  } else if (num >= 1000000) {
+    const millions = parseFloat((num / 1000000).toFixed(2));
+    return `${millions}M`;
+  } else if (num >= 1000) {
+    const thousands = parseFloat((num / 1000).toFixed(2));
+    return `${thousands}K`;
+  } else {
+    return num.toString();
+  }
+};
+export const formatBN = (input: string | undefined, dec = 18) => {
+  if (!input) return "";
+  const pow = 10 ** dec;
+  return convertDecimal(BigInt(input) / BigInt(pow), 3);
+};
+export const convertDecimal = (num: bigint | number, dec = 2) => {
+  const pow = 10 ** dec;
+  return Number(Math.floor(Number(num) * pow) / pow).toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: dec,
+  });
+};
+export const convertBN = (input: string | undefined, dec = 18) => {
+  if (!input) return "";
+  const pow = 10 ** dec;
+  return (BigInt(input) * BigInt(pow)).toString(10);
+};
