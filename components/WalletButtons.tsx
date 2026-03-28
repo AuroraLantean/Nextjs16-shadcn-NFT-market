@@ -1,10 +1,13 @@
 import {
+  useIsExtensionInstalled,
   usePhantom,
   useAccounts as usePhantomAccounts,
+  useConnect as usePhantomConnect,
   useDisconnect as usePhantomDisconnect,
   useModal as usePhantomModal,
 } from "@phantom/react-sdk";
 import { useAtom } from "jotai";
+import Link from "next/link";
 import { useConnect, useConnection, useConnectors, useDisconnect } from "wagmi";
 import { walletMenuOpenAtom } from "@/lib/jotaiStates";
 import { metamaskConn } from "@/lib/wagmi";
@@ -74,14 +77,43 @@ export function PhantomButton({ isFat = true }: PhantomButtonProps) {
   const { isConnected, user } = usePhantom();
   const { disconnect, isDisconnecting } = usePhantomDisconnect();
   const [_walletMenuOpen, setWalletMenuOpen] = useAtom(walletMenuOpenAtom);
-  //          <p>Connected</p>
-  //          {JSON.stringify(user?.addresses)}
+  const { connect, isConnecting, error } = usePhantomConnect();
+  const { isInstalled, isLoading } = useIsExtensionInstalled();
+  // {JSON.stringify(user?.addresses)}
   let buttonClassname = "ml-2 h-12";
   let spanClassname = "font-bold w-60";
   if (!isFat) {
     buttonClassname = "";
     spanClassname = "";
   }
+
+  if (!isInstalled) {
+    return (
+      <Button
+        type="button"
+        size="lg"
+        className={buttonClassname}
+        //onClick={handleConnect}
+        //disabled={isConnecting}
+      >
+        <Link href="https://phantom.app/download">
+          <span className={spanClassname}>Install Phantom Wallet</span>
+        </Link>
+      </Button>
+    );
+  }
+  const handleConnect = async () => {
+    setWalletMenuOpen(false);
+    //open();//to open Phantom Authentication menu
+    try {
+      const { walletId, addresses } = await connect({ provider: "injected" });
+      // Connection successful
+      console.log("Connected addresses:", addresses);
+    } catch (err) {
+      // Connection failed (user cancelled, network error, etc)
+      console.error("Failed to connect:", err);
+    }
+  };
   return (
     <div>
       {isConnected ? (
@@ -102,10 +134,8 @@ export function PhantomButton({ isFat = true }: PhantomButtonProps) {
           type="button"
           size="lg"
           className={buttonClassname}
-          onClick={() => {
-            setWalletMenuOpen(false);
-            open();
-          }}
+          onClick={handleConnect}
+          disabled={isConnecting}
         >
           <span className={spanClassname}>Phantom</span>
         </Button>

@@ -17,6 +17,9 @@ importers:
       '@phantom/react-sdk':
         specifier: ^1.0.7
         version: 1.0.7(bufferutil@4.1.0)(fastestsmallesttextencoderdecoder@1.0.22)(react@19.2.4)(typescript@6.0.2)(utf-8-validate@6.0.6)(zod@4.3.6)
+      '@phantom/sdk-types':
+        specifier: ^1.0.7
+        version: 1.0.7(bufferutil@4.1.0)(typescript@6.0.2)(utf-8-validate@6.0.6)
       '@rainbow-me/rainbow-button':
         specifier: ^0.2.27
         version: 0.2.27(744bc5a3cee46ca855cc9d2e15730822)
@@ -11054,7 +11057,7 @@ snapshots:
       buffer: 6.0.3
       eventemitter3: 5.0.1
       uuid: 11.1.0
-      ws: 8.18.3(bufferutil@4.1.0)(utf-8-validate@6.0.6)
+      ws: 8.20.0(bufferutil@4.1.0)(utf-8-validate@6.0.6)
     optionalDependencies:
       bufferutil: 4.1.0
       utf-8-validate: 6.0.6

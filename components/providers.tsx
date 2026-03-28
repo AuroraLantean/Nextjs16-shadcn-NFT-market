@@ -64,11 +64,11 @@ export const PhantomProvider1 = ({ children }: Props) => {
   return (
     <PhantomProvider
       config={{
-        providers: ["injected", "google", "apple"], // Enabled auth methods
+        providers: ["injected", "google", "apple"], //Authentication providers
         appId: phantomAppId,
         addressTypes: [
-          AddressType.ethereum,
-          AddressType.solana,
+          AddressType.solana, //1st address type Phantom will seek to find in the Phantom wallet
+          //AddressType.ethereum, //if the user does not have Ethereum address in his account, an error will show up
           AddressType.bitcoinSegwit,
           AddressType.sui,
         ],
