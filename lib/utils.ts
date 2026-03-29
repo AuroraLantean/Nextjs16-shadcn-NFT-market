@@ -18,12 +18,13 @@ export const safewalletSrc = "/wallets/safewallet.png";
 export const trustwalletSrc = "/wallets/trustwallet.png";
 
 //------------== ENV
+//TODO: how to hide those keys from frontend?
 export const reownProjId =
   process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "REOWN_PROJECT_ID_INVALID";
 export const phantomAppId =
   process.env["NEXT_PUBLIC_PHANTOM_APP_ID"] ?? "PHANTOM_APP_ID_INVALID";
 export const alchemyApikey =
-  process.env["NEXT_PUBLIC_ALCHEMY_APIKEY"] ?? "ALCHEMY_APIKEY_INVALID";
+  process.env["NEXT_PUBLIC_ALCHEMY"] ?? "ALCHEMY_APIKEY_INVALID";
 
 export const ethereumNetwork =
   process.env["NEXT_PUBLIC_ETHEREUM_NETWORK"] ?? "ETHEREUM_NETWORK_INVALID";
@@ -61,11 +62,11 @@ export const alchemyRPC = (blockchain: string) => {
       break;
   }
 };
-//------------== Functions
+//------------==
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
+//------------== Numbers
 export const parseFloatSafe = (input: string) => {
   const out = Number.parseFloat(input);
   if (Number.isNaN(out)) {
@@ -103,13 +104,70 @@ export const formatBN = (input: string | undefined, dec = 18) => {
 };
 export const convertDecimal = (num: bigint | number, dec = 2) => {
   const pow = 10 ** dec;
-  return Number(Math.floor(Number(num) * pow) / pow).toLocaleString(undefined, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: dec,
-  });
+  return Number(Math.floor(Number(num) ** pow) / pow).toLocaleString(
+    undefined,
+    {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: dec,
+    },
+  );
 };
 export const convertBN = (input: string | undefined, dec = 18) => {
   if (!input) return "";
   const pow = 10 ** dec;
   return (BigInt(input) * BigInt(pow)).toString(10);
 };
+//------------==
+export function isBase64Image(imageData: string) {
+  const base64Regex = /^data:image\/(png|jpe?g|gif|webp);base64,/;
+  return base64Regex.test(imageData);
+}
+export function formatDateString(dateString: string) {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  const date = new Date(dateString);
+  const formattedDate = date.toLocaleDateString(undefined, options);
+
+  const time = date.toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+  return `${time} - ${formattedDate}`;
+}
+
+export const delayFunc = async (delay: number): Promise<boolean> =>
+  new Promise((resolve, reject) =>
+    setTimeout(() => {
+      console.log("delay:", delay);
+      resolve(true);
+    }, delay),
+  );
+
+export const capitalizeFirst = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+export const makeShortAddr = (str: string) => {
+  return str.slice(0, 6) + "...." + str.slice(str.length - 4);
+};
+export const isEmpty = (value: any) =>
+  value === undefined ||
+  value === null ||
+  (typeof value === "object" && Object.keys(value).length === 0) ||
+  (typeof value === "string" && value.trim().length === 0) ||
+  (typeof value === "string" && value === "undefined");
+
+export const isEqualStr = (str1: any, str2: any): boolean =>
+  (str1 + "").trim().toLowerCase() === (str2 + "").trim().toLowerCase();
+
+export const isObjEqualStr = (obj1: object, obj2: object): boolean =>
+  JSON.stringify(obj1) === JSON.stringify(obj2);
+
+export const arrayRange = (start: number, stop: number, step: number) =>
+  Array.from(
+    { length: (stop - start) / step + 1 },
+    (value, index) => start + index * step,
+  );

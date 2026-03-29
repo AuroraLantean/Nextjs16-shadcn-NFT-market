@@ -123,8 +123,9 @@ Wagmi works with MetaMask Connect to replace previous MetaMask SDK
 Safe Wallet: <https://safe.global/>
 Injected Wallet: <https://web3onboard.thirdweb.com/docs/wallets/injected>
 
-ConnectKit & WalletConnect(Reown)
-<https://family.co/docs/connectkit>
+ConnectKit & WalletConnect(Reown): <https://family.co/docs/connectkit>
+
+Ethers.js: <https://docs.ethers.org/v6/getting-started/>
 
 Wallet Icons: RainbowKit repo: package/rainbowkit/assets/wallets/registry.json
 RainbowKit, based on Wagmi and Viem
