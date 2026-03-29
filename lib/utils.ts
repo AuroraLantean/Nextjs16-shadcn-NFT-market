@@ -25,6 +25,8 @@ export const phantomAppId =
   process.env["NEXT_PUBLIC_PHANTOM_APP_ID"] ?? "PHANTOM_APP_ID_INVALID";
 export const alchemyApikey =
   process.env["NEXT_PUBLIC_ALCHEMY"] ?? "ALCHEMY_APIKEY_INVALID";
+export const infuraApiKey =
+  process.env["NEXT_PUBLIC_INFURA"] ?? "ALCHEMY_APIKEY_INVALID";
 
 export const ethereumNetwork =
   process.env["NEXT_PUBLIC_ETHEREUM_NETWORK"] ?? "ETHEREUM_NETWORK_INVALID";
@@ -140,7 +142,7 @@ export function formatDateString(dateString: string) {
 }
 
 export const delayFunc = async (delay: number): Promise<boolean> =>
-  new Promise((resolve, reject) =>
+  new Promise((resolve, _reject) =>
     setTimeout(() => {
       console.log("delay:", delay);
       resolve(true);
@@ -151,7 +153,7 @@ export const capitalizeFirst = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 export const makeShortAddr = (str: string) => {
-  return str.slice(0, 6) + "...." + str.slice(str.length - 4);
+  return `${str.slice(0, 6)}....${str.slice(str.length - 4)}`;
 };
 export const isEmpty = (value: any) =>
   value === undefined ||
@@ -161,7 +163,7 @@ export const isEmpty = (value: any) =>
   (typeof value === "string" && value === "undefined");
 
 export const isEqualStr = (str1: any, str2: any): boolean =>
-  (str1 + "").trim().toLowerCase() === (str2 + "").trim().toLowerCase();
+  `${str1}`.trim().toLowerCase() === `${str2}`.trim().toLowerCase();
 
 export const isObjEqualStr = (obj1: object, obj2: object): boolean =>
   JSON.stringify(obj1) === JSON.stringify(obj2);
@@ -169,5 +171,5 @@ export const isObjEqualStr = (obj1: object, obj2: object): boolean =>
 export const arrayRange = (start: number, stop: number, step: number) =>
   Array.from(
     { length: (stop - start) / step + 1 },
-    (value, index) => start + index * step,
+    (_value, index) => start + index * step,
   );

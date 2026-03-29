@@ -13,10 +13,32 @@ const erc20JSON = contractsJSON[0];
 const erc721JSON = contractsJSON[1];
 const salesJSON = contractsJSON[2];
 
+//import { localChainDefault } from "@/constants/site_data";
+import { arrayRange, capitalizeFirst, isEmpty, isEqualStr } from "@/lib/utils";
 import { ll } from "./utils";
+
+const erc20_usdtAddr =
+  process.env["NEXT_PUBLIC_EVM_USDT"] ?? erc20JSON?.contractAddress;
+const erc20_usdcAddr = process.env["NEXT_PUBLIC_EVM_USDC"] ?? "";
+
+const erc721Addr =
+  process.env["NEXT_PUBLIC_EVM_NFT"] ?? erc721JSON?.contractAddress;
+const salesAddr =
+  process.env["NEXT_PUBLIC_EVM_NFTSALES"] ?? salesJSON?.contractAddress;
+
+export const ethAddr1 = process.env["NEXT_PUBLIC_EVM_ADDR1"] ?? "";
+export const ethAddr2 = process.env["NEXT_PUBLIC_EVM_ADDR2"] ?? "";
 
 let provider: any;
 let signer: any;
+const isInitialized = false;
+const mesg = "",
+  warning = "";
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
 /*
 export const evmInitWalletAfterLoad = async () =>
   window.addEventListener("load", async () => {
