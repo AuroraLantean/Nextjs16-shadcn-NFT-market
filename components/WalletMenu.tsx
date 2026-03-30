@@ -7,13 +7,13 @@ import {
 } from "wagmi";
 import {
   coinbaseSrc,
-  ll,
   metamaskSrc,
   phantomSrc,
   safewalletSrc,
   trustwalletSrc,
   walletconnectSrc,
-} from "@/lib/utils";
+} from "@/lib/initconditions";
+import { ll } from "@/lib/utils";
 import { metamaskConn, walletConnectConn } from "@/lib/wagmi";
 import { Button } from "@/ui/button";
 import { PhantomButton } from "./WalletButtons";

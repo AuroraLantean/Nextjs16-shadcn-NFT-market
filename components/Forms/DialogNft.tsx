@@ -2,7 +2,8 @@
 import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { chainIndexAtom, chainsAtom } from "@/lib/jotaiStates";
+import { chainInit } from "@/lib/initconditions";
+
 import { ll } from "@/lib/utils";
 import { Button } from "@/ui/button";
 import {
@@ -21,11 +22,7 @@ type Props = {
 };
 export const DialogNft = ({ nftId, price }: Props) => {
   const _compoName = "DialogNft";
-  const chainIndex = useAtomValue(chainIndexAtom);
-  const chainConfig = useAtomValue(chainsAtom);
-  if (!chainConfig[chainIndex]) throw new Error("chainIndex invalid");
-  const { blockchain, acceptedTokSymbol, contractAddr } =
-    chainConfig[chainIndex];
+  const { chainTarget, acceptedTokSymbol, targetCtrt1 } = chainInit;
 
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false); //setOpen is a function for Dialog to export its open/close state
@@ -84,8 +81,8 @@ export const DialogNft = ({ nftId, price }: Props) => {
           <FieldLabel>
             Price: {price} {acceptedTokSymbol}
           </FieldLabel>
-          <FieldLabel>Contract Address: {contractAddr}</FieldLabel>
-          <FieldLabel>Blockchain: {blockchain.toUpperCase()}</FieldLabel>
+          <FieldLabel>Contract Address: {targetCtrt1}</FieldLabel>
+          <FieldLabel>chainTarget: {chainTarget.toUpperCase()}</FieldLabel>
         </div>
         <Button
           type="submit"

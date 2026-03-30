@@ -1,28 +1,14 @@
 import { atom } from "jotai";
-import { chainIndexInitial } from "./utils";
+import { chainIndexInit } from "./initconditions";
 //https://jotai.org/
 //https://github.com/pmndrs/jotai
 export const walletMenuOpenAtom = atom<boolean>(false);
 
-export const chainIndexAtom = atom(chainIndexInitial);
+export const chainIndexAtom = atom(chainIndexInit);
 
-export type Chain = {
-  blockchain: string;
-  contractAddr: string;
-  acceptedTokSymbol: string;
-};
-export const chainsAtom = atom<Chain[]>([
-  {
-    blockchain: "sepolia",
-    contractAddr: "0x123Abcdef456Abcdef",
-    acceptedTokSymbol: "USDT",
-  },
-  {
-    blockchain: "solanaDevnet",
-    contractAddr: "123Abcdef456Abcdef",
-    acceptedTokSymbol: "USDC",
-  },
-]);
+export const errAtom = atom("");
+//const [count, setCount] = useAtom(counter);
+
 /*
 import type { ChangeEvent } from "react";
 

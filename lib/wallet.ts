@@ -7,39 +7,19 @@ import {
   parseUnits,
   toNumber,
 } from "ethers";
-import contractsJSON from "@/web3ABIs/ethereum/contractABIsERC721Sales.json";
-export const evmCtrtLen = contractsJSON.length;
-const erc20JSON = contractsJSON[0];
-const erc721JSON = contractsJSON[1];
-const salesJSON = contractsJSON[2];
 
-//import { localChainDefault } from "@/constants/site_data";
-import { arrayRange, capitalizeFirst, isEmpty, isEqualStr } from "@/lib/utils";
-import { ll } from "./utils";
+import { useAtom } from "jotai";
+import {
+  arrayRange,
+  capitalizeFirst,
+  isEmpty,
+  isEqualStr,
+  ll,
+  parseIntSafe,
+} from "@/lib/utils";
+import { chainIndexInit, chainInit, chains } from "./initconditions";
 
-export const blockchainType =
-  process.env["NEXT_PUBLIC_BLOCKCHAIN_TYPE"] ?? "BLOCKCHAIN_TYPE_INVALID";
-export const reownProjId =
-  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "REOWN_PROJECT_ID_INVALID";
-export const phantomAppId =
-  process.env["NEXT_PUBLIC_PHANTOM_APP_ID"] ?? "PHANTOM_APP_ID_INVALID";
-
-const ethereumNetwork =
-  process.env["NEXT_PUBLIC_ETHEREUM_NETWORK"] ?? "ETHEREUM_NETWORK_INVALID";
-const solanaNetwork =
-  process.env["NEXT_PUBLIC_SOLANA_NETWORK"] ?? "SOLANA_NETWORK_INVALID";
-const erc20_usdtAddr =
-  process.env["NEXT_PUBLIC_EVM_USDT"] ?? erc20JSON?.contractAddress;
-const erc20_usdcAddr = process.env["NEXT_PUBLIC_EVM_USDC"] ?? "";
-
-const erc721Addr =
-  process.env["NEXT_PUBLIC_EVM_NFT"] ?? erc721JSON?.contractAddress;
-const salesAddr =
-  process.env["NEXT_PUBLIC_EVM_NFTSALES"] ?? salesJSON?.contractAddress;
-
-const ethAddr1 = process.env["NEXT_PUBLIC_EVM_ADDR1"] ?? "";
-const ethAddr2 = process.env["NEXT_PUBLIC_EVM_ADDR2"] ?? "";
-
+//-------------==
 let provider: any;
 let signer: any;
 const isInitialized = false;
@@ -50,9 +30,19 @@ declare global {
     ethereum: any;
   }
 }
-export const evmDefaultAddrs = { addr1: ethAddr1, addr2: ethAddr2 };
-//DO NOT use vendor api keys in RPC endpoints in frontend because it exposes your API keys. Use Ether.js default PRC
 
+//[NOTICE] DO NOT use vendor api keys in RPC endpoints in frontend because it exposes your API keys. Use Ether.js default PRC
+
+export const evmGuestRpcProvider = () => {
+  const funcName = "evmDefaultProvider";
+
+  ll(`${funcName} will try to connect RPC at ${chainInit?.publicRpc}`);
+  provider = ethers.getDefaultProvider(chainInit?.publicRpc); // a default provider is returned and that is backed by well-known public Web3 backends (such as [[link-infura]]) using community-provided API keys. https://docs.ethers.org/v6/api/providers/#getDefaultProvider
+};
+export const getBlockNumber = async () => {
+  const blocknum = await provider.getBlockNumber();
+  ll("blockNumber:", blocknum);
+};
 /*
 export const evmInitWalletAfterLoad = async () =>
   window.addEventListener("load", async () => {
@@ -81,8 +71,8 @@ export const evmSetupSigner = async () => {
   };
 };
 */
-export const getChainObj = (input: string) => {
-  //console.log('getChainObj()... input:', input);
+export const getChainInfo = (input: string) => {
+  //console.log('getChainInfo()... input:', input);
   let chainHex = "",
     chainName = "",
     chainId = "";
@@ -98,12 +88,6 @@ export const getChainObj = (input: string) => {
       chainHex = "0xaa36a7";
       chainName = "sepolia";
       chainId = "11155111";
-      break;
-    case "goerli":
-    case "0x5":
-      chainHex = "0x5";
-      chainName = "goerli";
-      chainId = "";
       break;
     case "polygon":
     case "0x89":
@@ -135,29 +119,17 @@ export const getChainObj = (input: string) => {
       chainName = "avalanche";
       chainId = "";
       break;
-    case "fantom":
-    case "0xfa":
-      chainHex = "0xfa";
-      chainName = "fantom";
-      chainId = "";
-      break;
-    case "cronos":
-    case "0x19":
-      chainHex = "0x19";
-      chainName = "cronos";
-      chainId = "";
-      break;
-    case "palm":
-    case "0x2a15c308d":
-      chainHex = "0x2a15c308d";
-      chainName = "palm";
-      chainId = "";
-      break;
     case "arbitrum":
     case "0xa4b1":
       chainHex = "0xa4b1";
       chainName = "arbitrum";
       chainId = "";
+      break;
+    case "base-sepolia":
+      //case "0xa4b1":
+      chainHex = "";
+      chainName = "base-sepolia";
+      chainId = "84532";
       break;
     case "anvil":
     case "foundry":

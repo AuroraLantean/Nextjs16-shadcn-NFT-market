@@ -9,7 +9,7 @@ import { WagmiProvider } from "wagmi";
 import { rainbowkitConfig, wagmiConfig } from "@/lib/wagmi";
 import "@rainbow-me/rainbow-button/styles.css";
 import { AddressType, darkTheme, PhantomProvider } from "@phantom/react-sdk";
-import { phantomAppId } from "@/lib/wallet";
+import { phantomAppId } from "@/lib/initconditions";
 
 /*import {
   RainbowButtonProvider,

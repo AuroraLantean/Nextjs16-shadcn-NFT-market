@@ -1,21 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-//------------== Initial Conditions
-export const chainIndexInitial = 0;
-export const APP_WIDTH_MIN = 350;
-export const chainTypeDefault = "evm";
-export const localChainDefault = "Foundry".toLowerCase();
-export const nftIdMin = 0;
-export const nftIdMax = 9;
 export const ll = console.log;
-
-export const metamaskSrc = "/wallets/metamask.png";
-export const walletconnectSrc = "/wallets/walletconnect.png";
-export const coinbaseSrc = "/wallets/coinbase.png";
-export const phantomSrc = "/wallets/phantom.png";
-export const safewalletSrc = "/wallets/safewallet.png";
-export const trustwalletSrc = "/wallets/trustwallet.png";
 
 //------------==
 export function cn(...inputs: ClassValue[]) {

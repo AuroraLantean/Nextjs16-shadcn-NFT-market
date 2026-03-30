@@ -2,7 +2,9 @@
 import { ArrowUpDown, Coins, LogOut, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useConnection, useDisconnect } from "wagmi";
+import { evmGuestRpcProvider, getBlockNumber } from "@/lib/wallet";
 import { Button } from "@/ui/button";
 import ChainsDropdown from "./ChainsDropdown";
 import { ModeToggle } from "./dark-mode";
@@ -12,6 +14,14 @@ import { MenuDropdown } from "./MenuDropdown";
 const NavBar = () => {
   const connection = useConnection();
   const disconnect = useDisconnect();
+
+  useEffect(() => {
+    evmGuestRpcProvider();
+    const run = async () => {
+      await getBlockNumber();
+    };
+    run();
+  });
 
   //bg-background/95 for opacity
   //supports-backdrop-filter:bg-background for background image
