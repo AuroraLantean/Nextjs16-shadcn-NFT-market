@@ -17,6 +17,17 @@ const salesJSON = contractsJSON[2];
 import { arrayRange, capitalizeFirst, isEmpty, isEqualStr } from "@/lib/utils";
 import { ll } from "./utils";
 
+export const blockchainType =
+  process.env["NEXT_PUBLIC_BLOCKCHAIN_TYPE"] ?? "BLOCKCHAIN_TYPE_INVALID";
+export const reownProjId =
+  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "REOWN_PROJECT_ID_INVALID";
+export const phantomAppId =
+  process.env["NEXT_PUBLIC_PHANTOM_APP_ID"] ?? "PHANTOM_APP_ID_INVALID";
+
+const ethereumNetwork =
+  process.env["NEXT_PUBLIC_ETHEREUM_NETWORK"] ?? "ETHEREUM_NETWORK_INVALID";
+const solanaNetwork =
+  process.env["NEXT_PUBLIC_SOLANA_NETWORK"] ?? "SOLANA_NETWORK_INVALID";
 const erc20_usdtAddr =
   process.env["NEXT_PUBLIC_EVM_USDT"] ?? erc20JSON?.contractAddress;
 const erc20_usdcAddr = process.env["NEXT_PUBLIC_EVM_USDC"] ?? "";
@@ -26,8 +37,8 @@ const erc721Addr =
 const salesAddr =
   process.env["NEXT_PUBLIC_EVM_NFTSALES"] ?? salesJSON?.contractAddress;
 
-export const ethAddr1 = process.env["NEXT_PUBLIC_EVM_ADDR1"] ?? "";
-export const ethAddr2 = process.env["NEXT_PUBLIC_EVM_ADDR2"] ?? "";
+const ethAddr1 = process.env["NEXT_PUBLIC_EVM_ADDR1"] ?? "";
+const ethAddr2 = process.env["NEXT_PUBLIC_EVM_ADDR2"] ?? "";
 
 let provider: any;
 let signer: any;
@@ -39,6 +50,9 @@ declare global {
     ethereum: any;
   }
 }
+export const evmDefaultAddrs = { addr1: ethAddr1, addr2: ethAddr2 };
+//DO NOT use vendor api keys in RPC endpoints in frontend because it exposes your API keys. Use Ether.js default PRC
+
 /*
 export const evmInitWalletAfterLoad = async () =>
   window.addEventListener("load", async () => {
@@ -67,3 +81,101 @@ export const evmSetupSigner = async () => {
   };
 };
 */
+export const getChainObj = (input: string) => {
+  //console.log('getChainObj()... input:', input);
+  let chainHex = "",
+    chainName = "",
+    chainId = "";
+  switch (input) {
+    case "ethereum":
+    case "0x1":
+      chainHex = "0x1";
+      chainName = "mainnet";
+      chainId = "1";
+      break;
+    case "sepolia":
+    case "0xaa36a7":
+      chainHex = "0xaa36a7";
+      chainName = "sepolia";
+      chainId = "11155111";
+      break;
+    case "goerli":
+    case "0x5":
+      chainHex = "0x5";
+      chainName = "goerli";
+      chainId = "";
+      break;
+    case "polygon":
+    case "0x89":
+      chainHex = "0x89";
+      chainName = "polygon";
+      chainId = "137";
+      break;
+    case "mumbai":
+    case "0x13881":
+      chainHex = "0x13881";
+      chainName = "mumbai";
+      chainId = "80001";
+      break;
+    case "bsc":
+    case "0x38":
+      chainHex = "0x38";
+      chainName = "bsc";
+      chainId = "";
+      break;
+    case "bsc_testnet":
+    case "0x61":
+      chainHex = "0x61";
+      chainName = "bsc_testnet";
+      chainId = "97";
+      break;
+    case "avalanche":
+    case "0xa86a":
+      chainHex = "0xa86a";
+      chainName = "avalanche";
+      chainId = "";
+      break;
+    case "fantom":
+    case "0xfa":
+      chainHex = "0xfa";
+      chainName = "fantom";
+      chainId = "";
+      break;
+    case "cronos":
+    case "0x19":
+      chainHex = "0x19";
+      chainName = "cronos";
+      chainId = "";
+      break;
+    case "palm":
+    case "0x2a15c308d":
+      chainHex = "0x2a15c308d";
+      chainName = "palm";
+      chainId = "";
+      break;
+    case "arbitrum":
+    case "0xa4b1":
+      chainHex = "0xa4b1";
+      chainName = "arbitrum";
+      chainId = "";
+      break;
+    case "anvil":
+    case "foundry":
+    case "0x7a69":
+      chainHex = "";
+      chainName = "foundry";
+      chainId = "31337";
+      break;
+    case "hardhat":
+    case "0x539":
+      chainHex = "";
+      chainName = "hardhat";
+      chainId = "hardhat";
+      break;
+    default:
+      chainHex = "invalid";
+      chainName = "invalid";
+      chainId = "invalid";
+  }
+  return { chainHex, chainName, chainId };
+};

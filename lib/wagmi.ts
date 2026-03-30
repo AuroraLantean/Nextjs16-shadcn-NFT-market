@@ -9,7 +9,7 @@ import {
   safe,
   walletConnect,
 } from "wagmi/connectors";
-import { reownProjId } from "./utils";
+import { reownProjId } from "./wallet";
 
 //https://github.com/wevm/wagmi/blob/main/site/react/getting-started.md
 //https://wagmi.sh/vue/guides/connect-wallet
