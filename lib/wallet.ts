@@ -1,30 +1,14 @@
-import {
-  Contract,
-  ethers,
-  formatEther,
-  formatUnits,
-  parseEther,
-  parseUnits,
-  toNumber,
-} from "ethers";
+import { ethers } from "ethers";
 
-import { useAtom } from "jotai";
-import {
-  arrayRange,
-  capitalizeFirst,
-  isEmpty,
-  isEqualStr,
-  ll,
-  parseIntSafe,
-} from "@/lib/utils";
-import { chainIndexInit, chainInit, chains } from "./initconditions";
+import { ll } from "@/lib/utils";
+import { chainInit } from "./initconditions";
 
 //-------------==
 let provider: any;
-let signer: any;
-const isInitialized = false;
-const mesg = "",
-  warning = "";
+let _signer: any;
+const _isInitialized = false;
+const _mesg = "",
+  _warning = "";
 declare global {
   interface Window {
     ethereum: any;
@@ -32,45 +16,40 @@ declare global {
 }
 
 //[NOTICE] DO NOT use vendor api keys in RPC endpoints in frontend because it exposes your API keys. Use Ether.js default PRC
-
-export const evmGuestRpcProvider = () => {
+export type ProviderSigner = {
+  error: string;
+};
+export const evmGuestRpcProvider = async () => {
   const funcName = "evmDefaultProvider";
 
   ll(`${funcName} will try to connect RPC at ${chainInit?.publicRpc}`);
-  provider = ethers.getDefaultProvider(chainInit?.publicRpc); // a default provider is returned and that is backed by well-known public Web3 backends (such as [[link-infura]]) using community-provided API keys. https://docs.ethers.org/v6/api/providers/#getDefaultProvider
+  try {
+    provider = ethers.getDefaultProvider(chainInit?.publicRpc); // a default provider is returned and that is backed by well-known public Web3 backends (such as infura)
+    await getBlockNumber();
+    return { err: "" };
+  } catch (err: any) {
+    console.error(`${funcName}:`, err);
+    return { err: err.message };
+  }
 };
 export const getBlockNumber = async () => {
   const blocknum = await provider.getBlockNumber();
   ll("blockNumber:", blocknum);
 };
-/*
-export const evmInitWalletAfterLoad = async () =>
-  window.addEventListener("load", async () => {
-    let _initOut = web3InitDefault;
-    try {
-      _initOut = await evmInitializeWallet();
-    } catch (err: any) {
-      console.error("@evmInitializeWallet:", err);
-      return { ...web3InitDefault, err: err.message };
-    }
-  });
-export const evmInitializeWallet = async () => {};
 
 export const evmSetupSigner = async () => {
   const funcName = "evmSetupProvider";
   ll(`${funcName}()...`);
   try {
-    provider = new ethers.BrowserProvider(window.ethereum); //in case provider is not properly setup
-    signer = await provider.getSigner();
+    provider = new ethers.BrowserProvider(window.ethereum);
+    _signer = await provider.getSigner();
   } catch (err) {
     console.error(`${funcName} err:`, err);
+    return { err };
   }
-  ll(`${funcName} ran successfully`);
-  return {
-    ...web3InitDefault,
-  };
+  return { err: "", what: "" };
 };
-*/
+
 export const getChainInfo = (input: string) => {
   //console.log('getChainInfo()... input:', input);
   let chainHex = "",

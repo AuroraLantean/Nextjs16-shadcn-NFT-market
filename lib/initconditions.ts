@@ -50,7 +50,7 @@ export type Chain = {
   targetCtrt1: string;
   targetCtrt2: string;
   acceptedTokSymbol: string;
-  //nftOriginalOwner: string; 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+  nftOriginalOwner: string;
 };
 const chainEthereumSepolia = {
   chainType: "evm",
@@ -64,7 +64,7 @@ const chainEthereumSepolia = {
   nftAddr: "0xA7918D253764E42d60C3ce2010a34d5a1e7C1398",
   targetCtrt1: "0x71a9d115E322467147391c4a71D85F8e1cA623EF",
   targetCtrt2: "0xB35D3C9b9f2Fd72FAAb282E8Dd56da31FAA30E3d",
-  //nftOriginalOwner: 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65
+  nftOriginalOwner: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
   acceptedTokSymbol: "USDT",
 };
 export const chains: Chain[] = [
@@ -80,6 +80,7 @@ export const chains: Chain[] = [
     nftAddr: "",
     targetCtrt1: "",
     targetCtrt2: "",
+    nftOriginalOwner: "",
     acceptedTokSymbol: "USDT",
   },
   chainEthereumSepolia,
@@ -96,6 +97,7 @@ export const chains: Chain[] = [
     nftAddr: "",
     targetCtrt1: "",
     targetCtrt2: "",
+    nftOriginalOwner: "",
     acceptedTokSymbol: "USDT",
   },
   {
@@ -111,6 +113,7 @@ export const chains: Chain[] = [
     nftAddr: "",
     targetCtrt1: "",
     targetCtrt2: "",
+    nftOriginalOwner: "",
     acceptedTokSymbol: "USDT",
   },
   {
@@ -126,6 +129,7 @@ export const chains: Chain[] = [
     nftAddr: "",
     targetCtrt1: "",
     targetCtrt2: "",
+    nftOriginalOwner: "",
     acceptedTokSymbol: "USDC",
   },
   {
@@ -141,6 +145,7 @@ export const chains: Chain[] = [
     nftAddr: "",
     targetCtrt1: "",
     targetCtrt2: "",
+    nftOriginalOwner: "",
     acceptedTokSymbol: "USDC",
   },
 ];

@@ -63,6 +63,29 @@ Development Environment
 - Bun: 1.3.11
 - Google Chrome 146.0.7680.153(64-bit)
 
+Install dependencies: `pnpm install`
+Update Biome:
+
+```bash
+pnpm add @biomejs/biome@2.4.10 -D
+pnpx @biomejs/biome init
+```
+
+And set in biome.json: `indentStyle": "space"`
+In VS Code settings:
+
+```json
+  "biome.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+```
+
 TailwindCss: <https://tailwindcss.com/docs/installation/framework-guides/nextjs>
 
 Shadcn-UI and its Theming: <https://ui.shadcn.com/docs/installation>
@@ -185,15 +208,6 @@ Sepolia chain ID `11155111` or `0xaa36a7` in hexadecimal format
 Copy `.env.example` to `.env.local`, then add your credentials. Save it without formatting by your code editor!
 Note: Use a MongoDB user password, not the account password!
 
-Fill the Ethereum Network name and its associated contract addresses:
-
-```bash
-NEXT_PUBLIC_ETHEREUM_NETWORK=
-NEXT_PUBLIC_ETHEREUM_USDT=
-NEXT_PUBLIC_ETHEREUM_NFT=
-NEXT_PUBLIC_ETHEREUM_NFTSALES=
-```
-
 ## Run this NextJs application
 
 I use Bun to run this app in development because of its speed, but you should be able to use PNPM or NPM or Yarn to run it as well.
@@ -265,6 +279,8 @@ After the transaction has been submitted and finalize. Then click on the left `G
 
 ## Production Deployment via Vercel
 
+Set `NEXT_PUBLIC_INIT_BLOCKCHAIN_INDEX` to be one of `chains` in the `initialconditions.ts`. This sets the initial blockchain for the app to fetch the NFT data.
+
 Change the lockfileVersion in pnpm-lock.yaml to `lockfileVersion: '8.5.1'`
 
 Use Vercel's NodeJs version(from deployment error message) in your package.json engine section. Remove `"pnpm": ">=8.14.0"` in your package.json engine section to avoid `ERR_PNPM_UNSUPPORTED_ENGINE  Unsupported environment (bad pnpm and/or Node.js version)`:
@@ -295,7 +311,7 @@ Popover
 
 ## Development Requirement
 
-[NextJs 14 requires Node v18.17](https://nextjs.org/blog/next-14) Or Bun 1.0.22
+[NextJs 16 requires Node v20.9](https://nextjs.org/blog/next-14) Or Bun 1.3.x
 
 ## Browser Requirement
 

@@ -7,7 +7,7 @@ export const walletMenuOpenAtom = atom<boolean>(false);
 export const chainIndexAtom = atom(chainIndexInit);
 
 export const errAtom = atom("");
-//const [count, setCount] = useAtom(counter);
+//const [err, setErr] = useAtom(errAtom);
 
 /*
 import type { ChangeEvent } from "react";
