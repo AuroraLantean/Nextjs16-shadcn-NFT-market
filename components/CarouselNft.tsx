@@ -19,6 +19,7 @@ const CarouselNft = () => {
   ll("CarouselNft...");
   const [_err, setErr] = useAtom(errAtom);
   let res = { err: "" };
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <>
   useEffect(() => {
     const run = async () => {
       res = await evmGuestRpcProvider();
@@ -26,9 +27,9 @@ const CarouselNft = () => {
     };
     run();
     return () => {
-      ll("CarouselNft removed");
+      ll("CarouselNft dep changed");
     };
-  });
+  }, []);
   //Carousel: set Carousel width = w-full
   // max-w-48 sm:max-w-lg md:max-w-lg
   //CarouselItem: set item number to show

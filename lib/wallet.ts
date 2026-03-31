@@ -4,14 +4,15 @@ import { ll } from "@/lib/utils";
 import { chainInit } from "./initconditions";
 
 //-------------==
-let provider: any;
-let _signer: any;
+let provider: ethers.AbstractProvider;
+let signer: ethers.JsonRpcSigner;
 const _isInitialized = false;
 const _mesg = "",
   _warning = "";
 declare global {
   interface Window {
     ethereum: any;
+    isPhantomInstalled: any;
   }
 }
 
@@ -20,7 +21,7 @@ export type ProviderSigner = {
   error: string;
 };
 export const evmGuestRpcProvider = async () => {
-  const funcName = "evmDefaultProvider";
+  const funcName = "evmGuestRpcProvider";
 
   ll(`${funcName} will try to connect RPC at ${chainInit?.publicRpc}`);
   try {
@@ -29,7 +30,7 @@ export const evmGuestRpcProvider = async () => {
     return { err: "" };
   } catch (err: any) {
     console.error(`${funcName}:`, err);
-    return { err: err.message };
+    return { err };
   }
 };
 export const getBlockNumber = async () => {
@@ -37,17 +38,20 @@ export const getBlockNumber = async () => {
   ll("blockNumber:", blocknum);
 };
 
-export const evmSetupSigner = async () => {
-  const funcName = "evmSetupProvider";
+//Phantom takes over window.ethereum. Not sure how to connect to MetaMask...
+export const evmGetSignerViaEthersjs = async () => {
+  const funcName = "evmGetSigner";
   ll(`${funcName}()...`);
+  ll("isPhantomInstalled:", window.isPhantomInstalled);
   try {
-    provider = new ethers.BrowserProvider(window.ethereum);
-    _signer = await provider.getSigner();
-  } catch (err) {
-    console.error(`${funcName} err:`, err);
+    const browserProvider = new ethers.BrowserProvider(window.ethereum);
+    signer = await browserProvider.getSigner();
+    ll("signer obtained:", signer.address);
+  } catch (err: any) {
+    console.error(`${funcName}:`, err);
     return { err };
   }
-  return { err: "", what: "" };
+  return { err: "" };
 };
 
 export const getChainInfo = (input: string) => {

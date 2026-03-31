@@ -20,7 +20,7 @@ const NavBar = () => {
     const run = async () => {};
     run();
     return () => {
-      ll("NavBar removed");
+      ll("NavBar dep changed");
     };
   }, []);
 

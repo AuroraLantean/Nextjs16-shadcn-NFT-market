@@ -150,6 +150,9 @@ ConnectKit & WalletConnect(Reown): <https://family.co/docs/connectkit>
 
 Ethers.js: <https://docs.ethers.org/v6/getting-started/>
 
+Why Viem(Better than Ethers.js v6)
+https://viem.sh/docs/introduction
+
 Wallet Icons: RainbowKit repo: package/rainbowkit/assets/wallets/registry.json
 RainbowKit, based on Wagmi and Viem
 <https://rainbowkit.com/docs/introduction>
@@ -162,6 +165,10 @@ Phantom Wallet
 - Get Phantom App ID: <https://phantom.com/portal/login>
 - And setup Allowed Origins to "<http://localhost:3000>" and your deployment URL.
 - Install @phantom/react-sdk @solana/kit viem
+
+## Security
+
+- Viem <https://viem.sh/docs/installation#security>
 
 ## Error
 

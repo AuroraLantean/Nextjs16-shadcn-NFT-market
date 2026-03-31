@@ -16,7 +16,7 @@ import {
 import { ll } from "@/lib/utils";
 import { metamaskConn, walletConnectConn } from "@/lib/wagmi";
 import { Button } from "@/ui/button";
-import { PhantomButton } from "./WalletButtons";
+import { PhantomButton } from "./WagmiButtons";
 
 const buttonWidth = 48;
 const makeConnectorDiv = (
