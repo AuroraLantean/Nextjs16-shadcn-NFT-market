@@ -1,7 +1,7 @@
 //import { rainbowConnector } from "@rainbow-me/rainbow-button";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { createConfig, http } from "wagmi";
-import { base, mainnet, sepolia } from "wagmi/chains";
+import { base, foundry, mainnet, sepolia } from "wagmi/chains";
 import {
   coinbaseWallet,
   // injected,  type MetaMaskParameters,
@@ -18,15 +18,27 @@ import { reownProjId } from "./initconditions";
 export const walletConnectConn = walletConnect({ projectId: reownProjId });
 export const metamaskConn = metaMask();
 
+export const configFoundry = createConfig({
+  chains: [foundry],
+  transports: {
+    [foundry.id]: http(),
+  },
+});
+/*declare module "wagmi" {
+  interface Register {
+    config: typeof configFoundry;
+  }
+}*/
 //baseWallet, phantomWallet, injected(),
 export const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia, base],
+  chains: [mainnet, sepolia, base, foundry],
   connectors: [metamaskConn, walletConnectConn, coinbaseWallet(), safe()], //connectors order matters
   transports: {
     // RPC URL for each chain
     [mainnet.id]: http(),
     [sepolia.id]: http(),
     [base.id]: http(),
+    [foundry.id]: http(),
     //[mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`, ),
   },
   // storage: createStorage({

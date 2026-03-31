@@ -20,6 +20,7 @@ export const WagmiButton = () => {
   const disconnect = useDisconnect();
   const connection = useConnection();
   const phantomAddresses = usePhantomAccounts();
+
   return (
     <div>
       {connection.status === "connected" && (

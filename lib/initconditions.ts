@@ -1,20 +1,20 @@
 import contractsJSON from "@/web3ABIs/ethereum/contractABIsERC721Sales.json";
 import { parseIntSafe } from "./utils";
 export const evmCtrtLen = contractsJSON.length;
-const erc20JSON = contractsJSON[0];
-const erc721JSON = contractsJSON[1];
-const salesJSON = contractsJSON[2];
+export const erc20JSON = contractsJSON[0];
+export const erc721JSON = contractsJSON[1];
+export const salesJSON = contractsJSON[2];
 
 export const initBlockchainIndexStr =
-  process.env["NEXT_PUBLIC_INIT_BLOCKCHAIN_INDEX"] ??
+  process.env.NEXT_PUBLIC_INIT_BLOCKCHAIN_INDEX ??
   "INIT_BLOCKCHAIN_INDEX_INVALID";
 export const reownProjId =
-  process.env["NEXT_PUBLIC_REOWN_PROJECTID"] ?? "REOWN_PROJECT_ID_INVALID";
+  process.env.NEXT_PUBLIC_REOWN_PROJECTID ?? "REOWN_PROJECT_ID_INVALID";
 export const phantomAppId =
-  process.env["NEXT_PUBLIC_PHANTOM_APP_ID"] ?? "PHANTOM_APP_ID_INVALID";
+  process.env.NEXT_PUBLIC_PHANTOM_APP_ID ?? "PHANTOM_APP_ID_INVALID";
 
-const ethAddr1 = process.env["NEXT_PUBLIC_EVM_ADDR1"] ?? "";
-const ethAddr2 = process.env["NEXT_PUBLIC_EVM_ADDR2"] ?? "";
+const ethAddr1 = process.env.NEXT_PUBLIC_EVM_ADDR1 ?? "";
+const ethAddr2 = process.env.NEXT_PUBLIC_EVM_ADDR2 ?? "";
 export const evmDefaultAddrs = { addr1: ethAddr1, addr2: ethAddr2 };
 
 export const APP_WIDTH_MIN = 350;
