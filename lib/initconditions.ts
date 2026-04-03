@@ -63,8 +63,9 @@ export const chainEthereumSepolia = {
   nftOriginalOwner: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
   acceptedTokSymbol: "USDT",
 };
+export const usdtEthereumMain = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
 
-export const chains: Chain[] = [
+export const configChains: Chain[] = [
   {
     chainType: "evm",
     chainId: "31337",
@@ -89,7 +90,7 @@ export const chains: Chain[] = [
     chainTarget: "mainnet", //or sepolia, sepolia
     publicRpc: "https://eth.drpc.org",
     explorer: "https://etherscan.io",
-    usdtAddr: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    usdtAddr: usdtEthereumMain,
     usdcAddr: "",
     nftAddr: "",
     targetCtrt1: "",
@@ -147,6 +148,15 @@ export const chains: Chain[] = [
   },
 ];
 export const chainIndexInit = parseIntSafe(initBlockchainIndexStr);
-export const chainInit1 = chains[chainIndexInit];
+export const chainInit1 = configChains[chainIndexInit];
 
 export const chainInit = chainInit1 ?? chainEthereumSepolia;
+export const findConfigChain = (chainId: number | string) => {
+  const filtered = configChains.filter(
+    (chain) => chain.chainId === `${chainId}`,
+  );
+  if (filtered.length < 1) return { err: "not fond", chain: null };
+  if (filtered.length > 1) return { err: "found more than one", chain: null };
+  if (filtered[0] === undefined) return { err: "undefined", chain: null };
+  return { err: "", chain: filtered[0] };
+};

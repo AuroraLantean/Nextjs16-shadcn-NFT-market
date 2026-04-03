@@ -176,6 +176,10 @@ Phantom Wallet
 
 ## Error
 
+[Error] wagmi current chain of the wallet does not match the target chain... Due to "chainId !== chainIdViaConnection". This happens at the initial loading the NextJs with unknown chain.
+After connecting the wallet, the NextJs knows which chain and the wallet address. Then this error goes away.
+Try to see if removing Phantom wallet helps.  Enabling Phantom wallet later on seems okay.
+
 [Slow] wagmiConfig has a chain but its RPC invalid
 [Notice] use @react-email/tailwind@^0.0.8 instead of @react-email/tailwind@0.0.9 for the ReactServerComponentsError
 

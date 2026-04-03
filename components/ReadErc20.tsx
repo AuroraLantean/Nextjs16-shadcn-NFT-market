@@ -1,17 +1,32 @@
 import { useChainId, useConnection, useReadContract } from "wagmi";
-import aDeployedCtrts from "@/ethereumABIs/aDeployedCtrts.json";
 import USDX from "@/ethereumABIs/USDX.json";
+import { findConfigChain, usdtEthereumMain } from "@/lib/initconditions";
 import { ll, makeShortAddr } from "@/lib/utils";
 
 //connectkit at video 2743
 //https://wagmi.sh/react/api/hooks/useReadContract
 const ReadErc20 = () => {
   const chainId = useChainId();
-  const { address, addresses, chain, isConnected } = useConnection(); //its chainId is incorrect
+  const {
+    address,
+    addresses,
+    chain,
+    chainId: chainIdViaConnection,
+    isConnected,
+  } = useConnection(); //its chainId is incorrect
   ll(
-    `ReadErc20: ${address}, chain: ${chain?.name}, chainId: ${chainId}, isConnected: ${isConnected}, addressesLen: ${addresses?.length}`,
+    `ReadErc20: ${address}, chain: ${chain?.name}, chainId: ${chainId}, chainIdViaConnection: ${chainIdViaConnection},isConnected: ${isConnected}, addressesLen: ${addresses?.length}`,
   );
   //ll("addresses:", addresses);
+
+  let usdtAddr: `0x${string}` = usdtEthereumMain;
+  const foundChain = findConfigChain(chainId);
+  if (foundChain.err || !foundChain.chain) {
+    console.error(foundChain.err);
+  } else {
+    usdtAddr = foundChain.chain.usdtAddr as `0x${string}`;
+  }
+  ll("usdtAddr:", usdtAddr);
 
   //https://wagmi.sh/react/api/hooks/useReadContract
   //https://wagmi.sh/react/guides/read-from-contract
@@ -24,7 +39,7 @@ const ReadErc20 = () => {
     fetchStatus,
   } = useReadContract({
     abi: USDX,
-    address: aDeployedCtrts.USDT_ADDR as `0x${string}`,
+    address: usdtAddr, // aDeployedCtrts.USDT_ADDR as `0x${string}`,
     //address: chainEthereumSepolia.usdtAddr as `0x${string}`,
     functionName: "balanceOf",
     args: [address],

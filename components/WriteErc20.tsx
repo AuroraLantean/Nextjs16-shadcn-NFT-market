@@ -5,9 +5,12 @@ import {
   useWaitForTransactionReceipt,
   useWriteContract,
 } from "wagmi";
-import aDeployedCtrts from "@/ethereumABIs/aDeployedCtrts.json";
 import USDX from "@/ethereumABIs/USDX.json";
-import { evmAddrs } from "@/lib/initconditions";
+import {
+  evmAddrs,
+  findConfigChain,
+  usdtEthereumMain,
+} from "@/lib/initconditions";
 import { ll, toBigInt } from "@/lib/utils";
 import { Button } from "./ui/button";
 
@@ -17,11 +20,28 @@ const WriteErc20 = () => {
   const [inputAddr, setInputAddr] = useState("");
   const [amount, setAmount] = useState("");
 
-  const { address, addresses, chain, isConnected } = useConnection(); //its chainId is incorrect
+  const {
+    address,
+    addresses,
+    chain,
+    chainId: chainIdViaConnection,
+    isConnected,
+  } = useConnection(); //its chainId is incorrect
   ll(
-    `WriteErc20: chainId: ${chainId}, address: ${address}, addressesLen: ${addresses?.length}`,
+    `WriteErc20: chainId: ${chainId}, chainIdViaConnection: ${chainIdViaConnection}, address: ${address}, addressesLen: ${addresses?.length}`,
   );
   //ll("addresses:", addresses)
+  if (chainId !== chainIdViaConnection) {
+    console.warn("chainId !== chainIdViaConnection");
+  }
+  let usdtAddr: `0x${string}` = usdtEthereumMain;
+  const foundChain = findConfigChain(chainId);
+  if (foundChain.err || !foundChain.chain) {
+    console.error(foundChain.err);
+  } else {
+    usdtAddr = foundChain.chain.usdtAddr as `0x${string}`;
+  }
+  ll("usdtAddr:", usdtAddr);
 
   //https://wagmi.sh/react/api/hooks/useWriteContract
   const { mutate, data: txHash, isError, error } = useWriteContract();
@@ -52,7 +72,7 @@ const WriteErc20 = () => {
     try {
       mutate({
         abi: USDX,
-        address: aDeployedCtrts.USDT_ADDR as `0x${string}`,
+        address: usdtAddr, // aDeployedCtrts.USDT_ADDR as `0x${string}`,
         functionName: "transfer",
         args: [inputAddr, amount1],
         account: address,
