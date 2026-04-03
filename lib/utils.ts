@@ -91,7 +91,8 @@ export const delayFunc = async (delay: number): Promise<boolean> =>
 export const capitalizeFirst = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
-export const makeShortAddr = (str: string) => {
+export const makeShortAddr = (str: string | undefined) => {
+  if (!str) return "";
   return `${str.slice(0, 6)}....${str.slice(str.length - 4)}`;
 };
 export const isEmpty = (value: any) =>

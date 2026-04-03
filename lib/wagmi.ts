@@ -46,6 +46,7 @@ export const wagmiConfig = createConfig({
   //   storage: cookieStorage,
   // }),
   ssr: true,
+  syncConnectedChain: true,
 });
 export const rainbowkitConfig = getDefaultConfig({
   appName: "NextJs Dapp",

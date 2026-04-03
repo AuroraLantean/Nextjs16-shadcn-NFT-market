@@ -11,7 +11,7 @@ export const phantomAppId =
 
 const ethAddr1 = process.env.NEXT_PUBLIC_EVM_ADDR1 ?? "";
 const ethAddr2 = process.env.NEXT_PUBLIC_EVM_ADDR2 ?? "";
-export const evmDefaultAddrs = { addr1: ethAddr1, addr2: ethAddr2 };
+export const evmAddrs = { addr1: ethAddr1, addr2: ethAddr2 };
 
 export const APP_WIDTH_MIN = 350;
 export const nftIdMin = 0;

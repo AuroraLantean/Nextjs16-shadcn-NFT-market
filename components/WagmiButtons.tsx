@@ -25,7 +25,7 @@ export const WagmiButton = () => {
     <div>
       {connection.status === "connected" && (
         <div>
-          Wagmi addresses: {JSON.stringify(connection.addresses)}
+          Wagmi Button: {JSON.stringify(connection.addresses)}
           <br />
           <div className="flex items-center">
             <span className="mr-3">chainId: {connection.chainId}</span>
