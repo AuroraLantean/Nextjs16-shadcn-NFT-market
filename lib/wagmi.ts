@@ -21,7 +21,7 @@ export const metamaskConn = metaMask();
 export const configFoundry = createConfig({
   chains: [foundry],
   transports: {
-    [foundry.id]: http(),
+    [foundry.id]: http(`http://127.0.0.1:8545`),
   },
 });
 /*declare module "wagmi" {
@@ -30,16 +30,17 @@ export const configFoundry = createConfig({
   }
 }*/
 //baseWallet, phantomWallet, injected(),
+//useReadContract() will use the left most chain in chains below!
 export const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia, base, foundry],
+  chains: [foundry, sepolia], //mainnet base,
   connectors: [metamaskConn, walletConnectConn, coinbaseWallet(), safe()], //connectors order matters
   transports: {
-    // RPC URL for each chain
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-    [base.id]: http(),
-    [foundry.id]: http(),
-    //[mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`, ),
+    [sepolia.id]: http(
+      `https://eth-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY}`,
+    ),
+    [foundry.id]: http(`http://127.0.0.1:8545`),
+    //[mainnet.id]: http(), //`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}` not working!
+    //[base.id]: http(),
   },
   // storage: createStorage({
   //   storage: cookieStorage,

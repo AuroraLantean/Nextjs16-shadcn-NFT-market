@@ -40,12 +40,12 @@ export const formatNumbers = (num: number) => {
 };
 export const formatBN = (input: string | undefined, dec = 18) => {
   if (!input) return "";
-  const pow = 10 ** dec;
-  return convertDecimal(BigInt(input) / BigInt(pow), 3);
+  const base = 10 ** dec;
+  return convertDecimal(BigInt(input) / BigInt(base), 3);
 };
 export const convertDecimal = (num: bigint | number, dec = 2) => {
-  const pow = 10 ** dec;
-  return Number(Math.floor(Number(num) ** pow) / pow).toLocaleString(
+  const base = 10 ** dec;
+  return Number(Math.floor(Number(num) ** base) / base).toLocaleString(
     undefined,
     {
       minimumFractionDigits: 0,
@@ -53,10 +53,10 @@ export const convertDecimal = (num: bigint | number, dec = 2) => {
     },
   );
 };
-export const convertBN = (input: string | undefined, dec = 18) => {
+export const toBigInt = (input: string | number | undefined, dec = 18) => {
   if (!input) return "";
-  const pow = 10 ** dec;
-  return (BigInt(input) * BigInt(pow)).toString(10);
+  const base = 10 ** dec;
+  return BigInt(input) * BigInt(base);
 };
 //------------==
 export function isBase64Image(imageData: string) {

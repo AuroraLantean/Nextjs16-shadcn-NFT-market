@@ -1,9 +1,5 @@
-import contractsJSON from "@/web3ABIs/ethereum/contractABIsERC721Sales.json";
+import aDeployedCtrts from "@/ethereumABIs/aDeployedCtrts.json";
 import { parseIntSafe } from "./utils";
-export const evmCtrtLen = contractsJSON.length;
-export const erc20JSON = contractsJSON[0];
-export const erc721JSON = contractsJSON[1];
-export const salesJSON = contractsJSON[2];
 
 export const initBlockchainIndexStr =
   process.env.NEXT_PUBLIC_INIT_BLOCKCHAIN_INDEX ??
@@ -52,7 +48,7 @@ export type Chain = {
   acceptedTokSymbol: string;
   nftOriginalOwner: string;
 };
-const chainEthereumSepolia = {
+export const chainEthereumSepolia = {
   chainType: "evm",
   chainId: "11155111",
   chainMainnet: "ethereum", //or arbitrum, base
@@ -67,6 +63,7 @@ const chainEthereumSepolia = {
   nftOriginalOwner: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
   acceptedTokSymbol: "USDT",
 };
+
 export const chains: Chain[] = [
   {
     chainType: "evm",
@@ -75,12 +72,12 @@ export const chains: Chain[] = [
     chainTarget: "foundry", //or sepolia, sepolia
     publicRpc: "http://127.0.0.1:8545",
     explorer: "",
-    usdtAddr: "",
+    usdtAddr: aDeployedCtrts.USDT_ADDR,
     usdcAddr: "",
-    nftAddr: "",
-    targetCtrt1: "",
+    nftAddr: aDeployedCtrts.DRAGONS_ADDR,
+    targetCtrt1: aDeployedCtrts.SALES_ADDR,
     targetCtrt2: "",
-    nftOriginalOwner: "",
+    nftOriginalOwner: aDeployedCtrts.Deployer,
     acceptedTokSymbol: "USDT",
   },
   chainEthereumSepolia,

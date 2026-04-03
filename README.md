@@ -21,6 +21,10 @@
 
 ## TODO
 
+Axios: avoid 1.14.1 or 0.30.4
+Delete plain-crypto-js package!!!
+Avoid post install script!!!
+
 ReUi
 <https://reui.io/patterns/input>
 
@@ -151,7 +155,7 @@ ConnectKit & WalletConnect(Reown): <https://family.co/docs/connectkit>
 Ethers.js: <https://docs.ethers.org/v6/getting-started/>
 
 Why Viem(Better than Ethers.js v6)
-https://viem.sh/docs/introduction
+<https://viem.sh/docs/introduction>
 
 Wallet Icons: RainbowKit repo: package/rainbowkit/assets/wallets/registry.json
 RainbowKit, based on Wagmi and Viem
@@ -172,6 +176,7 @@ Phantom Wallet
 
 ## Error
 
+[Slow] wagmiConfig has a chain but its RPC invalid
 [Notice] use @react-email/tailwind@^0.0.8 instead of @react-email/tailwind@0.0.9 for the ReactServerComponentsError
 
 ## Deploy Solidity Smart Contracts on a Local Ethereum Network
@@ -180,12 +185,17 @@ Phantom Wallet
 Then start a local Ethereum network via Anvil: `anvil`
 
 [Download the Solidity Codebase](https://github.com/AuroraLantean/foundry-d2)
-Run tests on ERC721 Sales smart contract: `bun run erc721sales`
+```
+forge test --match-path test/ERC20Token.t.sol -vvv
+forge test --match-path test/ERC721Token.t.sol -vvv
+forge test --match-path test/ERC721Sales.t.sol -vvv
 
-Deploy the ERC20, ERC721, and the ERC721 Sales smart contracts onto the Anvil Local Ethereum network:
-`bun run erc721sales_deployAnvil`
+forge script script/Deploy.s.sol:DeployScript --fork-url --sig "run(uint256)" 5 --rpc-url http://localhost:8545 --broadcast
 
-Copy the compiled Solidity ABI files with deployment contract addresses into this frontend project repository: `bun run erc721sales_makeabi`
+bun abiExtract.ts
+```
+
+Copy the compiled Solidity ABI files with deployment contract addresses into this frontend project repository
 
 ## Connect A Web3 Browser Wallet to A Local OR Remote Ethereum Network
 

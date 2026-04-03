@@ -55,6 +55,9 @@
       ],
       "@/web3ABIs/*": [
         "./web3ABIs/*"
+      ],
+      "@/ethereumABIs/*": [
+        "./web3ABIs/ethereum/*"
       ]
     }
   },
