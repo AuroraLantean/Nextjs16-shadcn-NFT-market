@@ -6,10 +6,10 @@ import type * as React from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
-import { wagmiConfigEthereumSepolia, wagmiConfigFoundry } from "@/lib/wagmi";
+import { providerConfig } from "@/lib/wagmi";
 import "@rainbow-me/rainbow-button/styles.css";
 import { AddressType, darkTheme, PhantomProvider } from "@phantom/react-sdk";
-import { chainIndexInit, phantomAppId } from "@/lib/initconditions";
+import { phantomAppId } from "@/lib/initconditions";
 
 /*import {
   RainbowButtonProvider,
@@ -35,9 +35,7 @@ const queryClient = new QueryClient();
 /*  const wagmiInitialState = cookieToInitialState(getConfig(),
     (await headers()).get('cookie'),
 )*/
-const config =
-  chainIndexInit === 0 ? wagmiConfigFoundry : wagmiConfigEthereumSepolia;
-//const config = rainbowkitConfig;
+
 export function Provider({
   children,
   ...props
@@ -45,7 +43,7 @@ export function Provider({
   return (
     <NextThemesProvider {...props}>
       <JotaiProvider>
-        <WagmiProvider config={config}>
+        <WagmiProvider config={providerConfig}>
           <QueryClientProvider client={queryClient}>
             <PhantomProvider1>{children}</PhantomProvider1>
           </QueryClientProvider>

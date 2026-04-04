@@ -3,6 +3,18 @@ import { twMerge } from "tailwind-merge";
 
 export const ll = console.log;
 
+export const isBtnDisabled = (
+  isPending: boolean,
+  isInitial: boolean,
+  isPendingReceipt: boolean,
+) => {
+  if (isPending) return true;
+  if (isInitial) {
+    return false;
+  } else {
+    return isPendingReceipt;
+  }
+};
 //------------==
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

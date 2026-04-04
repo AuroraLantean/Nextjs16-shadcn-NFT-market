@@ -9,7 +9,7 @@ import {
   safe,
   walletConnect,
 } from "wagmi/connectors";
-import { reownProjId } from "./initconditions";
+import { chainIndexInit, reownProjId } from "./initconditions";
 
 //https://github.com/wevm/wagmi/blob/main/site/react/getting-started.md
 //https://wagmi.sh/vue/guides/connect-wallet
@@ -58,6 +58,9 @@ export const wagmiConfigFoundry = createConfig({
   ssr: true,
   syncConnectedChain: true,
 });
+export const providerConfig =
+  chainIndexInit === 0 ? wagmiConfigFoundry : wagmiConfigEthereumSepolia; //rainbowkitConfig;
+
 export const rainbowkitConfig = getDefaultConfig({
   appName: "NextJs Dapp",
   projectId: reownProjId,

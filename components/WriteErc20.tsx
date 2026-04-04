@@ -11,12 +11,12 @@ import {
   findConfigChain,
   usdtEthereumMain,
 } from "@/lib/initconditions";
-import { ll, toBigInt } from "@/lib/utils";
+import { isBtnDisabled, ll, toBigInt } from "@/lib/utils";
 import { Button } from "./ui/button";
 
 const WriteErc20 = () => {
   const chainId = useChainId();
-  const [_loading, setLoading] = useState(false);
+  const [isInitial, setIsInitial] = useState(true);
   const [inputAddr, setInputAddr] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -61,24 +61,26 @@ const WriteErc20 = () => {
     isSuccess: isSuccessReceipt,
     isPending: isPendingReceipt,
     isError: isErrorReceipt,
+    status: statusReceipt,
     error: errorReceipt,
   } = useWaitForTransactionReceipt({
     hash: txHash,
     chainId, //sepolia.id, mainnet.id
-    //confirmations: 2,
+    //confirmations: 2, //TODO: 2+ gives only pending!??
     //pollingInterval: 1_000,
     //config: config
   });
+  const btnDisabled = isBtnDisabled(isPending, isInitial, isPendingReceipt); //|| isPendingReceipt;
   ll(
-    `WriteErc20 isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt}`,
+    `WriteErc20 isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt},  statusReceipt: ${statusReceipt}, btnDisabled: ${btnDisabled}`,
   );
 
   //TODO: Udemy course@5.55
   const onBtnClick = async () => {
-    setLoading(true);
+    setIsInitial(false);
     const amount1 = toBigInt(amount, decimal);
     ll(
-      `onBtnClick()... inputAddr: ${inputAddr}, amount: ${amount} ${amount1}, chainId: ${chainId}, isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt}`,
+      `onBtnClick()... inputAddr: ${inputAddr}, amount: ${amount} ${amount1}, chainId: ${chainId}`,
     );
     try {
       mutate({
@@ -92,7 +94,6 @@ const WriteErc20 = () => {
     } catch (err: any) {
       console.error(err.message);
     }
-    setLoading(false);
   };
 
   return (
@@ -121,8 +122,12 @@ const WriteErc20 = () => {
         <Button
           type="button"
           onClick={onBtnClick}
-          disabled={isPending && isPendingReceipt}
-          className="bg-linear-to-r from-blue-400 to-purple-400 hover:from-orange-700 hover:scale-105 duration-300"
+          disabled={btnDisabled}
+          className={
+            btnDisabled
+              ? "bg-red-600"
+              : "bg-linear-to-r from-blue-400 to-purple-400 hover:from-green-700 hover:scale-105 duration-300"
+          }
         >
           Send Txn
         </Button>

@@ -1,7 +1,11 @@
+import { switchChain } from "@wagmi/core";
+import { foundry, sepolia } from "viem/chains";
 import { useChainId, useConnection, useReadContract } from "wagmi";
 import USDX from "@/ethereumABIs/USDX.json";
 import { findConfigChain, usdtEthereumMain } from "@/lib/initconditions";
 import { ll, makeShortAddr } from "@/lib/utils";
+import { providerConfig } from "@/lib/wagmi";
+import { Button } from "./ui/button";
 
 //connectkit at video 2743
 //https://wagmi.sh/react/api/hooks/useReadContract
@@ -15,9 +19,9 @@ const ReadErc20 = () => {
     chainId: chainIdViaConnection,
     isConnected,
   } = useConnection(); //its chainId is incorrect
-  ll(
+  /*ll(
     `ReadErc20: ${address}, chainName: ${chain?.name}, chainIdViaConnection: ${chainIdViaConnection},isConnected: ${isConnected}, addressesLen: ${addresses?.length}; chainId: ${chainId}}`,
-  );
+  );*/
   //ll("addresses:", addresses);
 
   let usdxAddr: `0x${string}` = usdtEthereumMain;
@@ -59,8 +63,19 @@ const ReadErc20 = () => {
   const balcUi = balance
     ? (BigInt(balance as bigint) / BigInt(10 ** decimal)).toString()
     : "";
+
+  const onSwitchSepolia = async () => {
+    ll("onSwitchSepolia");
+    await switchChain(providerConfig, { chainId: sepolia.id });
+  };
+  const onSwitchFoundry = async () => {
+    ll("onSwitchFoundry");
+    await switchChain(providerConfig, { chainId: foundry.id });
+  };
   return (
     <div className="border-2 border-t-blue-400">
+      <Button onClick={onSwitchSepolia}>Switch to Ethereum Sepolia </Button>
+      <Button onClick={onSwitchFoundry}>Switch to Foundry </Button>
       <span>isConnected: {isConnected ? "true" : "false"}</span>
       {". "}
       <span>address: {makeShortAddr(address)}</span>
