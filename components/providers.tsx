@@ -1,15 +1,15 @@
 "use client";
 
-import { Provider as JotaiProvider, useAtom } from "jotai";
+import { Provider as JotaiProvider } from "jotai";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type * as React from "react";
 import "@rainbow-me/rainbowkit/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
-import { rainbowkitConfig, wagmiConfig } from "@/lib/wagmi";
+import { wagmiConfigEthereumSepolia, wagmiConfigFoundry } from "@/lib/wagmi";
 import "@rainbow-me/rainbow-button/styles.css";
 import { AddressType, darkTheme, PhantomProvider } from "@phantom/react-sdk";
-import { phantomAppId } from "@/lib/initconditions";
+import { chainIndexInit, phantomAppId } from "@/lib/initconditions";
 
 /*import {
   RainbowButtonProvider,
@@ -35,7 +35,8 @@ const queryClient = new QueryClient();
 /*  const wagmiInitialState = cookieToInitialState(getConfig(),
     (await headers()).get('cookie'),
 )*/
-const config = wagmiConfig;
+const config =
+  chainIndexInit === 0 ? wagmiConfigFoundry : wagmiConfigEthereumSepolia;
 //const config = rainbowkitConfig;
 export function Provider({
   children,

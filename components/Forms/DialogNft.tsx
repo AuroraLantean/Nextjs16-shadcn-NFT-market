@@ -1,6 +1,5 @@
 "use client";
-import { useAtom, useAtomValue } from "jotai";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { chainInit } from "@/lib/initconditions";
 
@@ -22,12 +21,12 @@ type Props = {
 };
 export const DialogNft = ({ nftId, price }: Props) => {
   const _compoName = "DialogNft";
-  const { chainTarget, acceptedTokSymbol, targetCtrt1 } = chainInit;
+  const { chainTarget, tokenSymbol, salesAddr } = chainInit;
 
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false); //setOpen is a function for Dialog to export its open/close state
 
-  const onSubmit = async () => {
+  const _onSubmit = async () => {
     ll("onSubmit. nftId:", nftId);
     setIsLoading(true);
 
@@ -79,9 +78,9 @@ export const DialogNft = ({ nftId, price }: Props) => {
         <div className="mt-0 flex-col">
           <FieldLabel>NFT ID: {nftId}</FieldLabel>
           <FieldLabel>
-            Price: {price} {acceptedTokSymbol}
+            Price: {price} {tokenSymbol}
           </FieldLabel>
-          <FieldLabel>Contract Address: {targetCtrt1}</FieldLabel>
+          <FieldLabel>NFT Sales: {salesAddr}</FieldLabel>
           <FieldLabel>chainTarget: {chainTarget.toUpperCase()}</FieldLabel>
         </div>
         <Button

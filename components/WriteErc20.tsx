@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 
 const WriteErc20 = () => {
   const chainId = useChainId();
-  const [loading, setLoading] = useState(false);
+  const [_loading, setLoading] = useState(false);
   const [inputAddr, setInputAddr] = useState("");
   const [amount, setAmount] = useState("");
 
@@ -31,26 +31,35 @@ const WriteErc20 = () => {
     `WriteErc20: chainId: ${chainId}, chainIdViaConnection: ${chainIdViaConnection}, address: ${address}, addressesLen: ${addresses?.length}`,
   );
   //ll("addresses:", addresses)
-  if (chainId !== chainIdViaConnection) {
+  if (chainIdViaConnection !== undefined && chainId !== chainIdViaConnection) {
     console.warn("chainId !== chainIdViaConnection");
   }
-  let usdtAddr: `0x${string}` = usdtEthereumMain;
+
+  let usdxAddr: `0x${string}` = usdtEthereumMain;
+  let decimal = 6;
   const foundChain = findConfigChain(chainId);
   if (foundChain.err || !foundChain.chain) {
     console.error(foundChain.err);
   } else {
-    usdtAddr = foundChain.chain.usdtAddr as `0x${string}`;
+    usdxAddr = foundChain.chain.usdxAddr as `0x${string}`;
+    decimal = foundChain.chain.usdxDecimal;
   }
-  ll("usdtAddr:", usdtAddr);
+  ll("WriteErc20 usdxAddr:", usdxAddr);
 
   //https://wagmi.sh/react/api/hooks/useWriteContract
-  const { mutate, data: txHash, isError, error } = useWriteContract();
+  const {
+    mutate,
+    data: txHash,
+    isPending,
+    isError,
+    error,
+  } = useWriteContract();
   //const { mutate, data, isError, error } = useWriteContractSync(); // isPending, isSuccess,
 
   //https://wagmi.sh/react/api/hooks/useWaitForTransactionReceipt
   const {
     isSuccess: isSuccessReceipt,
-    isPending,
+    isPending: isPendingReceipt,
     isError: isErrorReceipt,
     error: errorReceipt,
   } = useWaitForTransactionReceipt({
@@ -60,19 +69,21 @@ const WriteErc20 = () => {
     //pollingInterval: 1_000,
     //config: config
   });
+  ll(
+    `WriteErc20 isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt}`,
+  );
 
   //TODO: Udemy course@5.55
   const onBtnClick = async () => {
     setLoading(true);
-    const decimals = 6;
-    const amount1 = toBigInt(amount, decimals);
+    const amount1 = toBigInt(amount, decimal);
     ll(
-      `onBtnClick()... inputAddr: ${inputAddr}, amount: ${amount} ${amount1}, chainId:, ${chainId}`,
+      `onBtnClick()... inputAddr: ${inputAddr}, amount: ${amount} ${amount1}, chainId: ${chainId}, isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt}`,
     );
     try {
       mutate({
         abi: USDX,
-        address: usdtAddr, // aDeployedCtrts.USDT_ADDR as `0x${string}`,
+        address: usdxAddr, // aDeployedCtrts.USDT_ADDR as `0x${string}`,
         functionName: "transfer",
         args: [inputAddr, amount1],
         account: address,
@@ -85,7 +96,7 @@ const WriteErc20 = () => {
   };
 
   return (
-    <div className="">
+    <div className="border-2 border-t-blue-400">
       <div>
         <span className="">Wallet 1: {evmAddrs.addr1}</span>
         <div>
@@ -110,11 +121,8 @@ const WriteErc20 = () => {
         <Button
           type="button"
           onClick={onBtnClick}
-          className={
-            loading
-              ? "bg-linear-to-r from-blue-400 to-purple-400"
-              : "bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:scale-105 duration-300"
-          }
+          disabled={isPending && isPendingReceipt}
+          className="bg-linear-to-r from-blue-400 to-purple-400 hover:from-orange-700 hover:scale-105 duration-300"
         >
           Send Txn
         </Button>
@@ -129,5 +137,4 @@ const WriteErc20 = () => {
     </div>
   );
 };
-/**  */
 export default WriteErc20;

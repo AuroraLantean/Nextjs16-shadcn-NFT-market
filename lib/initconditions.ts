@@ -2,8 +2,7 @@ import aDeployedCtrts from "@/ethereumABIs/aDeployedCtrts.json";
 import { parseIntSafe } from "./utils";
 
 export const initBlockchainIndexStr =
-  process.env.NEXT_PUBLIC_INIT_BLOCKCHAIN_INDEX ??
-  "INIT_BLOCKCHAIN_INDEX_INVALID";
+  process.env.NEXT_PUBLIC_INIT_BLOCKCHAIN_INDEX ?? "1";
 export const reownProjId =
   process.env.NEXT_PUBLIC_REOWN_PROJECTID ?? "REOWN_PROJECT_ID_INVALID";
 export const phantomAppId =
@@ -40,12 +39,12 @@ export type Chain = {
   chainTarget: string;
   publicRpc: string;
   explorer: string;
-  usdtAddr: string;
-  usdcAddr: string;
+  usdxAddr: string;
+  usdxDecimal: number;
+  tokenSymbol: string;
   nftAddr: string;
-  targetCtrt1: string;
-  targetCtrt2: string;
-  acceptedTokSymbol: string;
+  salesAddr: string;
+  ctrtXAddr: string;
   nftOriginalOwner: string;
 };
 export const chainEthereumSepolia = {
@@ -55,13 +54,13 @@ export const chainEthereumSepolia = {
   chainTarget: "sepolia", //or sepolia, sepolia
   publicRpc: "https://ethereum-sepolia-rpc.publicnode.com",
   explorer: "https://sepolia.etherscan.io",
-  usdtAddr: "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6",
-  usdcAddr: "",
+  usdxAddr: "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6",
+  usdxDecimal: 6,
+  tokenSymbol: "USDT",
   nftAddr: "0xA7918D253764E42d60C3ce2010a34d5a1e7C1398",
-  targetCtrt1: "0x71a9d115E322467147391c4a71D85F8e1cA623EF",
-  targetCtrt2: "0xB35D3C9b9f2Fd72FAAb282E8Dd56da31FAA30E3d",
+  salesAddr: "0x71a9d115E322467147391c4a71D85F8e1cA623EF",
+  ctrtXAddr: "",
   nftOriginalOwner: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
-  acceptedTokSymbol: "USDT",
 };
 export const usdtEthereumMain = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
 
@@ -73,13 +72,13 @@ export const configChains: Chain[] = [
     chainTarget: "foundry", //or sepolia, sepolia
     publicRpc: "http://127.0.0.1:8545",
     explorer: "",
-    usdtAddr: aDeployedCtrts.USDT_ADDR,
-    usdcAddr: "",
+    usdxAddr: aDeployedCtrts.USDT_ADDR,
+    usdxDecimal: 6,
+    tokenSymbol: "USDT",
     nftAddr: aDeployedCtrts.DRAGONS_ADDR,
-    targetCtrt1: aDeployedCtrts.SALES_ADDR,
-    targetCtrt2: "",
+    salesAddr: aDeployedCtrts.SALES_ADDR,
+    ctrtXAddr: "",
     nftOriginalOwner: aDeployedCtrts.Deployer,
-    acceptedTokSymbol: "USDT",
   },
   chainEthereumSepolia,
   {
@@ -90,13 +89,13 @@ export const configChains: Chain[] = [
     chainTarget: "mainnet", //or sepolia, sepolia
     publicRpc: "https://eth.drpc.org",
     explorer: "https://etherscan.io",
-    usdtAddr: usdtEthereumMain,
-    usdcAddr: "",
+    usdxAddr: usdtEthereumMain,
+    usdxDecimal: 6,
+    tokenSymbol: "USDT",
     nftAddr: "",
-    targetCtrt1: "",
-    targetCtrt2: "",
+    salesAddr: "",
+    ctrtXAddr: "",
     nftOriginalOwner: "",
-    acceptedTokSymbol: "USDT",
   },
   {
     //https://docs.arbitrum.io/build-decentralized-apps/reference/node-providers
@@ -106,13 +105,13 @@ export const configChains: Chain[] = [
     chainTarget: "sepolia", //or sepolia, sepolia
     publicRpc: "https://sepolia-rollup.arbitrum.io/rpc",
     explorer: "",
-    usdtAddr: "",
-    usdcAddr: "",
+    usdxAddr: "",
+    usdxDecimal: 6,
+    tokenSymbol: "USDT",
     nftAddr: "",
-    targetCtrt1: "",
-    targetCtrt2: "",
+    salesAddr: "",
+    ctrtXAddr: "",
     nftOriginalOwner: "",
-    acceptedTokSymbol: "USDT",
   },
   {
     //https://solana.com/docs/references/clusters
@@ -122,13 +121,13 @@ export const configChains: Chain[] = [
     chainTarget: "devnet", //or mainnet-beta
     publicRpc: "https://api.devnet.solana.com",
     explorer: "http://explorer.solana.com/",
-    usdtAddr: "",
-    usdcAddr: "",
+    usdxAddr: "",
+    usdxDecimal: 6,
+    tokenSymbol: "USDC",
     nftAddr: "",
-    targetCtrt1: "",
-    targetCtrt2: "",
+    salesAddr: "",
+    ctrtXAddr: "",
     nftOriginalOwner: "",
-    acceptedTokSymbol: "USDC",
   },
   {
     //https://solana.com/docs/references/clusters
@@ -138,13 +137,13 @@ export const configChains: Chain[] = [
     chainTarget: "mainnet-beta",
     publicRpc: "https://api.mainnet.solana.com",
     explorer: "http://explorer.solana.com/",
-    usdtAddr: "",
-    usdcAddr: "",
+    usdxAddr: "",
+    usdxDecimal: 6,
+    tokenSymbol: "USDC",
     nftAddr: "",
-    targetCtrt1: "",
-    targetCtrt2: "",
+    salesAddr: "",
+    ctrtXAddr: "",
     nftOriginalOwner: "",
-    acceptedTokSymbol: "USDC",
   },
 ];
 export const chainIndexInit = parseIntSafe(initBlockchainIndexStr);

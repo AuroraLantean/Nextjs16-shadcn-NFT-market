@@ -152,7 +152,7 @@ const TanstackForm1 = () => {
                   <FieldGroup>
                     {field.state.value.map((user, index) => (
                       <form1.Field
-                        key={`${index + user.email}`}
+                        key={`${user.email}`}
                         name={`users[${index}].email`}
                       >
                         {(innerField) => {

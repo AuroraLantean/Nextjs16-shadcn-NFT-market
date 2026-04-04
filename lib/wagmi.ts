@@ -18,12 +18,6 @@ import { reownProjId } from "./initconditions";
 export const walletConnectConn = walletConnect({ projectId: reownProjId });
 export const metamaskConn = metaMask();
 
-export const configFoundry = createConfig({
-  chains: [foundry],
-  transports: {
-    [foundry.id]: http(`http://127.0.0.1:8545`),
-  },
-});
 /*declare module "wagmi" {
   interface Register {
     config: typeof configFoundry;
@@ -31,7 +25,23 @@ export const configFoundry = createConfig({
 }*/
 //baseWallet, phantomWallet, injected(),
 //useReadContract() will use the left most chain in chains below!
-export const wagmiConfig = createConfig({
+export const wagmiConfigEthereumSepolia = createConfig({
+  chains: [sepolia, mainnet], //mainnet base,
+  connectors: [metamaskConn, walletConnectConn, coinbaseWallet(), safe()], //connectors order matters
+  transports: {
+    [sepolia.id]: http(
+      `https://eth-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY}`,
+    ),
+    [mainnet.id]: http(), //`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}` not working!
+    //[base.id]: http(),
+  },
+  // storage: createStorage({
+  //   storage: cookieStorage,
+  // }),
+  ssr: true,
+  syncConnectedChain: true,
+});
+export const wagmiConfigFoundry = createConfig({
   chains: [foundry, sepolia], //mainnet base,
   connectors: [metamaskConn, walletConnectConn, coinbaseWallet(), safe()], //connectors order matters
   transports: {
