@@ -36,7 +36,7 @@ export const parseIntSafe = (input: string) => {
   }
   return out;
 };
-export const formatNumbers = (num: number) => {
+export const toHumanNum = (num: number) => {
   if (num >= 1000000000) {
     const billions = parseFloat((num / 1000000000).toFixed(2));
     return `${billions}B`;
@@ -69,6 +69,33 @@ export const toBigInt = (input: string | number | undefined, dec = 18) => {
   if (!input) return "";
   const base = 10 ** dec;
   return BigInt(input) * BigInt(base);
+};
+export const tokBalcToFloatUi = (
+  input: unknown,
+  decimals: number,
+  tokenSymbol: string,
+) => {
+  if (!input) return `0 ${tokenSymbol}`;
+  //ll("input:", input);
+  const float1 =
+    Number(((input as bigint) * 100n) / BigInt(10 ** decimals)) / 100;
+  return `${toHumanNum(float1)} ${tokenSymbol}`;
+  //Number(a * 100n / b) / 100);
+};
+type NativeBalc =
+  | {
+      decimals: number;
+      symbol: string;
+      value: bigint;
+    }
+  | undefined;
+export const nativeBalcToFloatUi = (input: NativeBalc) => {
+  if (!input) return `0 Native`;
+  //ll("input.value:", input.value);
+  const float1 =
+    Number((input.value * 1000n) / BigInt(10 ** input.decimals)) / 1000;
+  return `${float1} ${input.symbol}`;
+  //Number(a * 100n / b) / 100);
 };
 //------------==
 export function isBase64Image(imageData: string) {

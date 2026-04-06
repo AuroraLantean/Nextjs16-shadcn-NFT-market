@@ -19,12 +19,6 @@
 - Fetching historical price data(coins, markets, OHLC, trending) using CoinGecko REST API endpoints
 - TradeView chart to display historical prices
 
-## TODO
-
-Axios: avoid 1.14.1 or 0.30.4
-Delete plain-crypto-js package!!!
-Avoid post install script!!!
-
 ReUi
 <https://reui.io/patterns/input>
 
@@ -171,6 +165,10 @@ Phantom Wallet
 - Install @phantom/react-sdk @solana/kit viem
 
 ## Security
+
+- Avoid Axios 1.14.1 or 0.30.4
+- Delete plain-crypto-js package!!!
+- Avoid post install script!!!
 
 - Viem <https://viem.sh/docs/installation#security>
 

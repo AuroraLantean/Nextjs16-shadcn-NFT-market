@@ -5,6 +5,7 @@ import { chainIndexInit } from "./initconditions";
 export const walletMenuOpenAtom = atom<boolean>(false);
 
 export const chainIndexAtom = atom(chainIndexInit);
+//export const chainIdAtom = atom(chainIdInit);
 
 export const errAtom = atom("");
 //const [err, setErr] = useAtom(errAtom);

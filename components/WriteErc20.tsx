@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import {
   useChainId,
   useConnection,
@@ -40,6 +41,7 @@ const WriteErc20 = () => {
   const foundChain = findConfigChain(chainId);
   if (foundChain.err || !foundChain.chain) {
     console.error(foundChain.err);
+    toast(JSON.stringify(foundChain.err));
   } else {
     usdxAddr = foundChain.chain.usdxAddr as `0x${string}`;
     decimal = foundChain.chain.usdxDecimal;
@@ -93,6 +95,7 @@ const WriteErc20 = () => {
       });
     } catch (err: any) {
       console.error(err.message);
+      toast(JSON.stringify(err.message));
     }
   };
 

@@ -1,4 +1,4 @@
-import aDeployedCtrts from "@/ethereumABIs/aDeployedCtrts.json";
+import aDeployedCtrtsAnvil from "@/ethereumABIs/aDeployedCtrtsAnvil.json";
 import { parseIntSafe } from "./utils";
 
 export const initBlockchainIndexStr =
@@ -72,13 +72,13 @@ export const configChains: Chain[] = [
     chainTarget: "foundry", //or sepolia, sepolia
     publicRpc: "http://127.0.0.1:8545",
     explorer: "",
-    usdxAddr: aDeployedCtrts.USDT_ADDR,
+    usdxAddr: aDeployedCtrtsAnvil.USDT_ADDR,
     usdxDecimal: 6,
     tokenSymbol: "USDT",
-    nftAddr: aDeployedCtrts.DRAGONS_ADDR,
-    salesAddr: aDeployedCtrts.SALES_ADDR,
+    nftAddr: aDeployedCtrtsAnvil.DRAGONS_ADDR,
+    salesAddr: aDeployedCtrtsAnvil.SALES_ADDR,
     ctrtXAddr: "",
-    nftOriginalOwner: aDeployedCtrts.Deployer,
+    nftOriginalOwner: aDeployedCtrtsAnvil.Deployer,
   },
   chainEthereumSepolia,
   {
@@ -150,6 +150,8 @@ export const chainIndexInit = parseIntSafe(initBlockchainIndexStr);
 export const chainInit1 = configChains[chainIndexInit];
 
 export const chainInit = chainInit1 ?? chainEthereumSepolia;
+//export const chainIdInit = chainInit?.chainId;
+
 export const findConfigChain = (chainId: number | string) => {
   const filtered = configChains.filter(
     (chain) => chain.chainId === `${chainId}`,

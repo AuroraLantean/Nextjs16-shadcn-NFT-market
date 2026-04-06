@@ -1,9 +1,15 @@
 import { switchChain } from "@wagmi/core";
+import { toast } from "sonner";
 import { foundry, sepolia } from "viem/chains";
-import { useChainId, useConnection, useReadContract } from "wagmi";
+import { useBalance, useChainId, useConnection, useReadContract } from "wagmi";
 import USDX from "@/ethereumABIs/USDX.json";
 import { findConfigChain, usdtEthereumMain } from "@/lib/initconditions";
-import { ll, makeShortAddr } from "@/lib/utils";
+import {
+  ll,
+  makeShortAddr,
+  nativeBalcToFloatUi,
+  tokBalcToFloatUi,
+} from "@/lib/utils";
 import { providerConfig } from "@/lib/wagmi";
 import { Button } from "./ui/button";
 
@@ -30,17 +36,18 @@ const ReadErc20 = () => {
   const foundChain = findConfigChain(chainId);
   if (foundChain.err || !foundChain.chain) {
     console.error(foundChain.err);
+    toast(JSON.stringify(foundChain.err));
   } else {
     usdxAddr = foundChain.chain.usdxAddr as `0x${string}`;
     decimal = foundChain.chain.usdxDecimal;
     tokenSymbol = foundChain.chain.tokenSymbol;
   }
-  ll("usdxAddr:", usdxAddr);
+  ll(`chainId: ${chainId}, usdxAddr: ${usdxAddr}`);
 
   //https://wagmi.sh/react/api/hooks/useReadContract
   //https://wagmi.sh/react/guides/read-from-contract
   const {
-    data: balance,
+    data: balcTok,
     error,
     isError,
     isLoading,
@@ -59,19 +66,34 @@ const ReadErc20 = () => {
     //account: "0x...",
     //config: createConfig({...})
   });
-  ll("balance:", balance, typeof balance);
-  const balcUi = balance
-    ? (BigInt(balance as bigint) / BigInt(10 ** decimal)).toString()
-    : "";
+  //ll("balcTok:", balcTok, typeof balcTok);
+  const balcTokUi = tokBalcToFloatUi(balcTok, decimal, tokenSymbol);
+
+  const {
+    data: balcNative,
+    error: errorNativeBalc,
+    isError: isErrorNativeBalc,
+  } = useBalance({
+    address: address,
+    chainId: chainId, // mainnet.id,
+  });
+  const balcNativeUi = nativeBalcToFloatUi(balcNative);
 
   const onSwitchSepolia = async () => {
     ll("onSwitchSepolia");
     await switchChain(providerConfig, { chainId: sepolia.id });
+    location.reload();
   };
   const onSwitchFoundry = async () => {
     ll("onSwitchFoundry");
     await switchChain(providerConfig, { chainId: foundry.id });
+    location.reload();
   };
+  /*
+0xFECD329d750D566f1A150fF51541aa303cb4a0fa USDT 
+0x4Fa0fa59422e660B594156aC10c65dD166795353 USDC 
+0x4802373E894e890A981DaE787532CBf01B5F4dD8 SLVC
+0x7574b7AbD6175348F6Faa64d4829f19c1Ee33f04 GLDC  */
   return (
     <div className="border-2 border-t-blue-400">
       <Button onClick={onSwitchSepolia}>Switch to Ethereum Sepolia </Button>
@@ -87,9 +109,12 @@ const ReadErc20 = () => {
       {". "}
       <div>
         <span>
-          {tokenSymbol} Balance: {balcUi}
+          Balance: {balcNativeUi}, {balcTokUi}
         </span>
-        {isError && <span>reading error: {`${error}`}</span>}
+        {isErrorNativeBalc && (
+          <span>nativeBalc error: {`${errorNativeBalc}`}</span>
+        )}
+        {isError && <span>tokeenBalc error: {`${error}`}</span>}
       </div>
     </div>
   );

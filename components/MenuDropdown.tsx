@@ -4,7 +4,6 @@ import {
   Coins,
   FileCodeIcon,
   Globe,
-  LogIn,
   LogOutIcon,
   Menu as MenuIcon,
   MoreHorizontalIcon,
@@ -24,7 +23,6 @@ import {
   DropdownMenuTrigger,
 } from "@/ui/dropdown-menu";
 
-//TODO: Select or Native Select
 export function MenuDropdown() {
   /*const [notifications, setNotifications] = React.useState({
     email: true,
