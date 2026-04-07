@@ -1,4 +1,5 @@
 import { switchChain } from "@wagmi/core";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { foundry, sepolia } from "viem/chains";
 import { useBalance, useChainId, useConnection, useReadContract } from "wagmi";
@@ -67,7 +68,25 @@ const ReadErc20 = () => {
     //config: createConfig({...})
   });
   //ll("balcTok:", balcTok, typeof balcTok);
-  const balcTokUi = tokBalcToFloatUi(balcTok, decimal, tokenSymbol);
+  const [balcTokUi, balcTokUiSet] = useState("");
+  useEffect(() => {
+    const balcTokUi = tokBalcToFloatUi(balcTok, decimal, tokenSymbol);
+    balcTokUiSet(balcTokUi);
+  }, [balcTok, decimal, tokenSymbol]);
+
+  const callRefetch = async () => {
+    ll("callRefetch");
+    const result = await refetch();
+    //ll("refetch result:", result); //{data: balc, error, isError}
+    if (result.isError) {
+      toast(JSON.stringify(result.error));
+    } else {
+      ll("refetch: success. ", result.data);
+    }
+    const balcTokUi = tokBalcToFloatUi(result.data, decimal, tokenSymbol);
+    ll("balcTokUi:", balcTokUi);
+    balcTokUiSet(balcTokUi);
+  };
 
   const {
     data: balcNative,
@@ -98,6 +117,7 @@ const ReadErc20 = () => {
     <div className="border-2 border-t-blue-400">
       <Button onClick={onSwitchSepolia}>Switch to Ethereum Sepolia </Button>
       <Button onClick={onSwitchFoundry}>Switch to Foundry </Button>
+      <Button onClick={callRefetch}>Refetch </Button>
       <span>isConnected: {isConnected ? "true" : "false"}</span>
       {". "}
       <span>address: {makeShortAddr(address)}</span>

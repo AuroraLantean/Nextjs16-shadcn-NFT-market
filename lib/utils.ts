@@ -36,6 +36,7 @@ export const parseIntSafe = (input: string) => {
   }
   return out;
 };
+//round to whole number!
 export const toHumanNum = (num: number) => {
   if (num >= 1000000000) {
     const billions = parseFloat((num / 1000000000).toFixed(2));
@@ -79,7 +80,7 @@ export const tokBalcToFloatUi = (
   //ll("input:", input);
   const float1 =
     Number(((input as bigint) * 100n) / BigInt(10 ** decimals)) / 100;
-  return `${toHumanNum(float1)} ${tokenSymbol}`;
+  return `${float1} ${tokenSymbol}`;
   //Number(a * 100n / b) / 100);
 };
 type NativeBalc =
