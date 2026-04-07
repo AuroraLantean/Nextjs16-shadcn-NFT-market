@@ -10,6 +10,7 @@ export default function Home() {
   return (
     <div className="">
       <div className="border-2">
+        <span>Click on a wallet name below to connect your wallet first</span>
         <WagmiButton />
         <ReadErc20 />
         <WriteErc20 />

@@ -1,4 +1,5 @@
-import aDeployedCtrtsAnvil from "@/ethereumABIs/aDeployedCtrtsAnvil.json";
+import aCtrtsAnvil from "@/ethereumABIs/aCtrtsAnvil.json";
+import aCtrtsSepolia from "@/ethereumABIs/aCtrtsSepolia.json";
 import { parseIntSafe } from "./utils";
 
 export const initBlockchainIndexStr =
@@ -54,13 +55,13 @@ export const chainEthereumSepolia = {
   chainTarget: "sepolia", //or sepolia, sepolia
   publicRpc: "https://ethereum-sepolia-rpc.publicnode.com",
   explorer: "https://sepolia.etherscan.io",
-  usdxAddr: "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6",
+  usdxAddr: aCtrtsSepolia.USDT_ADDR,
   usdxDecimal: 6,
   tokenSymbol: "USDT",
-  nftAddr: "0xA7918D253764E42d60C3ce2010a34d5a1e7C1398",
-  salesAddr: "0x71a9d115E322467147391c4a71D85F8e1cA623EF",
+  nftAddr: aCtrtsSepolia.DRAGONS_ADDR,
+  salesAddr: aCtrtsSepolia.SALES_ADDR,
   ctrtXAddr: "",
-  nftOriginalOwner: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+  nftOriginalOwner: aCtrtsSepolia.Deployer,
 };
 export const usdtEthereumMain = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
 
@@ -72,13 +73,13 @@ export const configChains: Chain[] = [
     chainTarget: "foundry", //or sepolia, sepolia
     publicRpc: "http://127.0.0.1:8545",
     explorer: "",
-    usdxAddr: aDeployedCtrtsAnvil.USDT_ADDR,
+    usdxAddr: aCtrtsAnvil.USDT_ADDR,
     usdxDecimal: 6,
     tokenSymbol: "USDT",
-    nftAddr: aDeployedCtrtsAnvil.DRAGONS_ADDR,
-    salesAddr: aDeployedCtrtsAnvil.SALES_ADDR,
+    nftAddr: aCtrtsAnvil.DRAGONS_ADDR,
+    salesAddr: aCtrtsAnvil.SALES_ADDR,
     ctrtXAddr: "",
-    nftOriginalOwner: aDeployedCtrtsAnvil.Deployer,
+    nftOriginalOwner: aCtrtsAnvil.Deployer,
   },
   chainEthereumSepolia,
   {

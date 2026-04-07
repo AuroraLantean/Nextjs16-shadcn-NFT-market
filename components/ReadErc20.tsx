@@ -1,8 +1,13 @@
-import { switchChain } from "@wagmi/core";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { foundry, sepolia } from "viem/chains";
-import { useBalance, useChainId, useConnection, useReadContract } from "wagmi";
+import {
+  useBalance,
+  useChainId,
+  useChains,
+  useConnection,
+  useReadContract,
+  useSwitchChain,
+} from "wagmi";
 import USDX from "@/ethereumABIs/USDX.json";
 import { findConfigChain, usdtEthereumMain } from "@/lib/initconditions";
 import {
@@ -11,7 +16,6 @@ import {
   nativeBalcToFloatUi,
   tokBalcToFloatUi,
 } from "@/lib/utils";
-import { providerConfig } from "@/lib/wagmi";
 import { Button } from "./ui/button";
 
 //connectkit at video 2743
@@ -92,31 +96,40 @@ const ReadErc20 = () => {
     data: balcNative,
     error: errorNativeBalc,
     isError: isErrorNativeBalc,
+    refetch: refetchNative,
   } = useBalance({
     address: address,
     chainId: chainId, // mainnet.id,
   });
   const balcNativeUi = nativeBalcToFloatUi(balcNative);
 
-  const onSwitchSepolia = async () => {
-    ll("onSwitchSepolia");
-    await switchChain(providerConfig, { chainId: sepolia.id });
+  //https://wagmi.sh/react/api/hooks/useSwitchChain
+  const switchChain = useSwitchChain();
+  const chains = useChains();
+
+  const onSwitchNetwork = async (chainId: number) => {
+    ll("onSwitchNetwork");
+    switchChain.mutate({ chainId: chainId });
     location.reload();
   };
-  const onSwitchFoundry = async () => {
-    ll("onSwitchFoundry");
-    await switchChain(providerConfig, { chainId: foundry.id });
-    location.reload();
-  };
-  /*
-0xFECD329d750D566f1A150fF51541aa303cb4a0fa USDT 
-0x4Fa0fa59422e660B594156aC10c65dD166795353 USDC 
-0x4802373E894e890A981DaE787532CBf01B5F4dD8 SLVC
-0x7574b7AbD6175348F6Faa64d4829f19c1Ee33f04 GLDC  */
   return (
     <div className="border-2 border-t-blue-400">
-      <Button onClick={onSwitchSepolia}>Switch to Ethereum Sepolia </Button>
-      <Button onClick={onSwitchFoundry}>Switch to Foundry </Button>
+      <div>
+        <span>
+          Click on Sepolia if your wallet is currently not on Sepolia, the
+          refresh this webpage:
+        </span>{" "}
+        {chains.map((chain) => (
+          <Button
+            type="button"
+            key={chain.id}
+            onClick={() => onSwitchNetwork(chain.id)}
+          >
+            {chain.name}
+          </Button>
+        ))}
+      </div>
+
       <Button onClick={callRefetch}>Refetch </Button>
       <span>isConnected: {isConnected ? "true" : "false"}</span>
       {". "}
