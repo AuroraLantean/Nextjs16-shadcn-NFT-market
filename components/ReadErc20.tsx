@@ -1,3 +1,4 @@
+import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
@@ -10,6 +11,7 @@ import {
 } from "wagmi";
 import USDX from "@/ethereumABIs/USDX.json";
 import { findConfigChain, usdtEthereumMain } from "@/lib/initconditions";
+import { txnNumAtom } from "@/lib/jotaiStates";
 import {
   ll,
   makeShortAddr,
@@ -47,7 +49,7 @@ const ReadErc20 = () => {
     decimal = foundChain.chain.usdxDecimal;
     tokenSymbol = foundChain.chain.tokenSymbol;
   }
-  ll(`chainId: ${chainId}, usdxAddr: ${usdxAddr}`);
+  ll(`chainId: ${chainId}, usdxAddr: ${makeShortAddr(usdxAddr)}`);
 
   //https://wagmi.sh/react/api/hooks/useReadContract
   //https://wagmi.sh/react/guides/read-from-contract
@@ -91,6 +93,14 @@ const ReadErc20 = () => {
     ll("balcTokUi:", balcTokUi);
     balcTokUiSet(balcTokUi);
   };
+  const [txnNum, _setTxnNum] = useAtom(txnNumAtom);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <>
+  useEffect(() => {
+    if (txnNum > 0) {
+      ll("ReadErc20 useEffect on callRefetch");
+      callRefetch();
+    }
+  }, [txnNum]);
 
   const {
     data: balcNative,
@@ -106,24 +116,21 @@ const ReadErc20 = () => {
   //https://wagmi.sh/react/api/hooks/useSwitchChain
   const switchChain = useSwitchChain();
   const chains = useChains();
-
-  const onSwitchNetwork = async (chainId: number) => {
-    ll("onSwitchNetwork");
+  //TODO: add NFT buy button
+  const onSwitchChain = async (chainId: number) => {
+    ll("onSwitchChain");
     switchChain.mutate({ chainId: chainId });
     location.reload();
   };
   return (
     <div className="border-2 border-t-blue-400">
       <div>
-        <span>
-          Click on Sepolia if your wallet is currently not on Sepolia, the
-          refresh this webpage:
-        </span>{" "}
+        <span>Click on Sepolia if your wallet is currently not on Sepolia</span>{" "}
         {chains.map((chain) => (
           <Button
             type="button"
             key={chain.id}
-            onClick={() => onSwitchNetwork(chain.id)}
+            onClick={() => onSwitchChain(chain.id)}
           >
             {chain.name}
           </Button>

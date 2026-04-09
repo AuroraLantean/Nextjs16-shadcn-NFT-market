@@ -10,7 +10,10 @@ export default function Home() {
   return (
     <div className="">
       <div className="border-2">
-        <span>Click on a wallet name below to connect your wallet first</span>
+        <div>
+          1. Go to your wallet and select the account you want to connect
+        </div>
+        <div>2. Click on a wallet below to connect your wallet</div>
         <WagmiButton />
         <ReadErc20 />
         <WriteErc20 />

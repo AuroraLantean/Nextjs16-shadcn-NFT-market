@@ -133,7 +133,7 @@ export const capitalizeFirst = (str: string) => {
 };
 export const makeShortAddr = (str: string | undefined) => {
   if (!str) return "";
-  return `${str.slice(0, 6)}....${str.slice(str.length - 4)}`;
+  return `${str.slice(0, 6)}...${str.slice(str.length - 4)}`;
 };
 export const isEmpty = (value: any) =>
   value === undefined ||

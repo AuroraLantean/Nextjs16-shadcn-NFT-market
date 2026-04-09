@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
   useChainId,
@@ -12,7 +13,8 @@ import {
   findConfigChain,
   usdtEthereumMain,
 } from "@/lib/initconditions";
-import { isBtnDisabled, ll, toBigInt } from "@/lib/utils";
+import { txnNumAtom } from "@/lib/jotaiStates";
+import { isBtnDisabled, ll, makeShortAddr, toBigInt } from "@/lib/utils";
 import { Button } from "./ui/button";
 
 const WriteErc20 = () => {
@@ -29,7 +31,7 @@ const WriteErc20 = () => {
     isConnected,
   } = useConnection(); //its chainId is incorrect
   ll(
-    `WriteErc20: chainId: ${chainId}, chainIdViaConnection: ${chainIdViaConnection}, address: ${address}, addressesLen: ${addresses?.length}`,
+    `WriteErc20: chainId: ${chainId}, chainIdViaConnection: ${chainIdViaConnection}, address: ${makeShortAddr(address)}, addressesLen: ${addresses?.length}`,
   );
   //ll("addresses:", addresses)
   if (chainIdViaConnection !== undefined && chainId !== chainIdViaConnection) {
@@ -46,7 +48,6 @@ const WriteErc20 = () => {
     usdxAddr = foundChain.chain.usdxAddr as `0x${string}`;
     decimal = foundChain.chain.usdxDecimal;
   }
-  ll("WriteErc20 usdxAddr:", usdxAddr);
 
   //https://wagmi.sh/react/api/hooks/useWriteContract
   const {
@@ -72,9 +73,17 @@ const WriteErc20 = () => {
     //pollingInterval: 1_000,
     //config: config
   });
+  const [_txnNum, setTxnNum] = useAtom(txnNumAtom);
   const btnDisabled = isBtnDisabled(isPending, isInitial, isPendingReceipt); //|| isPendingReceipt;
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <>
+  useEffect(() => {
+    ll("WriteErc20 useEffect");
+    if (!btnDisabled) {
+      setTxnNum((prev) => prev + 1);
+    }
+  }, [btnDisabled]);
   ll(
-    `WriteErc20 isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt},  statusReceipt: ${statusReceipt}, btnDisabled: ${btnDisabled}`,
+    `WriteErc20 usdxAddr:${makeShortAddr(usdxAddr)}, isPending: ${isPending}, isPendingReceipt: ${isPendingReceipt},  statusReceipt: ${statusReceipt}, btnDisabled: ${btnDisabled}`,
   );
 
   //TODO: Udemy course@5.55
